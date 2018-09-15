@@ -1,14 +1,13 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/detail/detail",
-    "pages/logs/logs",
-    "resouce"
+    "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "宇琛铺子",
-    "navigationBarTextStyle":"black"
+    "navigationBarTitleText": "宇琛小铺",
+    "navigationBarTextStyle": "black"
   }
 }
