@@ -18,8 +18,9 @@
           <navigator url="../detail/detail">
             <image src="{{item.image}}"></image>
             <text>
-              编号：{{item.child_id}} 
-              名称：{{item.name}}
+              编号：{{item.spu_no}} 
+              名称：{{item.goods_name}}
+              价格：{{item.price}}
             </text>
           </navigator>
         </view>
