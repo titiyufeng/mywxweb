@@ -15,6 +15,7 @@ Page({
               stock_quantity:9999,
               frozen_quantity:0,
               is_hot:false,
+              goods_detail:"商品详细描述信息",
               image: "http://mz.djmall.xmisp.cn/files/logo/20161208/148117972563.jpg"
             },
             {
@@ -25,6 +26,7 @@ Page({
               stock_quantity: 9999,
               frozen_quantity: 0,
               is_hot: false,
+              goods_detail: "商品详细描述信息",
               image: "../../resouce/type_select.png"
             }
           ]
@@ -42,6 +44,7 @@ Page({
               stock_quantity: 9999,
               frozen_quantity: 0,
               is_hot: false,
+              goods_detail: "商品详细描述信息",
               image: "../../resouce/1/10000001.png"
             },
             {
@@ -52,6 +55,7 @@ Page({
               stock_quantity: 9999,
               frozen_quantity: 0,
               is_hot: false,
+              goods_detail: "商品详细描述信息",
               image: "../../resouce/type_select.png"
             }
           ]
@@ -70,6 +74,7 @@ Page({
               stock_quantity: 9999,
               frozen_quantity: 0,
               is_hot: false,
+              goods_detail: "商品详细描述信息",
               image: "http://mz.djmall.xmisp.cn/files/logo/20161212/14815381301.jpg"
             },
             {
@@ -80,6 +85,7 @@ Page({
               stock_quantity: 9999,
               frozen_quantity: 0,
               is_hot: false,
+              goods_detail: "商品详细描述信息",
               image: "http://mz.djmall.xmisp.cn/files/logo/20161212/14815381411.jpg"
             }
           ]
@@ -98,6 +104,7 @@ Page({
               stock_quantity: 9999,
               frozen_quantity: 0,
               is_hot: false,
+              goods_detail: "商品详细描述信息",
               image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
             },
             {
@@ -108,6 +115,7 @@ Page({
               stock_quantity: 9999,
               frozen_quantity: 0,
               is_hot: false,
+              goods_detail: "商品详细描述信息",
               image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
             }
           ]
