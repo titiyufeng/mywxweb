@@ -6,7 +6,8 @@ Page({
    */
   data: {
     spu_no: "",
-    goods_detail : ""
+    goods_detail : "",
+    goods_name:""
   },
 
   /**
@@ -15,7 +16,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       spu_no: options.spu_no,
-      goods_detail: options.goods_detail
+      goods_detail: options.goods_detail,
+      goods_name: options.goods_name
     })
 
   },

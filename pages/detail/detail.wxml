@@ -2,13 +2,13 @@
 <view class="container">
   <view class='nav'>
   <text>
-  商品名称：{{spu_no}}
-
+  商品名称：{{goods_name}}
+  
   商品编号：{{spu_no}}
 
   商品描述： {{goods_detail}}
   </text>
-  <image  src='../../resouce/1/1000000101.jpg'>
+  <image  src='../../resouce/{{spu_no}}/{{spu_no}}01.jpg'>
   </image>
   </view>
 </view>

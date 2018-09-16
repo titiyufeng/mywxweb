@@ -27,7 +27,7 @@ Page({
               frozen_quantity: 0,
               is_hot: false,
               goods_detail: "商品详细描述信息",
-              image: "../../resouce/type_select.png"
+              image: "../../resouce/10000002/10000002.png"
             }
           ]
       }, {
@@ -45,7 +45,7 @@ Page({
               frozen_quantity: 0,
               is_hot: false,
               goods_detail: "商品详细描述信息",
-              image: "../../resouce/1/10000001.png"
+              image: "../../resouce/10000001/10000001.png"
             },
             {
               spu_no: 10000002,
@@ -56,7 +56,7 @@ Page({
               frozen_quantity: 0,
               is_hot: false,
               goods_detail: "商品详细描述信息",
-              image: "../../resouce/type_select.png"
+              image: "../../resouce/10000002/10000002.png"
             }
           ]
       },
