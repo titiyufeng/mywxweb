@@ -32,7 +32,7 @@ Page({
           ]
       }, {
         cate_id: 1,
-        cate_name: "护肤",
+        cate_name: "洁面",
         ishaveChild: true,
         children:
           [
@@ -62,7 +62,7 @@ Page({
       },
       {
         cate_id: 2,
-        cate_name: "彩妆",
+        cate_name: "爽肤水",
         ishaveChild: true,
         children:
           [
@@ -92,7 +92,7 @@ Page({
       },
       {
         cate_id: 3,
-        cate_name: "香水/香氛",
+        cate_name: "精华",
         ishaveChild: true,
         children:
           [
@@ -122,7 +122,73 @@ Page({
       },
       {
         cate_id: 4,
-        cate_name: "个人护理",
+        cate_name: "乳液",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 5,
+        cate_name: "面膜",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 6,
+        cate_name: "面霜",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 7,
+        cate_name: "眼霜",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 8,
+        cate_name: "防晒",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 9,
+        cate_name: "彩妆",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 10,
+        cate_name: "套盒",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 11,
+        cate_name: "日用",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 12,
+        cate_name: "儿童",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 13,
+        cate_name: "保健品",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 14,
+        cate_name: "食品",
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 15,
+        cate_name: "其他",
         ishaveChild: false,
         children: []
       }
