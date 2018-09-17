@@ -135,8 +135,20 @@ Page({
       {
         cate_id: 6,
         cate_name: "面霜",
-        ishaveChild: false,
-        children: []
+        ishaveChild: true,
+        children: [
+          {
+            spu_no: 60000001,
+            goods_name: "Lamer海蓝之谜奇迹面霜30ml",
+            price: 998,
+            is_display: true,
+            stock_quantity: 9999,
+            frozen_quantity: 0,
+            is_hot: false,
+            goods_detail: "海蓝之谜最经典的面霜全球十大面霜之首  这款神奇面霜被时代周刊评为“最值得拥有的奢侈品之一” 。神奇的滋润保湿效果，它是敏感肌换季救星，能够拯救了总是水肿的隔夜脸，它是拯救痘痘脸的终极法宝，更是敏感肌首选，五颗星推荐‼️神奇的再生能力。",
+            image: "../../resouce/60000001/60000001.jpg"
+          }
+        ]
       },
       {
         cate_id: 7,

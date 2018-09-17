@@ -51,6 +51,7 @@ page{
   padding: 10px;  
   box-sizing: border-box;  
   background: #fff;
+  
 }  
 /*右侧栏list的item*/  
 .nav_right .nav_right_items{  
@@ -60,6 +61,7 @@ page{
   width: 100%;  
   height: 120px;  
   text-align: left;
+  
 }  
 .nav_right .nav_right_items image{  
   /*被图片设置宽高*/  
@@ -68,11 +70,25 @@ page{
   margin-top: 15px;  
   float: left;  /*使右侧的商品说明文字与图片为同一行*/  
 }  
-.nav_right .nav_right_items text{  
+.nav_right .nav_right_items textyuan{  
   /*给text设成块级元素*/ 
+  float: left;
+  margin-left: 4px;
   margin-top: 15px;  
   font-size: 14px;  
   color: black;
+}  
+.nav_right .nav_right_items text{  
+  /*给text设成块级元素*/ 
+  display: -webkit-box;
+  font-size: 14px;  
+  color: black;
+  line-height: 35rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3;
+  overflow: hidden;
+  text-overflow:ellipsis;
 } 
 .nodata_text
 {
