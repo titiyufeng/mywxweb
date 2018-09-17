@@ -1,6 +1,6 @@
 <!--主盒子-->
-<view class="container">
-  <view class='nav'>
+
+  <view class='nav_right'>
   <text>
   商品名称：{{goods_name}}
   
@@ -8,11 +8,9 @@
 
   商品描述： {{goods_detail}}
   </text>
-  <image  src='../../resouce/{{spu_no}}/{{spu_no}}01.jpg'></image>
-  <image  src='../../resouce/{{spu_no}}/{{spu_no}}02.jpg'></image>
-  <image  src='../../resouce/{{spu_no}}/{{spu_no}}03.jpg'></image>
-  <image  src='../../resouce/{{spu_no}}/{{spu_no}}04.jpg'></image>
-  <image  src='../../resouce/{{spu_no}}/{{spu_no}}05.jpg'></image>
-  <image  src='../../resouce/{{spu_no}}/{{spu_no}}06.jpg'></image>
+  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}01.jpg'></image>
+  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}02.jpg'></image>
+  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}03.jpg'></image>
+  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}04.jpg'></image>
+  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}05.jpg'></image>
   </view>
-</view>

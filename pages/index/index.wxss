@@ -69,6 +69,7 @@ page{
   height: 90px;  
   margin-top: 15px;  
   float: left;  /*使右侧的商品说明文字与图片为同一行*/  
+  margin-right: 5px;
 }  
 .nav_right .nav_right_items textyuan{  
   /*给text设成块级元素*/ 
@@ -86,7 +87,7 @@ page{
   line-height: 35rpx;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:3;
+  -webkit-line-clamp:3;  /*控制显示行数*/ 
   overflow: hidden;
   text-overflow:ellipsis;
 } 

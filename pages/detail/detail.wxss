@@ -1,48 +1,29 @@
-page{  
-  background: #fff;  
-}  
-/*总体主盒子*/  
-.container {  
-  position: relative;  
-  width: 100%;  
-  height: 100%;  
-  background-color: #fff;  
-  color: #1a1919;  
-}
+
 /*右侧栏主盒子*/  
-.nav{  
+.nav_right{  
   /*右侧盒子使用了绝对定位*/  
   position: absolute;  
   top: 0;  
   right: 0;  
   flex: 1;  
-  /*宽度75%，高度占满，并使用百分比布局*/  
+  /*宽度占满，高度占满，并使用百分比布局*/  
   width: 100%;  
-  height: 100%;  
+  height: 1000px;  
   padding: 10px;  
   box-sizing: border-box;  
-  background: #fff;  
+  background: #fff;
+  text-align: center;
 }  
-.nav image{  
+.nav_right image{  
   /*被图片设置宽高*/  
-  width: 300px;  
-  height: 400px; 
+  width: 300px;   
   margin-top: 15px;  
 }  
-.nav text{  
-  /*给text设成块级元素*/  
-  display: block;  
-  margin-top: 15px;  
-  font-size: 14px;  
+
+.nav_right text{  
+  /*给text设成块级元素*/
+  text-align: left; 
+  display: block;
+  font-size: 18px;  
   color: black;
-  /*设置文字溢出部分为...*/  
-  overflow: hidden;  
-  white-space: nowrap;  
-  text-overflow: ellipsis;  
-} 
-.nodata_text
-{
-  color: black;
-  font-size: 14px;  
-  text-align: center;  
 } 
