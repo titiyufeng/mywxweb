@@ -160,13 +160,23 @@ Page({
           }, {
             spu_no: 60000003,
             goods_name: "黛珂时光活氧抗皱面霜30ml",
-            price: 198,
+            price: 458,
             is_display: true,
             stock_quantity: 9999,
             frozen_quantity: 0,
             is_hot: false,
             goods_detail: "针对因环境压力问题、年龄增长产生的各种肌肤问题 ，保持肌肤的柔软和弹力、改善肌肤、毛孔松弛状态cellgenie面霜LF ：适合任何年纪因为年龄增长导致的松弛的肌肤哦",
             image: "../../resouce/60000003/60000003.jpg"
+          }, {
+            spu_no: 60000004,
+            goods_name: "澳洲绵羊油250g",
+            price: 39,
+            is_display: true,
+            stock_quantity: 9999,
+            frozen_quantity: 0,
+            is_hot: false,
+            goods_detail: "绵羊油不是羊的脂肪，而是一种从天然羊毛中精炼出来的油脂。绵羊油最大的特点就是“滋润但绝不油腻，吸收好” 。因为绵羊油结构跟人体表面油脂相似，非常适宜人体使用哦。无论面部还是身体都可以用，非常滋润 ！",
+            image: "../../resouce/60000004/60000004.jpg"
           }
         ]
       },
