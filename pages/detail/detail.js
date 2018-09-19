@@ -7,17 +7,21 @@ Page({
   data: {
     spu_no: "",
     goods_detail : "",
-    goods_name:""
+    goods_name:"",
+    detail_images:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var imgs;
+    imgs = options.detail_images.split(",");//将传递过来的detail_images（字符串）转成数组
     this.setData({
       spu_no: options.spu_no,
       goods_detail: options.goods_detail,
-      goods_name: options.goods_name
+      goods_name: options.goods_name,
+      detail_images:imgs
     })
 
   },

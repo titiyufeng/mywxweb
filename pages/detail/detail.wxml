@@ -8,9 +8,5 @@
 
   商品描述： {{goods_detail}}
   </text>
-  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}01.jpg'></image>
-  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}02.jpg'></image>
-  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}03.jpg'></image>
-  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}04.jpg'></image>
-  <image mode="widthFix"  src='../../resouce/{{spu_no}}/{{spu_no}}05.jpg'></image>
+  <image mode="widthFix"  wx:for="{{detail_images}}"  src='{{item}}'></image>
   </view>

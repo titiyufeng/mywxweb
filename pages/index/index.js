@@ -16,7 +16,13 @@ Page({
               frozen_quantity: 0,
               is_hot: false,
               goods_detail: "海蓝之谜最经典的面霜全球十大面霜之首  这款神奇面霜被时代周刊评为“最值得拥有的奢侈品之一” 。神奇的滋润保湿效果，它是敏感肌换季救星，能够拯救了总是水肿的隔夜脸，它是拯救痘痘脸的终极法宝，更是敏感肌首选，五颗星推荐‼️神奇的再生能力。",
-              image: "../../resouce/60000001/60000001.jpg"
+              image: "../../resouce/60000001/60000001.jpg",
+              detail_images:
+              [
+                "https://img.alicdn.com/imgextra/i3/2424298091/O1CN0129dj1aD8AuHdq6N_!!2424298091.jpg_760x760Q50s50.jpg",
+                "https://img.alicdn.com/imgextra/i2/2424298091/TB2hE8vXrsTMeJjy1zcXXXAgXXa_!!2424298091.jpg_760x760Q50s50.jpg"
+
+              ]
             },
             {
               spu_no: 10000002,
