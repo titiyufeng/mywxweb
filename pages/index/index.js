@@ -1,5 +1,6 @@
 Page({
   data: {
+    topNum: 0,
     cateItems: [
       {
         cate_id: 0,
@@ -345,7 +346,14 @@ Page({
     // 把点击到的某一项，设为当前index  
     this.setData({
       curNav: id,
-      curIndex: index
+      curIndex: index,
+      topNum: this.data.topNum = 0
     })
+  },
+
+  returnTop: function () {
+    this.setData({
+      topNum: this.data.topNum = 0
+    });
   }
 })  
