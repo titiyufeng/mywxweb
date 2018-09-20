@@ -1,6 +1,7 @@
 page{  
   background: #f5f5f5;  
 }  
+
 /*总体主盒子*/  
 .container {  
   position: absolute;  
@@ -9,23 +10,14 @@ page{
   background-color: #fff;  
   color: #939393;  
 }
- /*左侧栏主盒子*/  
-.nav_left_bak{  
-  /*设置行内块级元素（没使用定位）*/  
-  display: inline-block;  
-  width: 25%;  
-  height: 100%;  
-  /*主盒子设置背景色为灰色*/  
-  background: #f5f5f5;  
-  text-align: center;  
-} 
 
+
+ /*左侧栏主盒子*/  
 .nav_left{  
   /*设置行内块级元素（没使用定位）*/
   position: fixed;
   left: 0;
   top: 0;
-  padding: 10px;  
   width: 25%;  
   height: 100%;  
   /*主盒子设置背景色为灰色*/  
@@ -46,49 +38,26 @@ page{
   /*文字14px*/  
   font-size: 14px; 
 }  
+
+
 /*左侧栏list的item被选中时*/  
 .nav_left .nav_left_items.active{  
   /*背景色变成白色*/  
   background: #fff;  
   color: #f0145a; 
 }  
+
+
 /*右侧栏主盒子*/  
-.nav_right_bak{  
-  /*右侧盒子使用了绝对定位*/  
-  position: absolute;  
-  top: 0;  
-  right: 0;  
-  /*宽度75%，高度占满，并使用百分比布局*/  
-  width: 75%;  
-  height: 100%;  
-  padding: 10px;  
-  box-sizing: border-box;  
-  background: #fff;
-  
-}  
-
-.nav_right_bak2{  
-  /*右侧盒子使用了绝对定位*/ 
-  position: fixed;
-  right: 0;  
-  /*宽度75%，高度占满，并使用百分比布局*/  
-  width: 75%;  
-  height: 100%;  
-  padding: 10px;  
-  box-sizing: border-box;  
-  background: #fff;
-  
-}  
-
 .nav_right{  
   /*设置行内块级元素（没使用定位）*/
   position: absolute;
+  box-sizing: border-box; 
   right: 0;
   top: 0;
-  padding: 10px;  
+  padding: 5px;  
   width: 75%;  
   height: 100%;  
-  box-sizing: border-box; 
   /*主盒子设置背景色为灰色*/  
   background: #fff;  
 } 
@@ -110,14 +79,8 @@ page{
   float: left;  /*使右侧的商品说明文字与图片为同一行*/  
   margin-right: 5px;
 }  
-.nav_right .nav_right_items textyuan{  
-  /*给text设成块级元素*/ 
-  float: left;
-  margin-left: 4px;
-  margin-top: 15px;  
-  font-size: 14px;  
-  color: black;
-}  
+
+
 .nav_right .nav_right_items text{  
   /*给text设成块级元素*/ 
   display: -webkit-box;
@@ -139,18 +102,4 @@ page{
 /*点击商品列表页面的时候，背景色为白色*/
 .navigator-hover {
   background: #fff;
-}
-
-
-.top{
-  width: 50px;
-  height: 50px;
-  position: fixed;
-  right: 10px;
-  bottom: 10px;
-  z-index: 1;
-  background-color: yellow;
-  color: red;
-  text-align: center;
-  line-height: 50px;
 }
