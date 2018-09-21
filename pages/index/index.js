@@ -443,5 +443,10 @@ Page({
       curIndex: index,
       topNum: this.data.topNum = 0
     })
+  },
+  suo: function (e) {
+    wx.navigateTo({
+      url: '../search/search',
+    })
   }
 })  
