@@ -109,7 +109,7 @@ page{
 
 /*搜索样式 */
 .search{
-  width: 80%;
+  width: 100%;
 }
 .search_arr {
   height: 30px;
@@ -125,12 +125,14 @@ page{
  
 .sousuo {
   margin-left: 15rpx;
+  margin-right: 15rpx;
   height: 30px;
   width: 15%;
   text-align: center;
   border: 1px solid #d0d0d0;
 }
 .page_row{
+    width: 100%;
   height: 30px;
   display: flex;
   flex-direction: row
