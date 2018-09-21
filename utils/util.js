@@ -13,7 +13,10 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+function goToSouSuo () {  
+  console.log(123);
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  goToSouSuo: goToSouSuo
 }

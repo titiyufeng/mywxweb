@@ -444,9 +444,10 @@ Page({
       topNum: this.data.topNum = 0
     })
   },
-  suo: function (e) {
+  goToSouSuo: function () {
     wx.navigateTo({
       url: '../search/search',
     })
   }
 })  
+

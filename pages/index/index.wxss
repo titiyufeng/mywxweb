@@ -53,7 +53,7 @@ page{
 .nav_right{  
   /*设置行内块级元素（没使用定位）*/
   margin-top: 35px;
-  position: absolute;
+  position: fixed;
   box-sizing: border-box; 
   right: 0;
   top: 0;
@@ -120,6 +120,7 @@ page{
 .search_arr input{
   margin-left: 60rpx;
   border-radius: 5px;
+  font-size: 14px; 
 }
  
 .sousuo {

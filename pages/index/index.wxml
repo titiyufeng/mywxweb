@@ -1,20 +1,15 @@
 <!--主盒子-->
 <view class="container">
 
-  <view class='page_row' bindtap="suo">
+  <view class='page_row' bindtap="goToSouSuo">
     <view class="search">
       <view class="df search_arr">
         <icon class="searchcion" size='20' type='search'></icon>
-        <input class="" disabled placeholder="请输入关键字" value="{{searchValue}}"/>
+        <input class="" disabled placeholder="请输入商品名称" value="{{searchValue}}"/>
       </view>
     </view>
     <view class='sousuo'>搜索</view>
   </view>
-
-
-
-
-
 
   <!--左侧栏-->
   <scroll-view scroll-y scroll-with-animation   class="nav_left">
