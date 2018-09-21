@@ -5,9 +5,9 @@
     <view class="search">
       <view class="df search_arr">
         <icon class="searchcion" size='20' type='search'></icon>
-        <input class=""  placeholder="请输入商品名称" value="{{searchValue}}"/>
+        <input class="input" name="keyword" placeholder="请输入商品名称" bindinput ="searchtextInput"/>
       </view>
     </view>
-    <view class='sousuo' bindtap="goTuSuo">搜索</view>
+    <view class='sousuo' bindtap="getdata">搜索</view>
   </view>
 </view>
