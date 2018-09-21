@@ -1,11 +1,11 @@
 // pages/search/search.js
+var goodsdata = require("../../resouce/goodsdata.js");
 
 Page({
   data: {
-
+    
   },
   goTuSuo:function(){
-    var common = require("../../utils/util.js");
-    common.goToSouSuo();
+    console.log(goodsdata);
   }
 })
