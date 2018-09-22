@@ -15,8 +15,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var imgs;
+    var imgs = new Array()
     imgs = options.detail_images.split(",");//将传递过来的detail_images（字符串）转成数组
+    if (imgs.length < 6){
+      var cate_id = 0;
+      cate_id = parseInt(options.spu_no / 10000000)
+      for (var i = 1; i < 6; i++) {
+        imgs.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/" + cate_id + "/" + options.spu_no + "/" + options.spu_no + "0" + i + ".jpg")
+      }  
+    }
+  
     this.setData({
       spu_no: options.spu_no,
       goods_detail: options.goods_detail,
