@@ -24,8 +24,8 @@
   <!--右侧栏-->
   <scroll-view  scroll-y scroll-with-animation  class="nav_right" scroll-top='{{topNum}}'>
     <!--如果有数据，才遍历项-->
-    <view wx:if="{{cateItems[curIndex].ishaveChild}}">
-      <block wx:for="{{cateItems[curIndex].children}}" wx:key="id">
+    <view wx:if="{{cateItems[curIndex].is_have_child}}">
+      <block wx:for="{{right_goodslist}}" wx:key="id">
         <view class="nav_right_items">
         <!--界面跳转 -->
           <navigator url="/pages/detail/detail?spu_no={{item.spu_no}}&goods_name={{item.goods_name}}&goods_detail={{item.goods_detail}}&detail_images={{item.detail_images}}">
@@ -42,7 +42,7 @@
     </view>
 
     <!--如果无数据，则显示数据-->
-    <view class="nodata_text" wx:else>该分类暂无数据</view>
+    <view class="nodata_text" wx:else>该分类暂无商品</view>
     
   </scroll-view>
 </view>

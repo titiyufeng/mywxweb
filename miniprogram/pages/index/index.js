@@ -1,11 +1,71 @@
-var goodsdata = require("../../resouce/goodsdata.js");
+var get_db_conn = require("../../utils/util.js");
+
+//获取数据库连接
+var dbconn = get_db_conn.get_db_conn();
+
 Page({
   data: { 
     topNum: 0,
-    cateItems: goodsdata.cateItems,
+    cateItems: [],//左侧导航
+    cateItems_goods_list:[],//右侧商品列表
     curNav: 0,
     curIndex: 0
   },
+  
+  /*
+    获取右侧商品列表
+  */
+  get_right_goodslist: function (id) {
+    const _ = dbconn.command
+    var that = this;
+    
+    //判断是否是热门tab，如是过热门tab则不需要过滤商品类型，如果不是热门tab需要过滤商品类型
+    if (id != 0){
+      dbconn.collection('goods_datas').where({
+        cate_id: id,
+        is_display: true,
+        stock_quantity: _.gt(0)
+      }).get({
+        success: function (res) {
+          var right_goodslist = res.data
+          that.setData({
+            right_goodslist: right_goodslist
+            }
+          )
+        }
+      })
+    }else{
+      dbconn.collection('goods_datas').where({
+        is_hot: true,
+        is_display: true,
+        stock_quantity: _.gt(0)
+      }).get({
+        success: function (res) {
+          var right_goodslist = res.data
+          that.setData({
+            right_goodslist: right_goodslist
+            }
+          )
+        }
+      })
+    }    
+  },
+
+  onLoad:function(options){
+    var cateItems_db = new Array() 
+    var that = this;
+    dbconn.collection('goods_types').get({
+        success: function (res) {
+          var rs_data = res.data
+          cateItems_db = rs_data          
+          that.setData({
+            cateItems: cateItems_db
+            }
+          )
+        }
+      })
+    this.get_right_goodslist(0)
+      },
 
   //事件处理函数  
   switchRightTab: function (e) {
@@ -18,7 +78,11 @@ Page({
       curIndex: index,
       topNum: this.data.topNum = 0
     })
+    this.get_right_goodslist(id)
   },
+
+
+
   goToSouSuo: function () {
     wx.navigateTo({
       url: '../search/search',

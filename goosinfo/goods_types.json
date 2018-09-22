@@ -1,110 +1,110 @@
+{
+	"cate_id": 0,
+	"cate_name": "热门",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 1,
+	"cate_name": "洁面",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 2,
+	"cate_name": "爽肤水",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 3,
+	"cate_name": "精华",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 4,
+	"cate_name": "乳液",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 5,
+	"cate_name": "面膜",
+	"is_have_child": true,
+	"children": []
+}
 	{
-		"cate_id": 0,
-		"cate_name": "热门",
-		"ishaveChild": true,
-		"children": []
-	}
+	"cate_id": 6,
+	"cate_name": "面霜",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 7,
+	"cate_name": "眼霜",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 8,
+	"cate_name": "防晒",
+	"is_have_child": true,
+	"children": []
+}
 	
-	{
-		"cate_id": 1,
-		"cate_name": "洁面",
-		"ishaveChild": true,
-		"children": []
-	}
+{
+	"cate_id": 9,
+	"cate_name": "彩妆",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 10,
+	"cate_name": "套盒",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 11,
+	"cate_name": "日用",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 12,
+	"cate_name": "儿童",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 13,
+	"cate_name": "保健品",
+	"is_have_child": true,
+	"children": []
+}
 	
-	{
-		"cate_id": 2,
-		"cate_name": "爽肤水",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 3,
-		"cate_name": "精华",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 4,
-		"cate_name": "乳液",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 5,
-		"cate_name": "面膜",
-		"ishaveChild": true,
-		"children": []
-	}
-		{
-		"cate_id": 6,
-		"cate_name": "面霜",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 7,
-		"cate_name": "眼霜",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 8,
-		"cate_name": "防晒",
-		"ishaveChild": true,
-		"children": []
-	}
-		
-	{
-		"cate_id": 9,
-		"cate_name": "彩妆",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 10,
-		"cate_name": "套盒",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 11,
-		"cate_name": "日用",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 12,
-		"cate_name": "儿童",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 13,
-		"cate_name": "保健品",
-		"ishaveChild": true,
-		"children": []
-	}
-		
-	{
-		"cate_id": 14,
-		"cate_name": "食品",
-		"ishaveChild": true,
-		"children": []
-	}
-	
-	{
-		"cate_id": 15,
-		"cate_name": "其他",
-		"ishaveChild": true,
-		"children": []
-	}
+{
+	"cate_id": 14,
+	"cate_name": "食品",
+	"is_have_child": true,
+	"children": []
+}
+
+{
+	"cate_id": 15,
+	"cate_name": "其他",
+	"is_have_child": true,
+	"children": []
+}
