@@ -28,7 +28,7 @@
       <block wx:for="{{right_goodslist}}" wx:key="id">
         <view class="nav_right_items">
         <!--界面跳转 -->
-          <navigator url="/pages/detail/detail?=cate_id{{item.cate_id}}&spu_no={{item.spu_no}}&goods_name={{item.goods_name}}&goods_detail={{item.goods_detail}}&detail_images={{item.detail_images}}">
+          <navigator url="/pages/detail/detail?=cate_id{{item.cate_id}}&spu_no={{item.spu_no}}&goods_name={{item.goods_name}}&goods_detail={{item.goods_detail}}&detail_images={{item.detail_images}}&wechat_id={{wechat_id}}&wechat_name={{wechat_name}}">
             <image src="cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/{{item.cate_id}}/{{item.spu_no}}/{{item.spu_no}}.jpg"></image>
             <text>
                名称：{{item.goods_name}}

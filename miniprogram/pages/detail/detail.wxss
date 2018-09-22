@@ -11,13 +11,22 @@
   background: #fff;
   text-align: center;
 }  
+
+
+.nav_right .wechat{
+  text-align: left; 
+  display: block;
+  font-size: 18px;  
+  color: red;
+}
+
 .nav_right image{  
   /*被图片设置宽高*/  
   width: 300px;   
   margin-top: 15px;  
 }  
 
-.nav_right text{  
+.nav_right .detail{  
   /*给text设成块级元素*/
   text-align: left; 
   display: block;

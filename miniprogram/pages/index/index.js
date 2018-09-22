@@ -9,7 +9,9 @@ Page({
     cateItems: [],//左侧导航
     cateItems_goods_list:[],//右侧商品列表
     curNav: 0,
-    curIndex: 0
+    curIndex: 0,
+    wechat_id:"",
+    wechat_name:""
   },
   
   /*
@@ -19,6 +21,20 @@ Page({
     const _ = dbconn.command
     var that = this;
     
+    //获取微信id、微信昵称
+    dbconn.collection('config').get({
+      success: function (res) {
+        var wechat_id = res.data[0]["wechat_id"]
+        var wechat_name = res.data[0]["wechat_name"]
+        that.setData({
+          wechat_id: wechat_id,
+          wechat_name: wechat_name
+        }
+        )
+      }
+    })
+
+
     //判断是否是热门tab，如是过热门tab则不需要过滤商品类型，如果不是热门tab需要过滤商品类型
     if (id != 0){
       dbconn.collection('goods_datas').where({
