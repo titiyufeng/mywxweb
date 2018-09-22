@@ -2,7 +2,7 @@
   "cloud": true,
   "pages": [
     "pages/index/index",
-	"pages/detail/detail",
+    "pages/detail/detail",
     "pages/logs/logs",
     "pages/search/search",
     "pages/userConsole/userConsole",
@@ -14,7 +14,7 @@
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
-	"backgroundTextStyle": "light",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "宇琛小铺",
     "navigationBarTextStyle": "black"

@@ -14,9 +14,20 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 function goToSouSuo () {  
+  
   console.log(123);
+  return 888888888888;
 }
+
+function get_db_conn(){
+  var dbconn = wx.cloud.database({
+    env: 'mywxweb-e946c5'
+  })
+  return dbconn;
+}
+
 module.exports = {
   formatTime: formatTime,
-  goToSouSuo: goToSouSuo
+  goToSouSuo: goToSouSuo,
+  get_db_conn: get_db_conn
 }

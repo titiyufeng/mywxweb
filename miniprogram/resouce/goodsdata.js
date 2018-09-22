@@ -24,7 +24,6 @@ var cateItems =
               [
                 "https://img.alicdn.com/imgextra/i3/2424298091/O1CN0129dj1aD8AuHdq6N_!!2424298091.jpg_760x760Q50s50.jpg",
                 "https://img.alicdn.com/imgextra/i2/2424298091/TB2hE8vXrsTMeJjy1zcXXXAgXXa_!!2424298091.jpg_760x760Q50s50.jpg"
-
               ]
           },
           {

@@ -9,5 +9,6 @@
       </view>
     </view>
     <view class='sousuo' bindtap="getdata">搜索</view>
+    <view class='sousuo' bindtap="ceshi">数据库测试</view>
   </view>
 </view>
