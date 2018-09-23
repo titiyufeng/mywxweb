@@ -15,7 +15,7 @@ Page({
   },
   
   /*
-    获取右侧商品列表
+    获取右侧商品列表、微信信息
   */
   get_right_goodslist: function (id) {
     const _ = dbconn.command
@@ -92,7 +92,8 @@ Page({
     this.setData({
       curNav: id,
       curIndex: index,
-      topNum: this.data.topNum = 0
+      topNum: this.data.topNum = 0,
+      right_goodslist:[]//先将右侧列表清空，然后重新加载
     })
     this.get_right_goodslist(id)
   },

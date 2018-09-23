@@ -1,0 +1,41 @@
+<!--miniprogram/pages/owner/owner.wxml-->
+<view class='container'>
+  <view class='head'>
+    <text>宇琛小铺</text>
+  </view>
+  
+  <view class='wechat'>
+    <text>
+      微信号：{{wechat_id}}
+      微信昵称：{{wechat_name}}
+    </text>
+  </view>
+
+<!--
+  <view class='head'>
+    <text>关于我</text>
+  </view>
+-->
+  <view class='detail'>
+    <text>
+          80后水瓶女一枚，生活+工作原因导致香港深圳两地跑，频繁来往之后很多朋友看上我这便利条件，顺带帮忙带带东西，后来没刹住闸，朋友，同学，亲戚，朋友的亲戚，同学的亲戚，亲戚的亲戚都来了……原本工作之余只有买买买，吃吃吃，逛逛逛三件人生大事，变成了买买买，买买买，不停买了，也因为代购，我的生活变得不一样了，认识了很多善良，漂亮，可爱的仙女。知道了很多自己没听过没见过的品牌，开始关注保养，健康，开始愿意跟陌生人打招呼，试着相处，吃过亏，上过当，不敢拿钱开玩笑！所以：
+          
+          1.不接受陌生人的货到付款要求；
+          
+          2.不接陌生人的临时单；
+          
+          3.基本都是周五或者周末采购，统一处理发货，所以不接急单；
+          
+          4.每年出国旅游两次，出境当月会有连续两周不采购，恳请理解，
+          
+          5.商品价格只作为参考，因为汇率是不断变化的，但是，但是，但是绝大多数情况买到还会比报价低一点哦。
+          
+          另外:商家送的赠品，我们会一并打包邮寄给你，绝不贪污哦，快递是L小先生发，对护肤品还属于刚入门阶段，如有遗漏或者发错，请务必及时微信跟我联系，我们会第一时间处理哦。我会时不时送大家一些我寄几喜欢吃的小零食，请笑纳！  
+    </text>
+  </view>
+
+  
+  <image mode="widthFix" bindtap="imgYu" data-src="cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/others/wechat.jpg" src="cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/others/wechat.jpg"></image>
+
+
+</view>
