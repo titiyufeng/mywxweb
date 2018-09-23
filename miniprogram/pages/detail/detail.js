@@ -18,8 +18,8 @@ Page({
     var imgs = new Array()
     imgs.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/others/wechat.jpg")//加入微信联系图片
     
-    var tmp = options.detail_images.split(",")
-    imgs = imgs.concat(tmp);//将传递过来的detail_images（字符串）转成数组
+    // var tmp = options.detail_images.split(",")
+    // imgs = imgs.concat(tmp);//将传递过来的detail_images（字符串）转成数组
     if (imgs.length < 3){
       var cate_id = 0;
       cate_id = parseInt(options.spu_no / 10000000)
