@@ -18,5 +18,24 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "宇琛小铺",
     "navigationBarTextStyle": "black"
+    },
+  "tabBar": {
+      "color": "#a9b7b7",
+      "selectedColor": "#f0145a",
+      "borderStyle": "black",
+      "list": [
+        {
+          "iconPath": "./resouce/all_goods.png",
+          "selectedIconPath": "./resouce/all_goods_selected.png",
+          "pagePath": "pages/index/index",
+          "text": "全部分类"
+        },
+        {
+          "iconPath": "./resouce/service.png",
+          "selectedIconPath": "./resouce/service_selected.png",
+          "pagePath": "pages/search/search",
+          "text": "联系卖家"
+        }
+    ]
   }
 }
