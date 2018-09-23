@@ -1,2 +1,113 @@
 /* pages/search/search.wxss */
-@import "../index/index"
+page{  
+  background: #f5f5f5;  
+}  
+
+/*总体主盒子*/  
+.container {  
+  position: absolute;  
+  width: 100%;  
+  height: 100%;  
+  background-color: #fff;  
+  color: #939393;  
+}
+
+
+ 
+/*右侧栏主盒子*/  
+.nav_search_result{  
+  /*设置行内块级元素（没使用定位）*/
+  margin-top: 35px;
+  position: fixed;
+  box-sizing: border-box; 
+  right: 0;
+  top: 0;
+  padding: 5px;  
+  width: 100%;  
+  height: 92%;   
+  /*主盒子设置背景色为灰色*/  
+  background: #fff;  
+} 
+
+/*右侧栏list的item*/  
+.nav_search_result .nav_search_result_items{  
+  /*浮动向左*/  
+  float: left;  
+  /*每个item设置宽度是100%*/  
+  width: 100%;  
+  padding: 5px;  
+  text-align: left;
+  
+}  
+.nav_search_result .nav_search_result_items image{  
+  /*被图片设置宽高*/  
+  width: 120px;  
+  height: 120px;  
+  float: left;  /*使右侧的商品说明文字与图片为同一行*/  
+  margin-right: 5px;
+}  
+
+
+.nav_search_result .nav_search_result_items text{  
+  /*给text设成块级元素*/ 
+  display: -webkit-box;
+  font-size: 16px;  
+  color: black;
+  line-height: 30rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:4;  /*控制显示行数*/ 
+  overflow: hidden;
+  text-overflow:ellipsis;
+} 
+.nodata_text
+{
+  margin-top: 180px;
+  color: black;
+  font-size: 16px;  
+  text-align: center;  
+} 
+/*点击商品列表页面的时候，背景色为白色*/
+.navigator-hover {
+  background: #fff;
+}
+
+
+/*搜索样式 */
+.search{
+  width: 100%;
+}
+.search_arr {
+  height: 30px;
+  border: 1px solid #d0d0d0;
+  border-radius: 10rpx;
+  margin-left: 20rpx;
+}
+.search_arr input{
+  margin-left: 60rpx;
+  border-radius: 5px;
+  font-size: 18px; 
+}
+ 
+.sousuo {
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+  height: 30px;
+  width: 15%;
+  text-align: center;
+  border: 1px solid #d0d0d0;
+}
+.page_row{
+    width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row
+}
+.searchcion {
+  margin: 10rpx 10rpx 10rpx 10rpx;
+  position: absolute;
+  left:25rpx;
+  z-index: 2;
+  width: 20px;
+  text-align: center;
+}

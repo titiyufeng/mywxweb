@@ -18,25 +18,33 @@ Page({
     })
   },
 
-  //获取用户输入的密码
+  //搜索商品
   getdata: function (e) {
-    console.log(this.data.searchtext);
-  },
 
-  ceshi: function () {
-    dbconn.collection('goods_types').where({
-      cate_id: 0
+    this.setData({
+      result_list: []//先将列表清空，然后重新加载
     })
-      .get({
-        success: function (res) {
-          // res.data 是包含以上定义的两条记录的数组
-          console.log(res.data[0]["cate_name"])
-          var aaa = res.data[0]["cate_name"]
-          this.setData({
-            aaa :"123"
-          })
-        
+
+    var searchtext = this.data.searchtext //获取用户输入
+    const _ = dbconn.command
+    var that = this;
+    var result_list = new Array();
+    dbconn.collection('goods_datas').where({
+      is_display: true,
+      cate_id: _.gt(0)
+    }).get({
+      success: function (res) {
+        var goodslist = res.data
+        for (var i = 0; i < goodslist.length;i++){
+          if (goodslist[i]["goods_name"].indexOf(searchtext) != -1){
+            result_list.push(goodslist[i])
+          }
         }
-      })
+        that.setData({
+          result_list: result_list
+        }
+        )
+      }
+    })
   }
 })
