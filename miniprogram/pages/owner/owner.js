@@ -11,7 +11,8 @@ Page({
    */
   data: {
     wechat_name:"",
-    wechat_id:""
+    wechat_id:"",
+    final_text:""
   },
 
   /**
@@ -19,14 +20,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    //获取微信id、微信昵称
+    //获取微信id、微信昵称、卖家信息
     dbconn.collection('config').get({
       success: function (res) {
         var wechat_id = res.data[0]["wechat_id"]
         var wechat_name = res.data[0]["wechat_name"]
+        var final_text = res.data[0]["final_text"]
         that.setData({
           wechat_id: wechat_id,
-          wechat_name: wechat_name
+          wechat_name: wechat_name,
+          final_text: final_text
         })
       }
     })
