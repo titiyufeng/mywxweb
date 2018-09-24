@@ -5,7 +5,7 @@
         <text>
               商品名称：{{goods_name}}
   
-              商品编号：{{spu_no}}
+              商品编号：{{goods_no}}
         </text>
     </view>
 

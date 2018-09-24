@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    spu_no: "",
+    goods_no: "",
     goods_detail : "",
     goods_name:"",
     detail_images:""
@@ -17,18 +17,15 @@ Page({
   onLoad: function (options) {
     var imgs = new Array()
     imgs.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/others/wechat.jpg")//加入微信联系图片
-    
-    // var tmp = options.detail_images.split(",")
-    // imgs = imgs.concat(tmp);//将传递过来的detail_images（字符串）转成数组
     if (imgs.length < 3){
       var cate_id = 0;
-      cate_id = parseInt(options.spu_no / 10000000)
+      cate_id = parseInt(options.goods_no / 10000000)
       for (var i = 1; i < 6; i++) {
-        imgs.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/" + cate_id + "/" + options.spu_no + "/" + options.spu_no + "0" + i + ".jpg")
+        imgs.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/" + cate_id + "/" + options.goods_no + "/" + options.goods_no + "0" + i + ".jpg")
       }  
     }
     this.setData({
-      spu_no: options.spu_no,
+      goods_no: options.goods_no,
       goods_detail: options.goods_detail,
       goods_name: options.goods_name,
       detail_images:imgs,
