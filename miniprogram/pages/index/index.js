@@ -33,8 +33,7 @@ Page({
                 )
             }
         })
-
-
+        
         //判断是否是热门tab，如是过热门tab则不需要过滤商品类型，如果不是热门tab需要过滤商品类型
         if (id != 0) {
             dbconn.collection('goods_datas').where({
@@ -96,12 +95,5 @@ Page({
             right_goodslist: []//先将右侧列表清空，然后重新加载
         })
         this.get_right_goodslist(id)
-    },
-
-
-    goToSouSuo: function () {
-        wx.navigateTo({
-            url: '../search/search',
-        })
     }
 })  

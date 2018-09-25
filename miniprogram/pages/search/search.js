@@ -9,6 +9,8 @@ Page({
     data: {
         searchtext: '',
         searchlist: [],
+        wechat_id:"",
+        wechat_name: "",
         page_text: ""//搜索结果为空白时候显示的内容，首次进入显示为空，无结果时候显示为“没有找到对应的商品”
     },
     //获取用户输入关键字
@@ -16,7 +18,13 @@ Page({
         this.setData({
             searchtext: e.detail.value
         })
-    },
+  }, 
+  onLoad: function (options) {
+    this.setData({
+      wechat_name: options.wechat_name,
+      wechat_id: options.wechat_id
+    })
+  },
 
     //搜索商品
     getdata: function (e) {
@@ -57,7 +65,6 @@ Page({
               )
             }
           })
-        }
-        
+        }      
     }
 })

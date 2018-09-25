@@ -32,7 +32,6 @@ Page({
             wechat_name: options.wechat_name,
             wechat_id: options.wechat_id
         })
-
     },
 
     /**

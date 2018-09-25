@@ -1,6 +1,6 @@
 
 /*右侧栏主盒子*/  
-.nav_right{  
+.nav_detail{  
   /*右侧盒子使用了绝对定位*/  
   position: relative;  
   /*宽度占满，高度占满，并使用百分比布局*/  
@@ -13,21 +13,21 @@
 }  
 
 
-.nav_right .wechat{
+.nav_detail .wechat{
   text-align: left; 
   display: block;
   font-size: 18px;  
   color: red;
 }
 
-.nav_right image{  
+.nav_detail image{  
   /*被图片设置宽高*/  
   width: 300px;   
   margin-top: 15px; 
   background: #f5f5f5; 
 }  
 
-.nav_right .detail{  
+.nav_detail .detail{  
   /*给text设成块级元素*/
   text-align: left; 
   display: block;
