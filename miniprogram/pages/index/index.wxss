@@ -80,6 +80,7 @@ page{
   height: 120px;  
   float: left;  /*使右侧的商品说明文字与图片为同一行*/  
   margin-right: 5px;
+  background: #dedede;
 }  
 
 
