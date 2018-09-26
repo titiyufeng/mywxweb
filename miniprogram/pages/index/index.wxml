@@ -1,56 +1,56 @@
 <!--主盒子-->
-<view class="container"> 
- <view class="page_row"> 
-  <view class="search"> 
-   <view class="df search_arr"> 
-    <navigator url="/pages/search/search?wechat_id={{wechat_id}}&wechat_name={{wechat_name}}">   
-      <icon class="searchcion" size="20" type="search"></icon> 
-      <input class="" disabled placeholder="请输入商品名称" value="{{searchValue}}" /> 
-    </navigator>   
-   </view> 
+<view class="container">
+  <view class="page_row">
+    <view class="search">
+      <view class="df search_arr">
+        <navigator url="/pages/search/search?wechat_id={{wechat_id}}&wechat_name={{wechat_name}}">
+          <icon class="searchcion" size="20" type="search"></icon>
+          <input class="" disabled placeholder="请输入商品名称" value="{{searchValue}}" />
+        </navigator>
+      </view>
+    </view>
+    <view class="sousuo">
+      <navigator url="/pages/search/search?wechat_id={{wechat_id}}&wechat_name={{wechat_name}}">
+        <text>搜索</text>
+      </navigator>
+    </view>
   </view>
-  <view class="sousuo">
-   <navigator url="/pages/search/search?wechat_id={{wechat_id}}&wechat_name={{wechat_name}}">    
-      <text>搜索</text> 
-   </navigator>
-  </view> 
- </view> 
 
- <!--左侧栏--> 
- <scroll-view scroll-y scroll-with-animation class="nav_left"> 
-  <block wx:for="{{cateItems}}" wx:key="id"> 
-   <!--当前项的id等于item项的id，那个就是当前状态--> 
-   <!--用data-index记录这个数据在数组的下标位置，使用data-id设置每个item的id值，供打开2级页面使用--> 
-   <view class="nav_left_items {{curNav == item.cate_id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.cate_id}}">
-    {{item.cate_name}}
-   </view> 
-  </block> 
- </scroll-view> 
- <!--右侧栏--> 
- <scroll-view scroll-y scroll-with-animation class="nav_right" scroll-top="{{topNum}}"> 
-  <!--如果有数据，才遍历项--> 
-  <view wx:if="{{cateItems[curIndex].is_have_child}}"> 
-   <block wx:for="{{right_goodslist}}" wx:key="id"> 
-    <view class="nav_right_items"> 
-     <!--界面跳转 --> 
-     <navigator url="/pages/detail/detail?cate_id={{item.cate_id}}&goods_no={{item.goods_no}}&goods_name={{item.goods_name}}&goods_detail={{item.goods_detail}}&wechat_id={{wechat_id}}&wechat_name={{wechat_name}}"> 
-      <image src="cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/{{item.cate_id}}/{{item.goods_no}}/{{item.goods_no}}.jpg" /> 
-      <text>
+  <!--左侧栏-->
+  <scroll-view scroll-y scroll-with-animation class="nav_left">
+    <block wx:for="{{cateItems}}" wx:key="id">
+      <!--当前项的id等于item项的id，那个就是当前状态-->
+      <!--用data-index记录这个数据在数组的下标位置，使用data-id设置每个item的id值，供打开2级页面使用-->
+      <view class="nav_left_items {{curNav == item.cate_id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.cate_id}}">
+        {{item.cate_name}}
+      </view>
+    </block>
+  </scroll-view>
+  <!--右侧栏-->
+  <scroll-view scroll-y scroll-with-animation class="nav_right" scroll-top="{{topNum}}">
+    <!--如果有数据，才遍历项-->
+    <view wx:if="{{cateItems[curIndex].is_have_child}}">
+      <block wx:for="{{right_goodslist}}" wx:key="id">
+        <view class="nav_right_items">
+          <!--界面跳转 -->
+          <navigator url="/pages/detail/detail?cate_id={{item.cate_id}}&goods_no={{item.goods_no}}&goods_name={{item.goods_name}}&goods_detail={{item.goods_detail}}&wechat_id={{wechat_id}}&wechat_name={{wechat_name}}">
+            <image src="cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/{{item.cate_id}}/{{item.goods_no}}/{{item.goods_no}}.jpg" />
+            <text>
         编号：{{item.goods_no}} 
-      </text> 
-      <text>
+      </text>
+            <text>
         名称：{{item.goods_name}} 
-      </text> 
-      <text>
+      </text>
+            <text>
         价格：{{item.goods_price}} 
-      </text> 
-     </navigator> 
-    </view> 
-   </block> 
-  </view> 
-  <!--如果无数据，则显示数据--> 
-  <view class="nodata_text" wx:else="">
-   该分类暂无商品
-  </view> 
- </scroll-view> 
+      </text>
+          </navigator>
+        </view>
+      </block>
+    </view>
+    <!--如果无数据，则显示数据-->
+    <view class="nodata_text" wx:else="">
+      该分类暂无商品
+    </view>
+  </scroll-view>
 </view>

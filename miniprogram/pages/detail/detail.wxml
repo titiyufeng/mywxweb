@@ -1,23 +1,23 @@
 <!--主盒子-->
-<view class="nav_detail"> 
- <view class="detail"> 
-  <text>
+<view class="nav_detail">
+  <view class="detail">
+    <text>
     商品名称：{{goods_name}} 
     
     商品编号：{{goods_no}} 
-  </text> 
- </view> 
- <view class="wechat"> 
-  <text>
+  </text>
+  </view>
+  <view class="wechat">
+    <text>
     微信号：{{wechat_id}} 
     
     微信昵称：{{wechat_name}} 
-  </text> 
- </view> 
- <view class="detail"> 
-  <text>
+  </text>
+  </view>
+  <view class="detail">
+    <text>
     商品描述： {{goods_detail}} 
-  </text> 
- </view> 
- <image mode="widthFix" bindtap="imgYu" wx:for="{{detail_images}}" wx:key="id" src="{{item}}" data-src="{{image}}" data-index="{{index}}" /> 
-</view> 
+  </text>
+  </view>
+  <image mode="widthFix" bindtap="imgYu" wx:for="{{detail_images}}" wx:key="id" src="{{item}}" data-src="{{image}}" data-index="{{index}}" />
+</view>
