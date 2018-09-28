@@ -1,8 +1,8 @@
 // pages/owner/owner.js
-var get_db_conn = require("../../utils/util.js");
+var util = require("../../utils/util.js");
 
 //获取数据库连接
-var dbconn = get_db_conn.get_db_conn();
+var dbconn = util.get_db_conn();
 
 Page({
 
