@@ -21,7 +21,7 @@ page {
   left: 0;
   top: 0;
   width: 23%;
-  height: 92%;
+  height: 95%;
   /*主盒子设置背景色为灰色*/
   background: #f5f5f5;
   text-align: center;
@@ -61,7 +61,7 @@ page {
   top: 0;
   padding: 5px;
   width: 77%;
-  height: 92%;
+  height: 95%;
   /*主盒子设置背景色为灰色*/
   background: #fff;
 }
