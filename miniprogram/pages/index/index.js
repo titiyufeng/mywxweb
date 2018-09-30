@@ -1,7 +1,6 @@
-var util = require("../../utils/util.js");
 
-//获取数据库连接
-var dbconn = util.get_db_conn();
+var util = require("../../utils/util.js");
+var app = getApp()
 
 Page({
   data: {
@@ -9,33 +8,19 @@ Page({
     cateItems: [], //左侧导航
     cateItems_goods_list: [], //右侧商品列表
     curNav: 0,
-    curIndex: 0,
-    wechat_id: "",
-    wechat_name: ""
+    curIndex: 0
   },
 
   /*
    获取右侧商品列表、微信信息
    */
-  get_right_goodslist: function(id) {
-    const _ = dbconn.command
+  get_right_goodslist: function(id) { 
+    const _ = app.dbconn.command
     var that = this;
-
-    //获取微信id、微信昵称
-    dbconn.collection('config').get({
-      success: function(res) {
-        var wechat_id = res.data[0]["wechat_id"]
-        var wechat_name = res.data[0]["wechat_name"]
-        that.setData({
-          wechat_id: wechat_id,
-          wechat_name: wechat_name
-        })
-      }
-    })
 
     //判断是否是热门tab，如是过热门tab则不需要过滤商品类型，如果不是热门tab需要过滤商品类型
     if (id != 0) {
-      dbconn.collection('goods_datas').where({
+      app.dbconn.collection('goods_datas').where({
         cate_id: id,
         is_display: true,
         stock_quantity: _.gt(0)
@@ -48,7 +33,7 @@ Page({
         }
       })
     } else {
-      dbconn.collection('goods_datas').where({
+      app.dbconn.collection('goods_datas').where({
         is_hot: true,
         is_display: true,
         stock_quantity: _.gt(0)
@@ -66,7 +51,7 @@ Page({
   onLoad: function(options) {
     var cateItems_db = new Array()
     var that = this;
-    dbconn.collection('goods_types').get({
+    app.dbconn.collection('goods_types').get({
       success: function(res) {
         var rs_data = res.data
         cateItems_db = rs_data

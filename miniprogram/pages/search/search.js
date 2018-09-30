@@ -1,8 +1,7 @@
 // pages/search/search.js
 var util = require("../../utils/util.js");
 
-//获取数据库连接
-var dbconn = util.get_db_conn();
+var app = getApp()
 
 Page({
   data: {
@@ -20,8 +19,8 @@ Page({
   },
   onLoad: function(options) {
     this.setData({
-      wechat_name: options.wechat_name,
-      wechat_id: options.wechat_id
+      wechat_name: app.globalData.wechat_id,
+      wechat_id: app.globalData.wechat_id
     })
   },
 
@@ -38,10 +37,10 @@ Page({
         page_text: ""
       })
     } else {
-      const _ = dbconn.command
+      const _ = app.dbconn.command
       var that = this;
       var result_list = new Array();
-      dbconn.collection('goods_datas').where({
+      app.dbconn.collection('goods_datas').where({
         is_display: true,
         cate_id: _.gt(0)
       }).get({

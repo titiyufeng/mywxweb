@@ -6,12 +6,13 @@
     "pages/logs/logs",
     "pages/search/search",
     "pages/owner/owner",
+    "pages/my/my",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
     "pages/addFunction/addFunction",
     "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib"    
+    "pages/chooseLib/chooseLib"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -30,6 +31,12 @@
         "selectedIconPath": "./resouce/all_goods_selected.png",
         "pagePath": "pages/index/index",
         "text": "全部分类"
+      },
+      {
+        "iconPath": "./resouce/my.png",
+        "selectedIconPath": "./resouce/my_selected.png",
+        "pagePath": "pages/my/my",
+        "text": "我的"
       },
       {
         "iconPath": "./resouce/service.png",

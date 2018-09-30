@@ -1,4 +1,6 @@
 // pages/detail/detail.js
+var util = require("../../utils/util.js");
+var app = getApp()
 Page({
 
   /**
@@ -29,8 +31,8 @@ Page({
       goods_detail: options.goods_detail,
       goods_name: options.goods_name,
       detail_images: imgs,
-      wechat_name: options.wechat_name,
-      wechat_id: options.wechat_id
+      wechat_name: app.globalData.wechat_name,
+      wechat_id: app.globalData.wechat_id
     })
   },
 
