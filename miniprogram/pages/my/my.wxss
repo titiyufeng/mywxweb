@@ -3,6 +3,7 @@
 .avatar-wrapper {
   background: #1b82d1;
   padding: 25px 0;
+  text-align: center;
 }
 
 .avatar-wrapper .avatar {
@@ -15,9 +16,16 @@
   height: 100px;
 }
 
-.avatar-wrapper .text {
+.avatar-wrapper text {
   text-align: center;
   color: #fff;
+  font-size: 16px;
+  
+}
+.avatar-wrapper button {
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
 }
 
 .weui-cell__hd image {
