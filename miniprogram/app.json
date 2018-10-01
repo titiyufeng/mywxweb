@@ -15,7 +15,8 @@
     "pages/chooseLib/chooseLib",
     "pages/my/userinfo/userinfo",
     "pages/my/order/order",
-    "pages/my/address/address"
+    "pages/my/address/address",
+    "pages/wxSelectCity/wxSelectCity"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
