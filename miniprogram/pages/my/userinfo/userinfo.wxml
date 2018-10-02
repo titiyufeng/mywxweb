@@ -1,54 +1,80 @@
 <!--miniprogram/pages/my/userinfo/userinfo.wxml-->
 <view class="page">
   <view class="page__bd">
-    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{err_msg}}</view>
 
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">姓名</view>
+    <form bindsubmit="formSubmit">
+
+      <view class="weui-cells weui-cells_after-title">
+
+        <view hidden class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">用户id</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='name' name='user_id' disabled class="weui-input" value='{{user_id}}' />
+          </view>
         </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入姓名" />
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">姓名</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='name' disabled='{{is_disabled}}' name='username' class="weui-input" placeholder="请输入姓名"  value='{{username}}'/>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">手机号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='name' name='mobile' class="weui-input" placeholder="请输入手机号码" value='{{mobile}}'/>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input weui-cell_vcode">
+          <view class="weui-cell__hd">
+            <view class="weui-label">收货地址</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='name' name='user_city' class="weui-input" disabled placeholder="" value='{{ province }}-{{city}}' />
+          </view>
+          <view class="">
+            <button class="btn" bindtap="handleClick">选省市</button>
+            <select-city bind:handleSelect="handleSelect" open-status="{{ isActive }}"></select-city>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input id='name' name='detail_address' class="weui-input" placeholder="请输入详细地址" style='font-size:14px;' value='{{detail_address}}' />
+          </view>
+        </view>
+
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">出生日期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="date" value="{{birthday}}" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
+              <input id='name' name='birthday' class="weui-input" disabled value='{{birthday}}'></input>
+            </picker>
+          </view>
         </view>
       </view>
 
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">手机号</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入手机号码" />
-        </view>
+      <view class="weui-cells__tips" style='color:red'>注意：</view>
+      <view class="weui-cells__tips" style='color:red'>1、为了准确、及时的将货物送到你的手中，请务必确认以上信息正确！如果收货地址有变更，请重新提交收货地址信息!</view>
+      <view class="weui-cells__tips" style='color:red'>2、如果手机号码变更，请务必及时联系卖家修改！！！</view>
+
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" formType="submit">确定</button>
       </view>
 
-      <view class="weui-cell weui-cell_input weui-cell_vcode">
-        <view class="weui-cell__hd">
-          <view class="weui-label">选择城市</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="" value='{{ currentCity }}' />
-        </view>
-        <view class="">
-          <button class="btn" bindtap="handleClick">请选择</button>
-          <select-city bind:handleSelect="handleSelect" open-status="{{ isActive }}"></select-city>
-        </view>
-      </view>
+    </form>
 
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">出生日期</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker mode="date" value="{{date}}" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
-            <view class="weui-input">{{date}}</view>
-          </picker>
-        </view>
-      </view>
-    </view>
-
-    <view class="weui-btn-area">
-      <button class="weui-btn" type="primary" bindtap="showTopTips">确定</button>
-    </view>
   </view>
 </view>

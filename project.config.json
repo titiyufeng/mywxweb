@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -39,7 +39,14 @@
 				{
 					"id": -1,
 					"name": "个人信息页面",
-					"pathName": "pages/my/userinfo/userinfo"
+					"pathName": "pages/my/userinfo/userinfo",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "my",
+					"pathName": "pages/my/my",
+					"query": ""
 				}
 			]
 		}

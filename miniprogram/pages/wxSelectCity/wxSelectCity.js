@@ -20,12 +20,20 @@ Component({
     isProvinceSelected: false,
     isCitySelected: false,
     provinceList: [],
-    cityList: []
+    cityList: [],
+    province_fullname: ""//我添加的---省全名
   },
   methods: {
     // 处理点击省份列表事件
     selectProvince: function (event) {
       let proId = event.target.dataset.id;
+
+      //我添加的---将省全名写入data中
+      let province_fullname = event.target.dataset.fullname;
+      this.data.province_fullname = province_fullname
+
+
+
       this.data.provinceList.forEach((value) => {
         if (value.id === proId){
           let tempCity = cityList.slice(value.cidx[0], value.cidx[1]+1);
@@ -47,7 +55,10 @@ Component({
     selectCity: function (event) {
       let { index } = event.target.dataset;
       // 触发自定义事件，传递选中的城市名称
-      this.triggerEvent('handleSelect', this.data.cityList[index]);
+      
+      //我添加的--返回一个数组，第一个值为省、第二个值为市
+      var return_data = [this.data.province_fullname, this.data.cityList[index]]
+      this.triggerEvent('handleSelect', return_data);
     }
   },
   ready: function () {

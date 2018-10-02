@@ -3,7 +3,7 @@
     <!-- 省份列表 -->
     <scroll-view class="select-city-box"  scroll-y>
       <block wx:for="{{provinceList}}" wx:key="{{item.id}}">
-        <view class="select-city-option" bindtap="selectProvince" data-id="{{item.id}}">
+        <view class="select-city-option" bindtap="selectProvince" data-id="{{item.id}}" data-fullname="{{item.fullname}}">
           {{item.fullname}}
         </view>
       </block>
