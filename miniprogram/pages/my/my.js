@@ -25,7 +25,7 @@ Page({
    * 获取用户信息
    */
   bindGetUserInfo: function (e) {
-    var userinfo = e.detail.userInfo+
+    var userinfo = e.detail.userInfo
     wx.setStorageSync("userinfo", userinfo)
     this.setData({
       userinfo: userinfo
