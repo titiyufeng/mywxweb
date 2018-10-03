@@ -23,28 +23,28 @@ Page({
     scaleCart: false
   },
 
-  onLoad: function (options) {
-    
-    var goods_no = options.goods_no*1
+  onLoad: function(options) {
+
+    var goods_no = options.goods_no * 1
     var cate_id = parseInt(goods_no / 10000000)
-    
-    var detail_images =[]
+
+    var detail_images = []
     for (var i = 1; i < 6; i++) {
       detail_images.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/" + cate_id + "/" + goods_no + "/" + goods_no + "0" + i + ".jpg")
-    } 
+    }
 
     var that = this
     app.dbconn.collection('goods_datas').where({
       goods_no: goods_no,
       is_display: true
     }).get({
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.length)
         if (res.data.length == 0) { //如果没有找到商品，提示商品已经下架
           wx.showModal({
             content: '商品已经下架！',
             showCancel: false,
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
                 wx.navigateBack({
                   // delta: 2
@@ -62,7 +62,7 @@ Page({
           }
           that.setData({
             goods_infos: goods_infos,
-            detail_images:detail_images
+            detail_images: detail_images
           })
         }
       }
@@ -93,12 +93,12 @@ Page({
     self.setData({
       show: true
     })
-    setTimeout(function () {
+    setTimeout(function() {
       self.setData({
         show: false,
         scaleCart: true
       })
-      setTimeout(function () {
+      setTimeout(function() {
         self.setData({
           scaleCart: false,
           hasCarts: true,
@@ -119,16 +119,29 @@ Page({
   /**
    * 预览明细页图片
    */
-  imgYu: function (event) {
+  imgYu: function(event) {
     console.log(event.currentTarget.dataset.index);
     var index = event.currentTarget.dataset.index;
     var detail_images = this.data.detail_images;
     wx.previewImage({
       current: detail_images[index], //当前图片地址
       urls: detail_images, //所有要预览的图片的地址集合 数组形式
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+
+  /**
+   * 使swiper中的图片自适应
+   */
+  imgHeight: function(e) {
+    var winWid = wx.getSystemInfoSync().windowWidth; //获取当前屏幕的宽度
+    var imgh = e.detail.height; //图片高度
+    var imgw = e.detail.width; //图片宽度
+    var swiperH = winWid * imgh / imgw + "px" //等比设置swiper的高度。 即 屏幕宽度 / swiper高度 = 图片宽度 / 图片高度  ==》swiper高度 = 屏幕宽度 * 图片高度 / 图片宽度
+    this.setData({
+      Height: swiperH //设置高度
     })
   }
 
