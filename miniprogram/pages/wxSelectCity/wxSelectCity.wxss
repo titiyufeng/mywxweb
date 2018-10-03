@@ -36,7 +36,7 @@
   border-bottom: 1px solid #ddd;
 }
 .select-city-option:active, .select-city-option:hover{
-  background: #1AAD16;
+  background: #f0145a;
   color: #fff;
 }
 .back-option:before{
