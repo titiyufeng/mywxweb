@@ -68,10 +68,10 @@
 
       <view class="weui-cells__tips" style='color:red'>注意：</view>
       <view class="weui-cells__tips" style='color:red'>1、为了准确、及时的将货物送到你的手中，请务必确认以上信息正确！如果收货地址有变更，请重新提交收货地址信息!</view>
-      <view class="weui-cells__tips" style='color:red'>2、如果手机号码变更，请务必及时联系卖家修改！！！</view>
+      <view class="weui-cells__tips" style='color:red'>2、如果手机号码变更，请务必及时修改！！！</view>
 
       <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" formType="submit">确定</button>
+        <button class="weui-btn" type="primary" formType="submit" style='background-color:#f0145a'>确定</button>
       </view>
 
     </form>

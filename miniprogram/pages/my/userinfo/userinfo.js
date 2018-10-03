@@ -9,13 +9,13 @@ Page({
     isActive: false,
     err_msg: '信息提交错误，所有信息不能为空',
     is_disabled: '', //判断用户信息是否可编辑
-    user_id: '',//对应user表中的_id字段
-    username:'',
-    mobile:'',
-    province: '',//省
-    city: '',//市
-    detail_address:'',
-    birthday:"2016-01-01"
+    user_id: '', //对应user表中的_id字段
+    username: '',
+    mobile: '',
+    province: '', //省
+    city: '', //市
+    detail_address: '',
+    birthday: ""
   },
   onLoad: function(options) {
     var that = this
@@ -27,23 +27,22 @@ Page({
           that.setData({
             user_id: res.data[0]._id
           })
+          if (res.data[0].username) {
+            that.setData({
+              is_disabled: true,
+              // user_id: res.data[0]._id,
+              username: res.data[0].username,
+              mobile: res.data[0].mobile,
+              province: res.data[0].province,
+              city: res.data[0].city,
+              detail_address: res.data[0].detail_address,
+              birthday: util.formatTime(res.data[0].birthday, 'Y-M-D')
+            })
+          }
         } else {
           console.log("获取_id失败！")
         }
-        if(res.data[0].username){
-          console.log("**********" + res.data[0].birthday)
-          that.setData({
-            is_disabled: true,
-            user_id: res.data[0]._id,
-            username: res.data[0].username,
-            mobile: res.data[0].mobile,
-            province: res.data[0].province,
-            city: res.data[0].city,
-            detail_address: res.data[0].detail_address,
-            birthday: res.data[0].birthday
-            // birthday: util.formformatTime(res.data[0].birthday, 'Y-M-D')
-          })
-        }
+
       },
       fail: console.error
     })
@@ -68,8 +67,7 @@ Page({
     console.log("birthday:" + birthday)
 
     // //将生日转成时间戳
-    // var birthday = Date.parse(new Date(birthday));
-    // birthday = birthday / 1000;
+    var birthday = Date.parse(new Date(birthday)) / 1000;;
 
     if (username.length == 0 || mobile.length == 0 || user_city.length == 0 || detail_address.length == 0 || birthday.length == 0) {
       this.showTopTips('信息提交错误，所有信息不能为空')
@@ -89,6 +87,18 @@ Page({
         },
         success: function(res) {
           console.log("用户信息更新成功，更新记录数为：" + res.stats.updated + "条！")
+          wx.showModal({
+            content: '提交成功！',
+            showCancel: false,
+            success: function(res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+                wx.navigateBack({
+                  // delta: 2
+                })
+              }
+            }
+          })
         },
         fail: console.error
       })
