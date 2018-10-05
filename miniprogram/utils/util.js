@@ -27,18 +27,15 @@ function get_db_conn() {
 }
 
 function test() {
-  that = this
   var dbconn = get_db_conn()
   dbconn.collection('config').get({
     success: function(res) {
-      this.config.appid = res.data[0]["appid"]
       var secret = res.data[0]["secret"]
-      console.log(appid)
-      return 123
+      // console.log(appid)
+      return secret
     }
   })
-
-  return that.config
+  console.log(123123123)
 }
 
 
