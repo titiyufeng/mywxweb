@@ -1,12 +1,12 @@
 <view class="main">
   <view class="goods-box">
-
+    <!-- <image src="{{goods.image}}" class="goods-thumb"></image> -->
     <!-- <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true"> -->
-    <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}"  style='height:{{Height}}'>
-      <block wx:for="{{detail_images}}" wx:key="{{index}}">
+    <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" style='height:{{Height}}'>
+      <block wx:for="{{detail_images_head}}" wx:key="{{index}}">
         <swiper-item>
           <!-- <image src="{{item}}" class="slide-image" width="100%" /> -->
-          <image src="{{item}}" class="slide-image" mode="widthFix" bindload='imgHeight'/>  
+          <image src="{{item}}" class="slide-image" mode="widthFix" bindload='imgHeight' />
         </swiper-item>
       </block>
     </swiper>
@@ -14,11 +14,13 @@
     <navigator open-type="switchTab" url="../cart/cart">
       <view class="carts-icon {{scaleCart?'on':''}}">
         <image src="../../resouce/cart2.png"></image>
-        <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text>
+        <!-- <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text> -->
+        <text class="carts-icon-num" wx:if="{{totalNum !=0}}">{{totalNum}}</text>
       </view>
     </navigator>
 
     <view class="goods-operation">
+      <text class="goods-operation-sub" bindtap="subCount">-</text>
       <text class="goods-operation-num">数量  {{num}}</text>
       <text class="goods-operation-add" bindtap="addCount">+</text>
       <text class="goods-to-cart" bindtap="addToCart">加入购物车</text>
@@ -27,7 +29,9 @@
 
     <image wx:if="{{show}}" src="../../resouce/cart1.png" class="to-carts-icon"></image>
 
-    <view class="goods-stock">{{goods_infos.goods_stock}}</view>
+    <view class="goods-limit">
+      <text wx:if="{{goods_infos.goods_limit_num !=0}}">限购数量：{{goods_infos.goods_limit_num}}</text>
+    </view>
     <view class="goods-title">{{goods_infos.goods_name}}</view>
     <view class="goods-price">￥ {{goods_infos.goods_price}}</view>
   </view>

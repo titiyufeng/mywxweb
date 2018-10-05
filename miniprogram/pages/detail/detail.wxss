@@ -109,7 +109,7 @@ swiper-item image {
     border-radius: 50rpx;
     background: #AB956D;
     color: #fff;
-    font-size: 28rpx;
+    font-size: 32rpx;
 }
 .goods-operation text{
     display: inline-block;
@@ -118,8 +118,13 @@ swiper-item image {
 .goods-operation-num{
     width: 160rpx;
 }
+
+.goods-operation-sub{
+    width: 20rpx;
+    /* margin-left: 30rpx; */
+}
 .goods-operation-add{
-    width: 80rpx;
+    width: 20rpx;
     margin-right: 30rpx;
 }
 .goods-to-cart{
@@ -134,9 +139,10 @@ swiper-item image {
     height: 45rpx;
 }
 
-.goods-stock{
+.goods-limit{
     font-size: 28rpx;
     margin-bottom: 20rpx;
+    color: red;
 }
 .goods-title{
     font-size: 40rpx;
