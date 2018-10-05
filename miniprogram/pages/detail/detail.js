@@ -36,6 +36,7 @@ Page({
     var totalNum = 0 //购买数量
 
     //获取商品明细图片
+    detail_images.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/" + cate_id + "/" + goods_no + "/" + goods_no + ".jpg")
     for (var i = 1; i < 6; i++) {
       detail_images.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/" + cate_id + "/" + goods_no + "/" + goods_no + "0" + i + ".jpg")
     }
@@ -155,6 +156,7 @@ Page({
       //如果该商品在购物车缓存中有数据，则将最新的数量更新到cart中，如果没有数据则将数据推至cart中
       if (self.data.cart_index == '') {
         cart.push({
+          detail_images: self.detail_images[0],
           goods_no: goods_infos.goods_no,
           totalNum: totalNum
         })
