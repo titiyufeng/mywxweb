@@ -3,7 +3,7 @@
   
   <view class="avatar-wrapper">
       <view class="avatar">
-        <image style="border-radius:50%;" src="{{userinfo.avatarUrl ? userinfo.avatarUrl:'../../resouce/avatar_01.png'}}"></image>
+        <image style="border-radius:50%;" src="{{userinfo.avatarUrl ? userinfo.avatarUrl:'../../resouce/my/avatar_01.png'}}"></image>
       </view>
         <text wx:if="{{userinfo.nickName}}">{{userinfo.nickName}}</text>
         <button wx:else open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" plain size='mini'>获取微信头像</button>  
