@@ -22,7 +22,7 @@ Page({
     curIndex: 0,
     show: false,
     scaleCart: false,
-    cart:[] //购物车
+    cart: [] //购物车
   },
 
   onLoad: function(options) {
@@ -33,7 +33,7 @@ Page({
     var detail_images_head = [] //明细页面头部图片
     var goods_infos //商品信息
     var cart //购物车
-    var cart_index ='--' //商品在购物车缓存中的下标
+    var cart_index = '--' //商品在购物车缓存中的下标
     var totalNum = 0 //购买数量
 
     //获取商品明细图片
@@ -85,7 +85,7 @@ Page({
                 if (cart[i].goods_no == goods_infos.goods_no) {
                   cart_index = i
                   totalNum = cart[i].totalNum
-                
+
                   that.setData({
                     cart: cart,
                     cart_index: cart_index,
