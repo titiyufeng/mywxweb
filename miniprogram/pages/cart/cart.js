@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    carts: [], // 购物车列表
+    cart: [], // 购物车列表
     hasList: false, // 列表是否有数据
     totalPrice: 0, // 总价，初始为0
     selectAllStatus: true, // 全选状态，默认全选
@@ -20,24 +20,47 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'get_goods_data',
-      // 传给云函数的参数
-      data: {
-        env: app.globalData.env,
-        goods_no: 10000001,
-      },
+    //从缓存中获取购物车信息
+    wx.getStorage({
+      key: 'cart',
       success: function(res) {
-        console.log(res.result.data) // 3
+        cart = res.data
+        for (var i = 0; i < cart.length; i++) {
+          wx.cloud.callFunction({
+            // 云函数名称
+            name: 'get_goods_data',
+            // 传给云函数的参数
+            data: {
+              env: app.globalData.env,
+              goods_no: 10000001,
+            },
+            success: function(res) {
+              console.log(res.result.data) 
+            },
+            fail: console.error
+          })
+        }
+        that.setData({
+          cart: cart,
+          hasList: true
+        })
       },
-      fail: console.error
+      fail: function(res) {
+        cart = []
+        that.setData({
+          hasList: false,
+          cart: cart
+        })
+      }
     })
-  },
-  onShow() {
+
+
+
+
+
     this.setData({
       hasList: true,
-      carts: [{
+      cart: [{
           id: 1,
           title: '新鲜法第三方士大夫所发生的发师傅水电费芹菜 半斤',
           image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
@@ -56,17 +79,41 @@ Page({
       ]
     });
     this.getTotalPrice();
+
   },
+  // onShow() {
+  //   this.setData({
+  //     hasList: true,
+  //     cart: [{
+  //         id: 1,
+  //         title: '新鲜法第三方士大夫所发生的发师傅水电费芹菜 半斤',
+  //         image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
+  //         num: 4,
+  //         price: 0.01,
+  //         selected: true
+  //       },
+  //       {
+  //         id: 2,
+  //         title: '素米 500g',
+  //         image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
+  //         num: 1,
+  //         price: 0.03,
+  //         selected: true
+  //       }
+  //     ]
+  //   });
+  //   this.getTotalPrice();
+  // },
   /**
    * 当前商品选中事件
    */
   selectList(e) {
     const index = e.currentTarget.dataset.index;
-    let carts = this.data.carts;
-    const selected = carts[index].selected;
-    carts[index].selected = !selected;
+    let cart = this.data.cart;
+    const selected = cart[index].selected;
+    cart[index].selected = !selected;
     this.setData({
-      carts: carts
+      cart: cart
     });
     this.getTotalPrice();
   },
@@ -76,12 +123,12 @@ Page({
    */
   deleteList(e) {
     const index = e.currentTarget.dataset.index;
-    let carts = this.data.carts;
-    carts.splice(index, 1);
+    let cart = this.data.cart;
+    cart.splice(index, 1);
     this.setData({
-      carts: carts
+      cart: cart
     });
-    if (!carts.length) {
+    if (!cart.length) {
       this.setData({
         hasList: false
       });
@@ -96,14 +143,14 @@ Page({
   selectAll(e) {
     let selectAllStatus = this.data.selectAllStatus;
     selectAllStatus = !selectAllStatus;
-    let carts = this.data.carts;
+    let cart = this.data.cart;
 
-    for (let i = 0; i < carts.length; i++) {
-      carts[i].selected = selectAllStatus;
+    for (let i = 0; i < cart.length; i++) {
+      cart[i].selected = selectAllStatus;
     }
     this.setData({
       selectAllStatus: selectAllStatus,
-      carts: carts
+      cart: cart
     });
     this.getTotalPrice();
   },
@@ -113,12 +160,12 @@ Page({
    */
   addCount(e) {
     const index = e.currentTarget.dataset.index;
-    let carts = this.data.carts;
-    let num = carts[index].num;
+    let cart = this.data.cart;
+    let num = cart[index].num;
     num = num + 1;
-    carts[index].num = num;
+    cart[index].num = num;
     this.setData({
-      carts: carts
+      cart: cart
     });
     this.getTotalPrice();
   },
@@ -129,15 +176,15 @@ Page({
   minusCount(e) {
     const index = e.currentTarget.dataset.index;
     const obj = e.currentTarget.dataset.obj;
-    let carts = this.data.carts;
-    let num = carts[index].num;
+    let cart = this.data.cart;
+    let num = cart[index].num;
     if (num <= 1) {
       return false;
     }
     num = num - 1;
-    carts[index].num = num;
+    cart[index].num = num;
     this.setData({
-      carts: carts
+      cart: cart
     });
     this.getTotalPrice();
   },
@@ -146,15 +193,15 @@ Page({
    * 计算总价
    */
   getTotalPrice() {
-    let carts = this.data.carts; // 获取购物车列表
+    let cart = this.data.cart; // 获取购物车列表
     let total = 0;
-    for (let i = 0; i < carts.length; i++) { // 循环列表得到每个数据
-      if (carts[i].selected) { // 判断选中才会计算价格
-        total += carts[i].num * carts[i].price; // 所有价格加起来
+    for (let i = 0; i < cart.length; i++) { // 循环列表得到每个数据
+      if (cart[i].selected) { // 判断选中才会计算价格
+        total += cart[i].num * cart[i].price; // 所有价格加起来
       }
     }
     this.setData({ // 最后赋值到data中渲染到页面
-      carts: carts,
+      cart: cart,
       totalPrice: total.toFixed(2)
     });
   }

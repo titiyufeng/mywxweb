@@ -90,6 +90,7 @@ page {
   line-height: 80rpx;
   text-align: center;
   font-size: 44rpx;
+  color: red;
 }
 
 .cart-footer {

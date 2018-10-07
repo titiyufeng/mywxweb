@@ -61,12 +61,6 @@ Page({
             }
           })
         } else {
-          that.setData({
-            goods_infos: goods_infos,
-            detail_images: detail_images,
-            detail_images_head: detail_images_head
-          })
-          
           goods_infos = {
             goods_no: res.data[0].goods_no,
             goods_name: res.data[0].goods_name,
@@ -75,13 +69,17 @@ Page({
             goods_detail: res.data[0].goods_detail
           }
 
+          that.setData({
+            goods_infos: goods_infos,
+            detail_images: detail_images,
+            detail_images_head: detail_images_head
+          })
+
           //从缓存中获取购物车信息
           wx.getStorage({
             key: 'cart',
             success: function(res) {
               cart = res.data
-              cart_index = ''
-              totalNum = 0
               for (var i = 0; i < cart.length; i++) {
                 if (cart[i].goods_no == goods_infos.goods_no) {
                   cart_index = i
@@ -104,7 +102,6 @@ Page({
         }
       }
     })
-
   },
 
   /**
@@ -116,7 +113,6 @@ Page({
     this.setData({
       num: num
     })
-
   },
 
   /**
@@ -156,7 +152,7 @@ Page({
       //如果该商品在购物车缓存中有数据，则将最新的数量更新到cart中，如果没有数据则将数据推至cart中
       if (self.data.cart_index == '') {
         cart.push({
-          detail_images: self.detail_images[0],
+          detail_images_head: self.detail_images_head,
           goods_no: goods_infos.goods_no,
           totalNum: totalNum
         })
@@ -219,5 +215,4 @@ Page({
       Height: swiperH //设置高度
     })
   }
-
 })
