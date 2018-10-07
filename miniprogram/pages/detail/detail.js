@@ -18,10 +18,11 @@ Page({
     },
     num: 1,
     totalNum: 0,
-    cart_index: '', //该商品在购物车缓存数组中的下标
+    cart_index: '--', //该商品在购物车缓存数组中的下标
     curIndex: 0,
     show: false,
-    scaleCart: false
+    scaleCart: false,
+    cart:[] //购物车
   },
 
   onLoad: function(options) {
@@ -32,7 +33,7 @@ Page({
     var detail_images_head = [] //明细页面头部图片
     var goods_infos //商品信息
     var cart //购物车
-    var cart_index = '' //商品在购物车缓存中的下标
+    var cart_index ='--' //商品在购物车缓存中的下标
     var totalNum = 0 //购买数量
 
     //获取商品明细图片
@@ -84,16 +85,19 @@ Page({
                 if (cart[i].goods_no == goods_infos.goods_no) {
                   cart_index = i
                   totalNum = cart[i].totalNum
+                
+                  that.setData({
+                    cart: cart,
+                    cart_index: cart_index,
+                    totalNum: totalNum
+                  })
                 }
               }
-              that.setData({
-                cart: cart,
-                cart_index: cart_index,
-                totalNum: totalNum
-              })
             },
             fail: function(res) {
+              console.log("购物车缓存为空！")
               cart = []
+              wx.setStorageSync('cart', cart)
               that.setData({
                 cart: cart
               })
@@ -137,12 +141,14 @@ Page({
     let total = this.data.totalNum;
     let totalNum = num + total
     let goods_infos = self.data.goods_infos
-    let cart = self.data.cart
+    var cart = wx.getStorageSync('cart')
+    var cart_index = self.data.cart_index
+
+
 
     //即将加入的数量与限购数量比较，如果大于限购数量，且限购数量不是0，则提示不能在加了，如果小于限购数量则可以继续加，如果限购数量为0则表示不限购
     if (totalNum > self.data.goods_infos.goods_limit_num && self.data.goods_infos.goods_limit_num != 0) {
       wx.showModal({
-        content: '购买数量不能超过限购数量！',
         showCancel: false,
         success: function(res) {
           console.log()
@@ -150,9 +156,11 @@ Page({
       })
     } else {
       //如果该商品在购物车缓存中有数据，则将最新的数量更新到cart中，如果没有数据则将数据推至cart中
-      if (self.data.cart_index == '') {
+      // console.log(self.data.cart_index+"**************")
+      if (self.data.cart_index == '--') {
+        cart_index = cart.length //新添加商品在购物车中的下标
         cart.push({
-          detail_images_head: self.detail_images_head,
+          detail_images_head: self.data.detail_images_head,
           goods_no: goods_infos.goods_no,
           totalNum: totalNum
         })
@@ -174,7 +182,8 @@ Page({
         setTimeout(function() {
           self.setData({
             scaleCart: false,
-            totalNum: totalNum
+            totalNum: totalNum,
+            cart_index: cart_index
           })
         }, 200)
       }, 300)
