@@ -19,78 +19,51 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    var cart
-    var that = this
-    //从缓存中获取购物车信息
-    wx.getStorage({
-      key: 'cart',
-      success: function(res) {
-        cart = res.data
-        console.log(cart)
-        for (var i = 0; i < cart.length; i++) {
-          var index = i
-          wx.cloud.callFunction({
-            // 云函数名称
-            name: 'get_goods_data',
-            // 传给云函数的参数
-            data: {
-              env: app.globalData.env,
-              goods_no: cart[i].goods_no,
-            },
-            success: function(res) {
-              console.log("**************************")
-              console.log(res.result.data[0].goods_name)
-              // console.log("***********" + cart[index].goods_no)
-              for (var t = 0; t < cart.length; t++) {
-                if (res.result.data[0].goods_no == cart[t].goods_no)
-                  cart[t].title = res.result.data[0].goods_name
-                  cart[t].price = res.result.data[0].goods_price
-              }
-              that.setData({
-                cart: cart,
-                hasList: true
-              })
-            },
-            fail: console.error
+    onLoad: function(options) {
+      var cart
+      var that = this
+      //从缓存中获取购物车信息
+      wx.getStorage({
+        key: 'cart',
+        success: function (res) {
+          cart = res.data
+          console.log("缓存中的购物车数据如下：")
+          console.log(cart)
+          for (var i = 0; i < cart.length; i++) {
+            var index = i
+            wx.cloud.callFunction({
+              // 云函数名称
+              name: 'get_goods_data',
+              // 传给云函数的参数
+              data: {
+                env: app.globalData.env,
+                goods_no: cart[i].goods_no,
+              },
+              success: function (res) {
+                for (var t = 0; t < cart.length; t++) {
+                  if (res.result.data[0].goods_no == cart[t].goods_no){
+                    cart[t].title = res.result.data[0].goods_name
+                    cart[t].price = res.result.data[0].goods_price
+                  }
+                }
+                that.setData({
+                  cart: cart,
+                  hasList: true
+                })
+              },
+              fail: console.error
+            })
+          }
+        },
+        fail: function (res) {
+          cart = []
+          that.setData({
+            hasList: false,
+            cart: cart
           })
         }
-      },
-      fail: function(res) {
-        cart = []
-        that.setData({
-          hasList: false,
-          cart: cart
-        })
-      }
-    })
-
-
-
-
-
-    // this.setData({
-    //   hasList: true,
-    //   cart: [{
-    //       id: 1,
-    //       title: '新鲜法第三方士大夫所发生的发师傅水电费芹菜 半斤',
-    //       image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
-    //       num: 4,
-    //       price: 0.01,
-    //       selected: true
-    //     },
-    //     {
-    //       id: 2,
-    //       title: '素米 500g',
-    //       image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
-    //       num: 1,
-    //       price: 0.03,
-    //       selected: true
-    //     }
-    //   ]
-    // });
+      })
     this.getTotalPrice();
-
   },
   // onShow() {
   //   this.setData({
