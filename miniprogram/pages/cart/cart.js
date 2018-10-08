@@ -20,7 +20,59 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  // onLoad: function(options) {
+  //   var cart
+  //   var that = this
+  //   //从缓存中获取购物车信息
+  //   wx.getStorage({
+  //     key: 'cart',
+  //     success: function(res) {
+  //       cart = res.data
+  //       console.log("缓存中的购物车数据如下：")
+  //       console.log(cart)
+  //       for (var i = 0; i < cart.length; i++) {
+  //         var index = i
+  //         wx.cloud.callFunction({
+  //           // 云函数名称
+  //           name: 'get_goods_data',
+  //           // 传给云函数的参数
+  //           data: {
+  //             env: app.globalData.env,
+  //             goods_no: cart[i].goods_no,
+  //           },
+  //           success: function(res) {
+  //             for (var t = 0; t < cart.length; t++) {
+  //               if (res.result.data[0].goods_no == cart[t].goods_no) {
+  //                 cart[t].title = res.result.data[0].goods_name
+  //                 cart[t].price = res.result.data[0].goods_price
+  //                 cart[t].goods_limit_num = res.result.data[0].goods_limit_num
+  //                 cart[t].selected = false
+  //               }
+  //             }
+  //             //将最新的购物车数据重新写入缓存
+  //             wx.setStorageSync('cart', cart)
+
+  //             that.setData({
+  //               cart: cart,
+  //               hasList: true,
+  //               selectAllStatus: false
+  //             })
+  //           },
+  //           fail: console.error
+  //         })
+  //       }
+  //     },
+  //     fail: function(res) {
+  //       cart = []
+  //       that.setData({
+  //         hasList: false,
+  //         cart: cart
+  //       })
+  //     }
+  //   })
+  //   this.getTotalPrice();
+  // },
+  onShow() {
     var cart
     var that = this
     //从缓存中获取购物车信息
@@ -28,7 +80,7 @@ Page({
       key: 'cart',
       success: function(res) {
         cart = res.data
-        console.log("缓存中的购物车数据如下：")
+        console.log("show缓存中的购物车数据如下：")
         console.log(cart)
         for (var i = 0; i < cart.length; i++) {
           var index = i
@@ -49,6 +101,9 @@ Page({
                   cart[t].selected = false
                 }
               }
+              //将最新的购物车数据重新写入缓存
+              wx.setStorageSync('cart', cart)
+
               that.setData({
                 cart: cart,
                 hasList: true,
@@ -67,9 +122,6 @@ Page({
         })
       }
     })
-    this.getTotalPrice();
-  },
-  onShow() {
     this.getTotalPrice();
   },
   /**
@@ -132,7 +184,7 @@ Page({
     let cart = this.data.cart;
     let totalNum = cart[index].totalNum;
 
-    if (totalNum < goods_limit_num) {
+    if (totalNum < goods_limit_num || totalNum != 0) {
       totalNum = totalNum + 1;
       cart[index].totalNum = totalNum;
       this.setData({
@@ -147,10 +199,6 @@ Page({
         }
       })
     }
-
-
-
-
     this.getTotalPrice();
   },
 
@@ -174,7 +222,7 @@ Page({
   },
 
   /**
-   * 计算总价
+   * 计算总价、并将最新的cart数据写入缓存
    */
   getTotalPrice() {
     let cart = this.data.cart; // 获取购物车列表
@@ -193,11 +241,16 @@ Page({
       is_display_order = true
     }
 
+    //将最新的购物车数据重新写入缓存
+    wx.setStorageSync('cart', cart)
+
     this.setData({ // 最后赋值到data中渲染到页面
       cart: cart,
       totalPrice: total.toFixed(2),
       is_display_order: is_display_order
     });
+
+
   }
 
 })

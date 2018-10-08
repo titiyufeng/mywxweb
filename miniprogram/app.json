@@ -38,6 +38,12 @@
         "text": "全部分类"
       },
       {
+        "iconPath": "./resouce/cart.png",
+        "selectedIconPath": "./resouce/cart_selected.png",
+        "pagePath": "pages/cart/cart",
+        "text": "购物车"
+      },
+      {
         "iconPath": "./resouce/my.png",
         "selectedIconPath": "./resouce/my_selected.png",
         "pagePath": "pages/my/my",
