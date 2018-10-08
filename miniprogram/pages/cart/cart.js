@@ -72,7 +72,7 @@ Page({
   //         id: 1,
   //         title: '新鲜法第三方士大夫所发生的发师傅水电费芹菜 半斤',
   //         image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
-  //         num: 4,
+  //         totalNum: 4,
   //         price: 0.01,
   //         selected: true
   //       },
@@ -80,7 +80,7 @@ Page({
   //         id: 2,
   //         title: '素米 500g',
   //         image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
-  //         num: 1,
+  //         totalNum: 1,
   //         price: 0.03,
   //         selected: true
   //       }
@@ -145,9 +145,9 @@ Page({
   addCount(e) {
     const index = e.currentTarget.dataset.index;
     let cart = this.data.cart;
-    let num = cart[index].num;
-    num = num + 1;
-    cart[index].num = num;
+    let totalNum = cart[index].totalNum;
+    totalNum = totalNum + 1;
+    cart[index].totalNum = totalNum;
     this.setData({
       cart: cart
     });
@@ -161,12 +161,12 @@ Page({
     const index = e.currentTarget.dataset.index;
     const obj = e.currentTarget.dataset.obj;
     let cart = this.data.cart;
-    let num = cart[index].num;
-    if (num <= 1) {
+    let totalNum = cart[index].totalNum;
+    if (totalNum <= 1) {
       return false;
     }
-    num = num - 1;
-    cart[index].num = num;
+    totalNum = totalNum - 1;
+    cart[index].totalNum = totalNum;
     this.setData({
       cart: cart
     });
@@ -181,7 +181,7 @@ Page({
     let total = 0;
     for (let i = 0; i < cart.length; i++) { // 循环列表得到每个数据
       if (cart[i].selected) { // 判断选中才会计算价格
-        total += cart[i].num * cart[i].price; // 所有价格加起来
+        total += cart[i].totalNum * cart[i].price; // 所有价格加起来
       }
     }
     this.setData({ // 最后赋值到data中渲染到页面
