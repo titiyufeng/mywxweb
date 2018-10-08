@@ -149,6 +149,7 @@ Page({
     //即将加入的数量与限购数量比较，如果大于限购数量，且限购数量不是0，则提示不能在加了，如果小于限购数量则可以继续加，如果限购数量为0则表示不限购
     if (totalNum > self.data.goods_infos.goods_limit_num && self.data.goods_infos.goods_limit_num != 0) {
       wx.showModal({
+        content:"不能超过限购数量！",
         showCancel: false,
         success: function(res) {
           console.log()

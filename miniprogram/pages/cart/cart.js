@@ -10,7 +10,8 @@ Page({
     cart: [], // 购物车列表
     hasList: false, // 列表是否有数据
     totalPrice: 0, // 总价，初始为0
-    selectAllStatus: true, // 全选状态，默认全选
+    selectAllStatus: false, // 全选状态，默认全选
+    is_display_order: true, //是否显示订单跳转链接图标
     obj: {
       name: "hello"
     }
@@ -19,75 +20,58 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-    onLoad: function(options) {
-      var cart
-      var that = this
-      //从缓存中获取购物车信息
-      wx.getStorage({
-        key: 'cart',
-        success: function (res) {
-          cart = res.data
-          console.log("缓存中的购物车数据如下：")
-          console.log(cart)
-          for (var i = 0; i < cart.length; i++) {
-            var index = i
-            wx.cloud.callFunction({
-              // 云函数名称
-              name: 'get_goods_data',
-              // 传给云函数的参数
-              data: {
-                env: app.globalData.env,
-                goods_no: cart[i].goods_no,
-              },
-              success: function (res) {
-                for (var t = 0; t < cart.length; t++) {
-                  if (res.result.data[0].goods_no == cart[t].goods_no){
-                    cart[t].title = res.result.data[0].goods_name
-                    cart[t].price = res.result.data[0].goods_price
-                  }
+  onLoad: function(options) {
+    var cart
+    var that = this
+    //从缓存中获取购物车信息
+    wx.getStorage({
+      key: 'cart',
+      success: function(res) {
+        cart = res.data
+        console.log("缓存中的购物车数据如下：")
+        console.log(cart)
+        for (var i = 0; i < cart.length; i++) {
+          var index = i
+          wx.cloud.callFunction({
+            // 云函数名称
+            name: 'get_goods_data',
+            // 传给云函数的参数
+            data: {
+              env: app.globalData.env,
+              goods_no: cart[i].goods_no,
+            },
+            success: function(res) {
+              for (var t = 0; t < cart.length; t++) {
+                if (res.result.data[0].goods_no == cart[t].goods_no) {
+                  cart[t].title = res.result.data[0].goods_name
+                  cart[t].price = res.result.data[0].goods_price
+                  cart[t].goods_limit_num = res.result.data[0].goods_limit_num
+                  cart[t].selected = false
                 }
-                that.setData({
-                  cart: cart,
-                  hasList: true
-                })
-              },
-              fail: console.error
-            })
-          }
-        },
-        fail: function (res) {
-          cart = []
-          that.setData({
-            hasList: false,
-            cart: cart
+              }
+              that.setData({
+                cart: cart,
+                hasList: true,
+                selectAllStatus: false
+              })
+            },
+            fail: console.error
           })
         }
-      })
+      },
+      fail: function(res) {
+        cart = []
+        that.setData({
+          hasList: false,
+          cart: cart
+        })
+      }
+    })
     this.getTotalPrice();
   },
-  // onShow() {
-  //   this.setData({
-  //     hasList: true,
-  //     cart: [{
-  //         id: 1,
-  //         title: '新鲜法第三方士大夫所发生的发师傅水电费芹菜 半斤',
-  //         image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
-  //         totalNum: 4,
-  //         price: 0.01,
-  //         selected: true
-  //       },
-  //       {
-  //         id: 2,
-  //         title: '素米 500g',
-  //         image: 'cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/1/10000001/10000001.jpg',
-  //         totalNum: 1,
-  //         price: 0.03,
-  //         selected: true
-  //       }
-  //     ]
-  //   });
-  //   this.getTotalPrice();
-  // },
+  onShow() {
+    this.getTotalPrice();
+  },
   /**
    * 当前商品选中事件
    */
@@ -143,14 +127,30 @@ Page({
    * 绑定加数量事件
    */
   addCount(e) {
+    const goods_limit_num = e.currentTarget.dataset.goods_limit_num //限购数量
     const index = e.currentTarget.dataset.index;
     let cart = this.data.cart;
     let totalNum = cart[index].totalNum;
-    totalNum = totalNum + 1;
-    cart[index].totalNum = totalNum;
-    this.setData({
-      cart: cart
-    });
+
+    if (totalNum < goods_limit_num) {
+      totalNum = totalNum + 1;
+      cart[index].totalNum = totalNum;
+      this.setData({
+        cart: cart
+      });
+    } else {
+      wx.showModal({
+        content: "该商品限购数量：" + goods_limit_num,
+        showCancel: false,
+        success: function(res) {
+          console.log()
+        }
+      })
+    }
+
+
+
+
     this.getTotalPrice();
   },
 
@@ -179,14 +179,24 @@ Page({
   getTotalPrice() {
     let cart = this.data.cart; // 获取购物车列表
     let total = 0;
+    let is_display_order = this.data.is_display_order
     for (let i = 0; i < cart.length; i++) { // 循环列表得到每个数据
       if (cart[i].selected) { // 判断选中才会计算价格
         total += cart[i].totalNum * cart[i].price; // 所有价格加起来
       }
     }
+
+    //根据购物车合计金额判断是否展示订单链接图标
+    if (total > 0) {
+      is_display_order = false
+    } else {
+      is_display_order = true
+    }
+
     this.setData({ // 最后赋值到data中渲染到页面
       cart: cart,
-      totalPrice: total.toFixed(2)
+      totalPrice: total.toFixed(2),
+      is_display_order: is_display_order
     });
   }
 
