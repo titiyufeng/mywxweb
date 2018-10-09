@@ -40,7 +40,7 @@ Page({
             success: function(res) {
               for (var t = 0; t < cart.length; t++) {
                 if (res.result.data[0].goods_no == cart[t].goods_no) {
-                  cart[t].title = res.result.data[0].goods_name
+                  cart[t].goods_name = res.result.data[0].goods_name
                   cart[t].price = res.result.data[0].goods_price
                   cart[t].goods_limit_num = res.result.data[0].goods_limit_num
                   cart[t].selected = false

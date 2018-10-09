@@ -8,7 +8,7 @@
         <navigator url="../detail/detail?goods_no={{item.goods_no}}">
           <image class="cart-thumb" src="{{item.detail_images_head[0]}}"></image>
         </navigator>
-        <text class="cart-pro-name">{{item.title}}</text>
+        <text class="cart-pro-name">{{item.goods_name}}</text>
         <text class="cart-pro-price">￥{{item.price}}</text>
         <view class="cart-count-box">
           <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">-</text>

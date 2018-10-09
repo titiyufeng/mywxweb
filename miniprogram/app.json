@@ -17,7 +17,8 @@
     "pages/my/order/order",
     "pages/my/address/address",
     "pages/wxSelectCity/wxSelectCity",
-    "pages/cart/cart"
+    "pages/cart/cart",
+    "pages/orders/orders"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
