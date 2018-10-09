@@ -1,7 +1,7 @@
 /* miniprogram/pages/my/my.wxss */
 @import '../../style/weui.wxss';
 .avatar-wrapper {
-  background: #1b82d1;
+  background: #AB956D;
   padding: 25px 0;
   text-align: center;
 }

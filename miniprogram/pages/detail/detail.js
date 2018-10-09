@@ -107,88 +107,6 @@ Page({
       }
     })
   },
-  // onShow: function() {
-  //   var that = this
-  //   var goods_no = options.goods_no * 1 //将前端传递过来的商品编号改成数字
-  //   var cate_id = parseInt(goods_no / 10000000)
-  //   var detail_images = [] //定义明细图片列表
-  //   var detail_images_head = [] //明细页面头部图片
-  //   var goods_infos //商品信息
-  //   var cart //购物车
-  //   var cart_index = '--' //商品在购物车缓存中的下标
-  //   var totalNum = 0 //购买数量
-
-  //   //获取商品明细图片
-  //   detail_images.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/" + cate_id + "/" + goods_no + "/" + goods_no + ".jpg")
-  //   for (var i = 1; i < 6; i++) {
-  //     detail_images.push("cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/" + cate_id + "/" + goods_no + "/" + goods_no + "0" + i + ".jpg")
-  //   }
-  //   detail_images_head.push(detail_images[0])
-
-  //   //获取商品信息
-  //   app.dbconn.collection('goods_datas').where({
-  //     goods_no: goods_no,
-  //     is_display: true
-  //   }).get({
-  //     success: function(res) {
-  //       if (res.data.length == 0) { //如果没有找到商品，提示商品已经下架
-  //         wx.showModal({
-  //           content: '商品已经下架！',
-  //           showCancel: false,
-  //           success: function(res) {
-  //             if (res.confirm) {
-  //               wx.navigateBack({
-  //                 // delta: 2
-  //               })
-  //             }
-  //           }
-  //         })
-  //       } else {
-  //         goods_infos = {
-  //           goods_no: res.data[0].goods_no,
-  //           goods_name: res.data[0].goods_name,
-  //           goods_price: res.data[0].goods_price,
-  //           goods_limit_num: res.data[0].goods_limit_num,
-  //           goods_detail: res.data[0].goods_detail
-  //         }
-
-  //         that.setData({
-  //           goods_infos: goods_infos,
-  //           detail_images: detail_images,
-  //           detail_images_head: detail_images_head
-  //         })
-
-  //         //从缓存中获取购物车信息
-  //         wx.getStorage({
-  //           key: 'cart',
-  //           success: function(res) {
-  //             cart = res.data
-  //             for (var i = 0; i < cart.length; i++) {
-  //               if (cart[i].goods_no == goods_infos.goods_no) {
-  //                 cart_index = i
-  //                 totalNum = cart[i].totalNum
-
-  //                 that.setData({
-  //                   cart: cart,
-  //                   cart_index: cart_index,
-  //                   totalNum: totalNum
-  //                 })
-  //               }
-  //             }
-  //           },
-  //           fail: function(res) {
-  //             console.log("购物车缓存为空！")
-  //             cart = []
-  //             wx.setStorageSync('cart', cart)
-  //             that.setData({
-  //               cart: cart
-  //             })
-  //           }
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
 
   /**
    * 点击加号增加数量
@@ -225,8 +143,6 @@ Page({
     let goods_infos = self.data.goods_infos
     var cart = wx.getStorageSync('cart')
     var cart_index = self.data.cart_index
-
-
 
     //即将加入的数量与限购数量比较，如果大于限购数量，且限购数量不是0，则提示不能在加了，如果小于限购数量则可以继续加，如果限购数量为0则表示不限购
     if (totalNum > self.data.goods_infos.goods_limit_num && self.data.goods_infos.goods_limit_num != 0) {
@@ -268,8 +184,8 @@ Page({
             totalNum: totalNum,
             cart_index: cart_index
           })
-        }, 200)
-      }, 300)
+        }, 100)
+      }, 200)
     }
   },
 

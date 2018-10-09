@@ -16,62 +16,7 @@ Page({
       name: "hello"
     }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  // onLoad: function(options) {
-  //   var cart
-  //   var that = this
-  //   //从缓存中获取购物车信息
-  //   wx.getStorage({
-  //     key: 'cart',
-  //     success: function(res) {
-  //       cart = res.data
-  //       console.log("缓存中的购物车数据如下：")
-  //       console.log(cart)
-  //       for (var i = 0; i < cart.length; i++) {
-  //         var index = i
-  //         wx.cloud.callFunction({
-  //           // 云函数名称
-  //           name: 'get_goods_data',
-  //           // 传给云函数的参数
-  //           data: {
-  //             env: app.globalData.env,
-  //             goods_no: cart[i].goods_no,
-  //           },
-  //           success: function(res) {
-  //             for (var t = 0; t < cart.length; t++) {
-  //               if (res.result.data[0].goods_no == cart[t].goods_no) {
-  //                 cart[t].title = res.result.data[0].goods_name
-  //                 cart[t].price = res.result.data[0].goods_price
-  //                 cart[t].goods_limit_num = res.result.data[0].goods_limit_num
-  //                 cart[t].selected = false
-  //               }
-  //             }
-  //             //将最新的购物车数据重新写入缓存
-  //             wx.setStorageSync('cart', cart)
-
-  //             that.setData({
-  //               cart: cart,
-  //               hasList: true,
-  //               selectAllStatus: false
-  //             })
-  //           },
-  //           fail: console.error
-  //         })
-  //       }
-  //     },
-  //     fail: function(res) {
-  //       cart = []
-  //       that.setData({
-  //         hasList: false,
-  //         cart: cart
-  //       })
-  //     }
-  //   })
-  //   this.getTotalPrice();
-  // },
+  
   onShow() {
     var cart
     var that = this
@@ -115,10 +60,10 @@ Page({
         }
       },
       fail: function(res) {
-        cart = []
+        // cart = []
         that.setData({
-          hasList: false,
-          cart: cart
+          hasList: false
+          // cart: cart
         })
       }
     })
@@ -249,8 +194,5 @@ Page({
       totalPrice: total.toFixed(2),
       is_display_order: is_display_order
     });
-
-
   }
-
 })
