@@ -67,7 +67,8 @@ page {
   width: 510rpx;
   padding-left: 30rpx;
   box-sizing: border-box;
-  color: #a55350;
+  color: #fff;
+  background: #ab956d;
 }
 
 .orders-footer .orders-footer-btn {

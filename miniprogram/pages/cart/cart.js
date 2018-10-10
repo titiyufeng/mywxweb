@@ -9,14 +9,14 @@ Page({
   data: {
     cart: [], // 购物车列表
     hasList: false, // 列表是否有数据
-    totalPrice: 0, // 总价，初始为0
+    totalPrice: 0.00, // 总价，初始为0
     selectAllStatus: false, // 全选状态，默认全选
     is_display_order: true, //是否显示订单跳转链接图标
     obj: {
       name: "hello"
     }
   },
-  
+
   onShow() {
     var cart
     var that = this
@@ -52,7 +52,9 @@ Page({
               that.setData({
                 cart: cart,
                 hasList: true,
-                selectAllStatus: false
+                selectAllStatus: false,
+                totalPrice: 0.00,
+                is_display_order: true
               })
             },
             fail: console.error
@@ -97,6 +99,8 @@ Page({
       this.setData({
         hasList: false
       });
+      //清空购物车的时候，同样需要将空cart写回缓存
+      wx.setStorageSync('cart', cart)
     } else {
       this.getTotalPrice();
     }

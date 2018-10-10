@@ -118,8 +118,14 @@ page {
   position: absolute;
   right: 40rpx;
   top: 25rpx;
-  width: 45rpx;
+  width: 120rpx;
   height: 45rpx;
+}
+
+.order-icon-text {
+  float: left;
+  margin-right: 70px;
+  width: 180rpx;
 }
 
 .order-icon image, .order-icon navigator {
@@ -130,7 +136,8 @@ page {
 
 .cart-toatl-price {
   float: right;
-  width: 120rpx;
+  margin-right: 70px;
+  width: 180rpx;
 }
 
 .cart-no-data {
