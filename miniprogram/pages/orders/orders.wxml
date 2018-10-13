@@ -9,7 +9,7 @@
   </view>
 
   <view class="orders-footer">
-    <view class="orders-footer-total">货款合计：￥{{total}}</view>
-    <view class="orders-footer-btn" bindtap="toPay">确认订单</view>
+    <view class="orders-footer-total">货款合计(不含运费)：￥{{total}}</view>
+    <view class="orders-footer-btn" bindtap="confirm">确认订单</view>
   </view>
 </view>
