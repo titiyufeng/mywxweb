@@ -38,7 +38,7 @@ Page({
 
   confirm() {
     //将订单写入订单表及订单明细表
-    var order_id = wx.getStorageSync('openid') + Date.parse(new Date()) / 1000
+    var order_id = Date.parse(new Date()) / 1000
     //开始插入订单表
     app.dbconn.collection('order').add({
       data: {
@@ -61,6 +61,7 @@ Page({
             data: {
               order_detail_id: order_id + '--' + i,
               order_id: order_id,
+              detail_images_head: order[i].detail_images_head,
               goods_no: order[i].goods_no,
               totalNum: order[i].totalNum,
               goods_price: order[i].price,
