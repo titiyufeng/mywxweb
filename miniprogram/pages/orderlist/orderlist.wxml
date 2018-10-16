@@ -3,12 +3,12 @@
   <view class="tr bg-w">
     <view class="th">订单日期</view>
     <view class="th">订单状态</view>
-    <view class="th ">已付金额</view>
+    <view class="th ">应付金额</view>
     <view class="th ">操作</view>
   </view>
   <block wx:for="{{listData}}" wx:key="{{index}}">
     <view class="tr bg-g">
-      <view class="td">{{item.date}}</view>
+      <view class="td">{{item.create_time}}</view>
       <view class="td">{{item.status}}</view>
       <view class="td">{{item.amout}}</view>
       <view class="td">{{item.commond}}</view>

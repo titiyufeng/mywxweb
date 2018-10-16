@@ -1,36 +1,37 @@
 // miniprogram/pages/orderlist/orderlist.js
+
+var util = require("../../utils/util.js");
+var app = getApp()
+
 Page({
   data: {
-    listData: [
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销"   },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--"  },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销"  },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--"  },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "撤销" },
-      { "date": "2018-02-02", "status": "已确认", "amout": "200.12", "commond": "--" }
-      // { "code": "03", "text": "text3", "type": "type3" },
-      // { "code": "04", "text": "text4", "type": "type4" },
-      // { "code": "05", "text": "text5", "type": "type5" },
-      // { "code": "06", "text": "text6", "type": "type6" },
-      // { "code": "07", "text": "text7", "type": "type7" }
-    ]
+    listData: []
   },
-  onLoad: function () {
-    console.log('onLoad')
+  onLoad: function() {
+    var status = {"0": "已提交","1": "已确认","2": "已发货","3": "已结款","9": "已撤销"}
+    var openid = wx.getStorageSync("openid")
+    var listData
+    var that = this
+    app.dbconn.collection('order').where({
+      openid: openid
+    }).get({
+      success: function(res) {
+        if (res.data.length > 0) {
+          console.log(res.data)
+          var listData = res.data
+          for (var i = 0; i < listData.length; i++) {
+            listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D')
+            listData[i].status = status[listData[i].status.toString()]
+            listData[i].commond = "撤销"
+          }
+        }else{
+          listData = []
+        }
+        that.setData({
+          listData: listData
+        })
+      },
+      fail: console.error
+    })
   }
-
 })
