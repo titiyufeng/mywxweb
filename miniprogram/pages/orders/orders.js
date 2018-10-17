@@ -39,6 +39,8 @@ Page({
   confirm() {
     //将订单写入订单表及订单明细表
     var order_id = Date.parse(new Date()) / 1000
+    var order = wx.getStorageSync('cart')
+    wx.removeStorageSync('cart')//提交后将购物车清空
     //开始插入订单表
     app.dbconn.collection('order').add({
       data: {
@@ -55,7 +57,7 @@ Page({
       success: function(res) {
         console.log("订单添加成功!")
         //开始插入订单详情表
-        var order = wx.getStorageSync('cart')
+        // var order = wx.getStorageSync('cart')
         console.log(order)
         for (var i = 0; i < order.length; i++) {
           app.dbconn.collection('orderdetail').add({
@@ -75,24 +77,6 @@ Page({
             success: function(res) {
               console.log(res)
               console.log("订单详情添加成功!")
-
-              //订单表插入成功，订单明细表插入成功后，弹窗，点击确定跳转我的订单页面
-              wx.showModal({
-                title: '',
-                content: '提交成功，等待卖家确认，卖家确认后将不能撤销！',
-                text: 'center',
-                showCancel: false,
-                success: function(res) {
-                  if (res.confirm) {
-                    console.log('用户点击确定')
-                    wx.navigateTo({
-                      url: '../orderlist/orderlist'
-                    })
-                  } else if (res.cancel) {
-                    console.log('用户点击取消')
-                  }
-                }
-              })
             },
             fail: function(res) {
               console.log("订单详情插入失败！")
@@ -100,6 +84,23 @@ Page({
             }
           })
         }
+        //订单表插入成功，订单明细表插入成功后，弹窗，点击确定跳转我的订单页面
+        wx.showModal({
+          title: '',
+          content: '提交成功，等待卖家确认，卖家确认后将不能撤销！',
+          text: 'center',
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')              
+              wx.reLaunch({
+                url: '../index/index'
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
       },
       fail: function(res) {
         console.log("订单表插入失败！")
