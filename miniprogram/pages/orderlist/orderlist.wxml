@@ -10,8 +10,9 @@
     <view class="tr bg-g">
       <view class="td">{{item.create_time}}</view>
       <view class="td">{{item.status}}</view>
-      <view class="td">{{item.amout}}</view>
-      <view class="td">{{item.commond}}</view>
+      <view class="td">{{item.total_amout}}</view>
+      <view id="{{item._id}}" class="td" wx:if="{{item.commond}}" bindtap='cancel' style='color:blue'>撤销</view>
+      <view id="{{item._id}}" class="td" wx:else>--</view>
     </view>
   </block>
 </view>
