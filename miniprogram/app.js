@@ -37,13 +37,13 @@ App({
 
         //将配置信息放入缓存
         wx.setStorageSync('appid', res.data[0]["appid"])
-
         var secret = res.data[0]["secret"]
 
         //获取登录信息
         var openid = (wx.getStorageSync('openid'))
         if (openid) {
           console.log("缓存中已经有openid，自动获取登录态")
+          that.globalData.openid = res.data.openid //将openid写入全局变量
         } else {
           wx.login({
             success: function(res) {
