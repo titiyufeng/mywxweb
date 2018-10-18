@@ -11,7 +11,8 @@ App({
     }
     //全局变量
     this.globalData = {
-      env: 'mywxweb-e946c5' //云环境配置信息，注意切换
+      env: 'mywxweb-e946c5', //云环境配置信息，注意切换
+      openid:''
     }
     //全局数据库连接
     this.dbconn = wx.cloud.database({
@@ -63,6 +64,7 @@ App({
                   },
                   success: function(res) {
                     wx.setStorageSync('openid', res.data.openid)
+                    that.globalData.openid = res.data.openid //将openid写入全局变量
                     //检查openid是否存在，如果存在什么都不做，如果不存在则创建用户信息：插入user表（id、openid，创建时间）
                     that.dbconn.collection('user').where({
                       openid: wx.getStorageSync('openid')

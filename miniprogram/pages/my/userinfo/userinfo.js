@@ -20,7 +20,7 @@ Page({
   onLoad: function(options) {
     var that = this
     app.dbconn.collection('user').where({
-      openid: wx.getStorageSync('openid')
+      openid: app.globalData.openid
     }).get({
       success: function(res) {
         if (res.data.length == 1) {

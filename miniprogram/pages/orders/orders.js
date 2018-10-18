@@ -44,7 +44,7 @@ Page({
     //开始插入订单表
     app.dbconn.collection('order').add({
       data: {
-        openid :wx.getStorageSync("openid"),
+        openid: app.globalData.openid,
         order_id: order_id,
         logistics_id: '',
         amout: this.data.total,

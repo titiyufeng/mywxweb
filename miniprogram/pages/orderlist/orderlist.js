@@ -15,7 +15,7 @@ Page({
       "3": "已结款",
       "9": "已撤销"
     }
-    var openid = wx.getStorageSync("openid")
+    var openid = app.globalData.openid
     var listData
     var that = this
     app.dbconn.collection('order').where({
@@ -27,8 +27,8 @@ Page({
           console.log(res.data[1])
           var listData = res.data
           for (var i = 0; i < listData.length; i++) {
-            listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D')
-            listData[i].status = status[listData[i].status]            
+            listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
+            listData[i].status = status[listData[i].status]
 
             //根据订单状态判断是否显示撤销
             if (listData[i].status == '已提交') {
@@ -40,7 +40,7 @@ Page({
             //根据订单状态判断是否显示应付金额
             if (listData[i].status != '已发货' && listData[i].status != '已结款') {
               listData[i].total_amout = "--"
-            }else{
+            } else {
               listData[i].total_amout = listData[i].amout + listData[i].logistics_fee
             }
           }
@@ -67,15 +67,15 @@ Page({
         if (res.confirm) {
           app.dbconn.collection('order').doc(e.target.id).update({
             data: {
-              status:9
+              status: 9
             },
             success: function(res) {
               console.log("订单撤销成功")
               wx.showModal({
                 content: '撤销成功',
                 showCancel: false,
-                success:function(){
-                  that.onLoad()//调用onload方法重新加载页面数据
+                success: function() {
+                  that.onLoad() //调用onload方法重新加载页面数据
                 }
               })
             },
@@ -86,5 +86,16 @@ Page({
         }
       }
     })
+  },
+
+  /**
+   *上拉触底事件：加载第二页 
+   */
+  onReachBottom() {
+    console.log(123123123123)
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.hideLoading()
   }
 })
