@@ -11,6 +11,10 @@ page {
   font-size: 32rpx;
 }
 
+.user_addinfo {
+background: #F0F0F0;
+}
+
 .navigator-hover {
   background: none;
 }

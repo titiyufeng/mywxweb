@@ -1,4 +1,11 @@
 <view class="main">
+  <view class='user_addinfo'>
+    <text>
+      收货人：{{username}}
+      联系电话：{{mobile}}
+      收货信息:{{province}}{{city}}{{detail_address}} 
+    </text>
+  </view>
   <view class="orders-box">
     <view wx:for="{{orders}}" wx:key="index" class="orders-list">
       <image class="orders-thumb" src="{{item.detail_images_head[0]}}"></image>

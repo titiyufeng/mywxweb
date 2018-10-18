@@ -77,13 +77,13 @@ Page({
       app.dbconn.collection('user').doc(user_id).update({
         data: {
           username: username,
-          gender: wx.getStorageSync("userinfo").gender,
+          gender: wx.getStorageSync("userinfo").gender,//用户性别
           mobile: mobile,
           birthday: birthday,
           province: this.data.province,
           city: this.data.city,
           detail_address: detail_address,
-          udpate_time: Date.parse(new Date()) / 1000
+          update_time: Date.parse(new Date()) / 1000
         },
         success: function(res) {
           console.log("用户信息更新成功，更新记录数为：" + res.stats.updated + "条！")
@@ -93,8 +93,11 @@ Page({
             success: function(res) {
               if (res.confirm) {
                 console.log('用户点击确定')
-                wx.navigateBack({
-                  // delta: 2
+                // wx.navigateBack({
+                //   // delta: 2
+                // })
+                wx.reLaunch({
+                  url: '../my'
                 })
               }
             }

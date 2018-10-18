@@ -74,6 +74,7 @@ App({
                           that.dbconn.collection('user').add({
                             data: {
                               openid: wx.getStorageSync('openid'),
+                              mobile:'',
                               create_time: Date.parse(new Date()) / 1000,
                               udpate_time: Date.parse(new Date()) / 1000
                             },

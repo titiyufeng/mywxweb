@@ -17,6 +17,47 @@ Page({
   onShow: function() {
     var cart = wx.getStorageSync('cart')
     var orders = cart
+    var that = this
+
+    app.dbconn.collection('user').where({
+      openid: app.globalData.openid
+    }).get({
+      success: function (res) {
+        if (res.data.length == 1) {
+          if (res.data[0].mobile) {
+            that.setData({
+              username: res.data[0].username,
+              mobile: res.data[0].mobile,
+              province: res.data[0].province,
+              city: res.data[0].city,
+              detail_address: res.data[0].detail_address,
+            })
+          }else{
+            wx.showModal({
+              title: '',
+              content: '您尚未设置收货地址，请前往“我的-个人信息”页面进行设置！',
+              text: 'center',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                  wx.reLaunch({
+                    url: '../my/userinfo/userinfo'
+                  })
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          }
+        } else {
+          console.log("用户信息不存在！")
+        }
+
+      },
+      fail: console.error
+    })
+  
     this.setData({
       orders: orders
     })
