@@ -43,7 +43,7 @@ App({
         var openid = (wx.getStorageSync('openid'))
         if (openid) {
           console.log("缓存中已经有openid，自动获取登录态")
-          that.globalData.openid = res.data.openid //将openid写入全局变量
+          that.globalData.openid = openid //将openid写入全局变量
         } else {
           wx.login({
             success: function(res) {
