@@ -12,7 +12,8 @@ page {
 }
 
 .user_addinfo {
-background: #F0F0F0;
+  top: 0px;
+  background: #eee;
 }
 
 .navigator-hover {

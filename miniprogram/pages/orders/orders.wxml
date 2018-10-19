@@ -1,9 +1,8 @@
 <view class="main">
   <view class='user_addinfo'>
-    <text>
-      收货人：{{username}}
+    <text>收货人：{{username}}
       联系电话：{{mobile}}
-      收货信息:{{province}}{{city}}{{detail_address}} 
+      收货信息：{{province}}{{city}}{{detail_address}} 
     </text>
   </view>
   <view class="orders-box">

@@ -60,7 +60,7 @@
           </view>
           <view class="weui-cell__bd">
             <picker mode="date" value="{{birthday}}" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
-              <input id='name' name='birthday' class="weui-input" disabled value='{{birthday}}'></input>
+              <input id='name' name='birthday' class="weui-input" placeholder="请选择出生日期" disabled value='{{birthday}}'></input>
             </picker>
           </view>
         </view>

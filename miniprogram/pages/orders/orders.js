@@ -36,6 +36,7 @@ Page({
             wx.showModal({
               title: '',
               content: '您尚未设置收货地址，请前往“我的-个人信息”页面进行设置！',
+              confirmText:'去设置',
               text: 'center',
               showCancel: false,
               success: function (res) {

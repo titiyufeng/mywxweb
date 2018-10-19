@@ -26,7 +26,7 @@
       <navigator url="../orders/orders">
         <view class="order-icon" hidden='{{is_display_order}}'>
           <image src="../../resouce/icon3.png"></image>
-          <text class='order-icon-text'>预览订单</text> <!--这个地方暂时没有想到怎么展示出来，目前只是一个占位，作用是扩大跳转图标的点击范围-->
+          <text class='order-icon-text'>预览订单</text> 这个地方暂时没有想到怎么展示出来，目前只是一个占位，作用是扩大跳转图标的点击范围
         </view>
       </navigator>
 
