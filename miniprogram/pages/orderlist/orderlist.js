@@ -20,7 +20,8 @@ Page({
     var listData
     var that = this
     app.dbconn.collection('order').where({
-      openid: openid
+      openid: openid,
+      delete_time:0
     }).get({
       success: function(res) {
         if (res.data.length > 0) {
@@ -107,7 +108,8 @@ Page({
     var pagenum = that.data.pagenum
 
     app.dbconn.collection('order').where({
-      openid: openid
+      openid: openid,
+      delete_time: 0
     }).skip(pagenum * 20).limit(20).get({
       success: function(res) {
         if (res.data.length > 0) {

@@ -88,9 +88,9 @@ Page({
       data: {
         openid: app.globalData.openid,
         order_id: order_id,
-        logistics_id: '',
+        logistics_id: '',//运单号
         amout: this.data.total,
-        logistics_fee: 0,
+        logistics_fee: 0,//运费
         status: '0',
         create_time: Date.parse(new Date()) / 1000,
         delete_time: 0,
