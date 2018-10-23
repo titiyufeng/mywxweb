@@ -6,23 +6,28 @@ Page({
   data: {
     hasAddress: true,
     total: 0,
-    orders: []
+    orders: [],
+    logistics_fee: 0,
+    amout: 0,
+    status: ''
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this
     var order_id = parseInt(options.order_id)
-    console.log("***********")
-    console.log(order_id)
-    console.log("***********")
+    var logistics_fee = options.logistics_fee
+    var amout = options.amout
+    var status = options.status
     app.dbconn.collection('orderdetail').where({
       order_id: order_id,
       delete_time: 0
     }).limit(50).get({
       success: function(res) {
-        console.log(res.data)
         var orders = res.data
         that.setData({
-          orders:orders
+          orders: orders,
+          logistics_fee: logistics_fee,
+          amout: amout,
+          status: status
         })
       },
       fail: console.error

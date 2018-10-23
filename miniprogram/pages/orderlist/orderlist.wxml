@@ -7,7 +7,7 @@
     <view class="th ">操作</view>
   </view>
   <block wx:for="{{listData}}" wx:key="{{index}}">
-    <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&amout={{item.amout}}&logistics_fee={{item.logistics_fee}}">
+    <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&amout={{item.amout}}&logistics_fee={{item.logistics_fee}}&status={{item.status}}">
       <view class="tr bg-g">
         <view class="td">{{item.create_time}}</view>
         <view class="td">{{item.status}}</view>
