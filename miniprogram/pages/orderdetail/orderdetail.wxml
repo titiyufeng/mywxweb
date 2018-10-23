@@ -1,2 +1,16 @@
 <!--miniprogram/pages/orderslist/orderdetail.wxml-->
-<text>miniprogram/pages/orderslist/orderdetail.wxml</text>
+<view class="main">
+  <view class="orders-box">
+    <view wx:for="{{orders}}" wx:key="index" class="orders-list">
+      <image class="orders-thumb" src="{{item.detail_images_head[0]}}"></image>
+      <view class="orders-pro-name">{{item.goods_name}}</view>
+      <view class="orders-pro-name ">￥{{item.goods_price}}</view>
+      <view class="orders-pro-name ">×{{item.totalNum}}</view>
+    </view>
+  </view>
+
+  <view  class="orders-footer">
+    <view class="orders-footer-total">货款合计：￥{{item.amout}}</view>
+    <view class="orders-footer-btn" bindtap="confirm">运费：￥{{item.logistics_fee}}</view>
+  </view>
+</view>

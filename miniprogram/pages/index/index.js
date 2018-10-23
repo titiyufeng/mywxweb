@@ -24,7 +24,7 @@ Page({
         cate_id: id,
         is_display: true,
         stock_quantity: _.gt(0)
-      }).get({
+      }).limit(50).get({
         success: function(res) {
           var right_goodslist = res.data
           that.setData({
@@ -37,7 +37,7 @@ Page({
         is_hot: true,
         is_display: true,
         stock_quantity: _.gt(0)
-      }).get({
+      }).limit(50).get({
         success: function(res) {
           var right_goodslist = res.data
           that.setData({
@@ -51,7 +51,7 @@ Page({
   onLoad: function(options) {
     var cateItems_db = new Array()
     var that = this;
-    app.dbconn.collection('goods_types').get({
+    app.dbconn.collection('goods_types').limit(50).get({
       success: function(res) {
         var rs_data = res.data
         cateItems_db = rs_data

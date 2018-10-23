@@ -107,6 +107,7 @@ Page({
               order_detail_id: order_id + '--' + i,
               order_id: order_id,
               detail_images_head: order[i].detail_images_head,
+              goods_name: order[i].goods_name,
               goods_no: order[i].goods_no,
               totalNum: order[i].totalNum,
               goods_price: order[i].price,
