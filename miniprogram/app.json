@@ -21,7 +21,8 @@
     "pages/orders/orders",
     "pages/orderdetail/orderdetail",
     "pages/orderlist/orderlist",
-    "pages/ordersmanage/ordersmanage"
+    "pages/ordersmanage/ordersmanage",
+    "pages/ordersmanage/order_manage_update/order_manage_update"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

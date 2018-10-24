@@ -5,8 +5,8 @@
       <image class="orders-thumb" src="{{item.detail_images_head[0]}}"></image>
       <view class="orders-pro-name" hidden>{{item._id}}</view>
       <view class="orders-pro-name">{{item.goods_name}}</view>
-      <view class="orders-pro-name ">￥{{item.goods_price}}</view>
-      <view class="orders-pro-name ">×{{item.totalNum}}</view>
+      <view class="orders-pro-name ">￥{{item.real_goods_price}}</view>
+      <view class="orders-pro-name ">×{{item.real_totalNum}}</view>
     </view>
   </view>
 

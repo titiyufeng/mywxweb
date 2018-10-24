@@ -1,2 +1,22 @@
 <!--miniprogram/pages/ordersmanage/ordersmanage.wxml-->
-<text>miniprogram/pages/ordersmanage/ordersmanage.wxml</text>
+<view class="main">
+  <view class='user_addinfo'>
+    <text>收货人：{{username}}123
+      联系电话：{{mobile}}
+      收货信息：{{province}}{{city}}{{detail_address}} 
+    </text>
+  </view>
+  <view class="orders-box">
+    <view wx:for="{{orders}}" wx:key="index" class="orders-list">
+      <image class="orders-thumb" src="{{item.detail_images_head[0]}}"></image>
+      <view class="orders-pro-name">{{item.goods_name}}</view>
+      <view class="orders-pro-name ">￥{{item.price}}</view>
+      <view class="orders-pro-name ">×{{item.totalNum}}</view>
+    </view>
+  </view>
+
+  <view class="orders-footer">
+    <view class="orders-footer-total">货款合计(不含运费)：￥{{total}}</view>
+    <view class="orders-footer-btn" bindtap="confirm">确认订单</view>
+  </view>
+</view>

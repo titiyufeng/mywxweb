@@ -1,17 +1,19 @@
 <!--miniprogram/pages/my/my.wxml-->
-<view >
-  
+<view>
+
   <view class="avatar-wrapper">
-      <view class="avatar">
-        <image style="border-radius:50%;" src="{{userinfo.avatarUrl ? userinfo.avatarUrl:'../../resouce/my/avatar_01.png'}}"></image>
-      </view>
-        <text wx:if="{{userinfo.nickName}}">{{userinfo.nickName}}</text>
-        <button wx:else open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" plain size='mini'>获取微信头像</button>  
+    <view class="avatar">
+      <image style="border-radius:50%;" src="{{userinfo.avatarUrl ? userinfo.avatarUrl:'../../resouce/my/avatar_01.png'}}"></image>
+    </view>
+    <text wx:if="{{userinfo.nickName}}">{{userinfo.nickName}}</text>
+    <button wx:else open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" plain size='mini'>获取微信头像</button>
   </view>
 
 
   <view class="list-wrapper">
     <view class="weui-cells weui-cells_after-title">
+
+      <!--常规菜单-->
       <block wx:for="{{menuitems}}" wx:key="menu_for">
         <navigator url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
           <view class="weui-cell__hd">
@@ -21,7 +23,16 @@
           <view class="weui-cell__ft weui-cell__ft_in-access">{{item.tips}}</view>
         </navigator>
       </block>
+
+      <!-- 订单管理菜单-->
+      <navigator wx:if='{{is_manager}}' url="{{menuitems_manager.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <image src="{{menuitems_manager.icon}}"></image>
+        </view>
+        <view class="weui-cell__bd">{{menuitems_manager.text}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">{{menuitems_manager.tips}}</view>
+      </navigator>
     </view>
   </view>
-  
+
 </view>
