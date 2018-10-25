@@ -41,7 +41,7 @@ Page({
             if (listData[i].status != '已发货' && listData[i].status != '已结款') {
               listData[i].total_amout = "--"
             } else {
-              listData[i].total_amout = listData[i].amout + listData[i].logistics_fee
+              listData[i].total_amout = listData[i].real_amout + listData[i].logistics_fee
             }
           }
         } else {

@@ -8,8 +8,8 @@ Page({
   data: {
     menuitems: [
       { text: '个人信息', url: './userinfo/userinfo', icon: '../../resouce/my/userinfo.png', tips: '' },
-      { text: '我的订单', url: '../orderlist/orderlist', icon: '../../resouce/my/oder.png', tips: '' },
-      { text: '收货地址', url: './address/address', icon: '../../resouce/my/address.png', tips: '' }
+      { text: '我的订单', url: '../orderlist/orderlist', icon: '../../resouce/my/oder.png', tips: '' }
+      // { text: '收货地址', url: './address/address', icon: '../../resouce/my/address.png', tips: '' }
       // { text: '待归还', url: '../borrowbook/borrowbook?status=Y', icon: '../../images/usermenu/huan.png', tips: '' },
       // { text: '个人喜好', url: '../favorcate/favorcate', icon: '../../images/usermenu/favor.png', tips: '' },
     ],

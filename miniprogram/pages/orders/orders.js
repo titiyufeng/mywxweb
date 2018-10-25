@@ -87,9 +87,15 @@ Page({
     app.dbconn.collection('order').add({
       data: {
         openid: app.globalData.openid,
+        username: this.data.username,
+        mobile: this.data.mobile,
+        province: this.data.province,
+        city: this.data.city,
+        detail_address: this.data.detail_address,
         order_id: order_id,
         logistics_id: '',//运单号
         amout: this.data.total,
+        real_amout: this.data.total,
         logistics_fee: 0,//运费
         status: '0',
         create_time: Date.parse(new Date()) / 1000,

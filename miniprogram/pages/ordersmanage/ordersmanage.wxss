@@ -1,4 +1,5 @@
 /* miniprogram/pages/ordersmanage/ordersmanage.wxss */
+@import '../../style/weui.wxss';
 
 page {
   background-color: #fff;
@@ -26,9 +27,9 @@ page {
 
 .orders-list {
   position: relative;
-  padding: 20rpx 20rpx 20rpx 220rpx;
-  height: 180rpx;
-  border-bottom: 1rpx solid #ededed;
+  padding: 20rpx 20rpx 80rpx 10rpx;
+  /* height: 180rpx; */
+  border-bottom: 5rpx solid #555353;
 }
 
 .orders-thumb {
