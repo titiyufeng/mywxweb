@@ -5,151 +5,100 @@ var app = getApp()
 
 Page({
   data: {
-    address: {},
-    hasAddress: false,
-    total: 0,
-    orders: []
+    listData: [],
+    pagenum: 1
   },
-
-  onReady() {
-    this.getTotalPrice();
-  },
-
-  onShow: function () {
-    var cart = wx.getStorageSync('cart')
-    var orders = cart
+  onShow: function() {
+    var status = {
+      "0": "已提交",
+      "1": "已确认",
+      "2": "已发货",
+      "3": "已结款",
+      "9": "已撤销"
+    }
+    var openid = app.globalData.openid
+    var manager_openid = wx.getStorageSync('manager_openid')
+    var listData = []
     var that = this
 
-    app.dbconn.collection('user').where({
-      openid: app.globalData.openid
-    }).get({
-      success: function (res) {
-        if (res.data.length == 1) {
-          if (res.data[0].mobile) {
-            that.setData({
-              username: res.data[0].username,
-              mobile: res.data[0].mobile,
-              province: res.data[0].province,
-              city: res.data[0].city,
-              detail_address: res.data[0].detail_address,
-            })
-          } else {
-            wx.showModal({
-              title: '',
-              content: '您尚未设置收货地址，请前往“我的-个人信息”页面进行设置！',
-              confirmText: '去设置',
-              text: 'center',
-              showCancel: false,
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('用户点击确定')
-                  wx.reLaunch({
-                    url: '../my/userinfo/userinfo'
-                  })
-                } else if (res.cancel) {
-                  console.log('用户点击取消')
-                }
+    for (var i = 0; i < manager_openid.length; i++) {
+      if (openid == manager_openid[i]) {
+        app.dbconn.collection('order').where({
+          delete_time: 0
+        }).get({
+          success: function(res) {
+            if (res.data.length > 0) {
+              var listData = res.data
+              console.log(listData)
+              for (var i = 0; i < listData.length; i++) {
+                listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
+                listData[i].status = status[listData[i].status]
               }
+            }
+            that.setData({
+              listData: listData
             })
-          }
-        } else {
-          console.log("用户信息不存在！")
-        }
-
-      },
-      fail: console.error
-    })
-
-    this.setData({
-      orders: orders
-    })
-  },
-
-  /**
-   * 计算总价
-   */
-  getTotalPrice() {
-    let orders = this.data.orders;
-    let total = 0;
-    for (let i = 0; i < orders.length; i++) {
-      total += orders[i].totalNum * orders[i].price;
-    }
-    this.setData({
-      total: total
-    })
-  },
-
-  confirm() {
-    //将订单写入订单表及订单明细表
-    var order_id = Date.parse(new Date()) / 1000
-    var order = wx.getStorageSync('cart')
-    wx.removeStorageSync('cart')//提交后将购物车清空
-    //开始插入订单表
-    app.dbconn.collection('order').add({
-      data: {
-        openid: app.globalData.openid,
-        order_id: order_id,
-        logistics_id: '',//运单号
-        amout: this.data.total,
-        logistics_fee: 0,//运费
-        status: '0',
-        create_time: Date.parse(new Date()) / 1000,
-        delete_time: 0,
-        udpate_time: Date.parse(new Date()) / 1000
-      },
-      success: function (res) {
-        console.log("订单添加成功!")
-        //开始插入订单详情表
-        // var order = wx.getStorageSync('cart')
-        console.log(order)
-        for (var i = 0; i < order.length; i++) {
-          app.dbconn.collection('orderdetail').add({
-            data: {
-              order_detail_id: order_id + '--' + i,
-              order_id: order_id,
-              detail_images_head: order[i].detail_images_head,
-              goods_name: order[i].goods_name,
-              goods_no: order[i].goods_no,
-              totalNum: order[i].totalNum,
-              goods_price: order[i].price,
-              real_totalNum: order[i].totalNum,
-              real_goods_price: order[i].price,
-              create_time: Date.parse(new Date()) / 1000,
-              delete_time: 0,
-              udpate_time: Date.parse(new Date()) / 1000
-            },
-            success: function (res) {
-              console.log(res)
-              console.log("订单详情添加成功!")
-            },
-            fail: function (res) {
-              console.log("订单详情插入失败！")
-              console.error
-            }
-          })
-        }
-        //订单表插入成功，订单明细表插入成功后，弹窗，点击确定跳转我的订单页面
-        wx.showModal({
-          title: '',
-          content: '提交成功，等待卖家确认，卖家确认后将不能撤销！',
-          text: 'center',
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-              wx.reLaunch({
-                url: '../index/index'
-              })
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
+          },
+          fail: console.error
         })
-      },
-      fail: function (res) {
-        console.log("订单表插入失败！")
-        console.error
+        break
       }
+    }
+  },
+  /**
+   *上拉触底事件：加载第二页 
+   */
+  onReachBottom() {
+    wx.showLoading({
+      title: '加载中',
     })
+    var status = {
+      "0": "已提交",
+      "1": "已确认",
+      "2": "已发货",
+      "3": "已结款",
+      "9": "已撤销"
+    }
+    var that = this
+    var openid = app.globalData.openid
+    var manager_openid = wx.getStorageSync('manager_openid')
+    var tmp_listData
+    var pagenum = that.data.pagenum
+
+    for (var i = 0; i < manager_openid.length; i++) {
+      if (openid == manager_openid[i]) {
+        app.dbconn.collection('order').where({
+          delete_time: 0
+        }).skip(pagenum * 20).limit(20).get({
+          success: function(res) {
+            if (res.data.length > 0) {
+              var tmp_listData = res.data
+              for (var i = 0; i < tmp_listData.length; i++) {
+                tmp_listData[i].create_time = util.formatTime(tmp_listData[i].create_time, 'Y-M-D h:m:s')
+                tmp_listData[i].status = status[tmp_listData[i].status]
+              }
+              var listData = that.data.listData
+              var total_listData = []
+              for (var i in listData) {
+                total_listData.push(listData[i])
+              }
+              var total_listData = total_listData.concat(tmp_listData)
+              that.setData({
+                listData: total_listData,
+                pagenum: pagenum + 1
+              })
+            } else {
+              wx.showToast({
+                icon: 'none',
+                title: '没有更多数据啦！'
+              })
+            }
+          },
+          fail: console.error
+        })
+        break
+      }
+    }
+    wx.hideLoading()
   }
 })

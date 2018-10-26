@@ -26,6 +26,7 @@ Page({
     app.dbconn.collection('config').get({
       success: function (res) {
         var manager_openid = res.data[0].manager_openid
+        wx.setStorageSync('manager_openid', manager_openid)
         //判断是否是管理员，如果是则展示“订单管理”菜单，如果不是则不展示
         for(var i = 0;i<manager_openid.length;i++){
           if (openid == manager_openid[i]) {

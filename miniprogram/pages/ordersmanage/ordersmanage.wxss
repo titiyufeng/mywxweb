@@ -22,14 +22,14 @@ page {
 }
 
 .orders-box {
-  padding-bottom: 105rpx;
+  /* padding-bottom: 105rpx; */
 }
 
 .orders-list {
   position: relative;
   padding: 20rpx 20rpx 80rpx 10rpx;
   /* height: 180rpx; */
-  border-bottom: 5rpx solid #555353;
+  border-bottom: 25rpx solid #cfc5c5;
 }
 
 .orders-thumb {
@@ -52,7 +52,7 @@ page {
   line-height: 15px;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1; /*控制显示行数*/
+  -webkit-line-clamp: 3; /*控制显示行数*/
   overflow: hidden;
   text-overflow: ellipsis;
   margin-right: 3px;
