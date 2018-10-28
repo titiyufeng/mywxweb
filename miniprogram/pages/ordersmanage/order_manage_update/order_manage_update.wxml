@@ -1,2 +1,147 @@
 <!--miniprogram/pages/ordersmanage/order_manage_update/order_manage_update.wxml-->
-<text>miniprogram/pages/ordersmanage/order_manage_update/order_manage_update.wxml</text>
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{err_msg}}</view>
+
+    <form bindsubmit="formSubmit">
+
+      <view class="weui-cells weui-cells_after-title">
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">订单时间</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled class="weui-input" value='{{order.create_time}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前状态</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled class="weui-input" value='{{order.status}}' />
+          </view>
+        </view>
+
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label" style='color:red'>修改状态</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="satutsChange" value="{{satutsIndex}}" range="{{satuts}}">
+                <view class="weui-select weui-select_in-select-after">{{satuts[satutsIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label" style='color:blue'>收货人</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='username' name='username' class="weui-input" placeholder="请输入" value='{{order.username}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label" style='color:blue'>手机号码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='mobile' name='mobile' class="weui-input" placeholder="请输入" value='{{order.mobile}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">_id</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled id='_id' name='_id' class="weui-input" placeholder="请输入" value='{{order._id}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">订单号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled id='order_id' name='order_id' class="weui-input" placeholder="请输入" value='{{order.order_id}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">openid</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled id='openid' name='openid' class="weui-input" placeholder="请输入" value='{{order.openid}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">货款（旧）</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled id='amout' name='amout' class="weui-input" placeholder="请输入" value='{{order.amout}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">货款（新）</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled id='real_amout' name='real_amout' class="weui-input" placeholder="请输入" value='{{order.real_amout}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label" style='color:red'>运费</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='logistics_fee' name='logistics_fee' class="weui-input" placeholder="请输入" value='{{order.logistics_fee}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label" style='color:red'>运单号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='logistics_id' name='logistics_id' class="weui-input" placeholder="请输入" value='{{order.logistics_id}}' />
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input weui-cell_vcode">
+          <view class="weui-cell__hd">
+            <view class="weui-label" style='color:blue'>收货地址</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id='user_city' name='user_city' class="weui-input" disabled placeholder="" value='{{ order.province }}-{{order.city}}' />
+          </view>
+          <view class="">
+            <button class="btn" bindtap="handleClick">选省市</button>
+            <select-city bind:handleSelect="handleSelect" open-status="{{ isActive }}"></select-city>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input id='name' name='detail_address' class="weui-input" placeholder="请输入" style='font-size:14px;' value='{{order.detail_address}}' />
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" formType="submit" style='background-color:#f0145a'>确定</button>
+      </view>
+    </form>
+  </view>
+</view>

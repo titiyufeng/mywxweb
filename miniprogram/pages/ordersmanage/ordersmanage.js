@@ -29,7 +29,6 @@ Page({
           success: function(res) {
             if (res.data.length > 0) {
               var listData = res.data
-              console.log(listData)
               for (var i = 0; i < listData.length; i++) {
                 listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
                 listData[i].status = status[listData[i].status]
@@ -100,5 +99,24 @@ Page({
       }
     }
     wx.hideLoading()
+  },
+
+  /***
+   *跳转修改订单 
+   */
+  update_order:function(e){
+    var url = '/pages/ordersmanage/order_manage_update/order_manage_update?_id=' + e.target.id
+    wx.navigateTo({
+      url: url
+    })
+  },
+  /***
+ *跳转修改订单详情
+ */
+  update_orderdetail: function (e) {
+    var url = '/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update?_id=' + e.target.id
+    wx.navigateTo({
+      url: url
+    })
   }
 })
