@@ -1,4 +1,5 @@
 /* miniprogram/pages/orderlist/orderlist.wxss */
+@import '../../style/weui.wxss';
 
 .table {
   border: 0px solid darkgray;
@@ -25,7 +26,7 @@
 
 .bg-g {
   background: white;
-border-bottom:2px ridge;
+  border-bottom: 2px ridge;
 }
 
 .th {

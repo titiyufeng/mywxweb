@@ -7,14 +7,23 @@
     <view class="th ">操作</view>
   </view>
   <block wx:for="{{listData}}" wx:key="{{index}}">
-    <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&amout={{item.amout}}&logistics_fee={{item.logistics_fee}}&status={{item.status}}">
-      <view class="tr bg-g">
-        <view class="td">{{item.create_time}}</view>
-        <view class="td">{{item.status}}</view>
-        <view class="td">{{item.total_amout}}</view>
-        <view id="{{item._id}}" class="td" wx:if="{{item.commond}}" bindtap='cancel' style='color:blue'>撤销</view>
-        <view id="{{item._id}}" class="td" wx:else style='color:blue'>查看明细</view>
+
+    <view class="tr bg-g">
+      <view class="td">{{item.create_time}}</view>
+      <view class="td">{{item.status}}</view>
+      <view class="td">{{item.total_amout}}</view>
+      <view  class="td" wx:if="{{item.commond}}" style='color:blue'>
+        <text id="{{item._id}}" bindtap='cancel'>撤销</text>
+        <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&amout={{item.amout}}&logistics_fee={{item.logistics_fee}}&status={{item.status}}">
+          <text >查看明细</text>
+        </navigator>
       </view>
-    </navigator>
+      <view id="{{item._id}}" class="td" wx:else style='color:blue'>
+        <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&amout={{item.amout}}&logistics_fee={{item.logistics_fee}}&status={{item.status}}">
+          <text>查看明细</text>
+        </navigator>
+      </view>
+    </view>
+
   </block>
 </view>
