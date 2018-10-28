@@ -46,7 +46,7 @@ Page({
     //获取商品信息
     app.dbconn.collection('goods_datas').where({
       goods_no: goods_no,
-      is_display: true
+      is_display: 1
     }).get({
       success: function(res) {
         if (res.data.length == 0) { //如果没有找到商品，提示商品已经下架
