@@ -22,7 +22,7 @@ Page({
     if (id != 0) {
       app.dbconn.collection('goods_datas').where({
         cate_id: id,
-        is_display: true,
+        is_display: 1,
         stock_quantity: _.gt(0)
       }).limit(50).get({
         success: function(res) {
@@ -34,8 +34,8 @@ Page({
       })
     } else {
       app.dbconn.collection('goods_datas').where({
-        is_hot: true,
-        is_display: true,
+        is_hot: 1,
+        is_display: 1,
         stock_quantity: _.gt(0)
       }).limit(50).get({
         success: function(res) {
