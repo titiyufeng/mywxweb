@@ -15,7 +15,7 @@ Page({
       "1": "已确认",
       "2": "已发货",
       "3": "已结款",
-      "9": "已撤销"
+      "4": "已撤销"
     }
     var that = this
     var _id = options._id
@@ -24,11 +24,13 @@ Page({
         var order
         order = res.data
         order.create_time = util.formatTime(order.create_time, 'Y-M-D h:m:s')
+        var satutsIndex = parseInt(order.status)
         order.status = status[order.status]
         that.setData({
           order: order,
           province: order.province, //省
-          city: order.city //市
+          city: order.city,//市
+          satutsIndex:satutsIndex
         })
       },
       fail: console.error
@@ -52,7 +54,7 @@ Page({
     var status = String(this.data.satutsIndex)
     var username = e.detail.value.username
     var mobile = e.detail.value.mobile
-    var logistics_fee = e.detail.value.logistics_fee
+    var logistics_fee = parseFloat(e.detail.value.logistics_fee)
     var logistics_id = e.detail.value.logistics_id
     var province = this.data.province
     var city = this.data.city
@@ -78,12 +80,12 @@ Page({
           success: function(res) {
             if (res.confirm) {
               console.log('用户点击确定')
-              // wx.navigateBack({
-              //   // delta: 2
-              // })
-              wx.reLaunch({
-                url: '../ordersmanage'
+              wx.navigateBack({
+                delta: 1
               })
+              // wx.reLaunch({
+              //   url: '../ordersmanage'
+              // })
             }
           }
         })

@@ -11,7 +11,7 @@
   </view>
 
   <view  class="orders-footer">
-    <view class="orders-footer-total">货款合计：￥{{amout}}</view>
+    <view class="orders-footer-total">货款合计：￥{{real_amout}}</view>
     <view wx:if="{{logistics_fee > 0}}" class="orders-footer-btn" bindtap="confirm">运费：￥{{logistics_fee}}</view>
     <view wx:else class="orders-footer-btn" bindtap="confirm">运费：--</view>
   </view>

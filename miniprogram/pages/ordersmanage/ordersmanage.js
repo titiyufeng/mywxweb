@@ -15,7 +15,7 @@ Page({
       "1": "已确认",
       "2": "已发货",
       "3": "已结款",
-      "9": "已撤销"
+      "4": "已撤销"
     }
     var openid = app.globalData.openid
     var manager_openid = wx.getStorageSync('manager_openid')
@@ -57,7 +57,7 @@ Page({
       "1": "已确认",
       "2": "已发货",
       "3": "已结款",
-      "9": "已撤销"
+      "4": "已撤销"
     }
     var that = this
     var openid = app.globalData.openid

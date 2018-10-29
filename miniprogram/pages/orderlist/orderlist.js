@@ -14,7 +14,7 @@ Page({
       "1": "已确认",
       "2": "已发货",
       "3": "已结款",
-      "9": "已撤销"
+      "4": "已撤销"
     }
     var openid = app.globalData.openid
     var listData
@@ -67,7 +67,7 @@ Page({
         if (res.confirm) {
           app.dbconn.collection('order').doc(e.target.id).update({
             data: {
-              status: 9
+              status: '4'
             },
             success: function(res) {
               console.log("订单撤销成功")
@@ -100,7 +100,7 @@ Page({
       "1": "已确认",
       "2": "已发货",
       "3": "已结款",
-      "9": "已撤销"
+      "4": "已撤销"
     }
     var that = this
     var openid = app.globalData.openid

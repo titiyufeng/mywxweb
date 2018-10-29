@@ -15,7 +15,7 @@ Page({
     var that = this
     var order_id = parseInt(options.order_id)
     var logistics_fee = options.logistics_fee
-    var amout = options.amout
+    var real_amout = options.real_amout
     var status = options.status
     app.dbconn.collection('orderdetail').where({
       order_id: order_id,
@@ -26,7 +26,7 @@ Page({
         that.setData({
           orders: orders,
           logistics_fee: logistics_fee,
-          amout: amout,
+          real_amout: real_amout,
           status: status
         })
       },

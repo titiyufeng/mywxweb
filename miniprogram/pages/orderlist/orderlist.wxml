@@ -14,12 +14,12 @@
       <view class="td">{{item.total_amout}}</view>
       <view  class="td" wx:if="{{item.commond}}" style='color:blue'>
         <text id="{{item._id}}" bindtap='cancel'>撤销</text>
-        <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&amout={{item.amout}}&logistics_fee={{item.logistics_fee}}&status={{item.status}}">
+        <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&real_amout={{item.real_amout}}&logistics_fee={{item.logistics_fee}}&status={{item.status}}">
           <text >查看明细</text>
         </navigator>
       </view>
       <view id="{{item._id}}" class="td" wx:else style='color:blue'>
-        <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&amout={{item.amout}}&logistics_fee={{item.logistics_fee}}&status={{item.status}}">
+        <navigator url="/pages/orderdetail/orderdetail?order_id={{item.order_id}}&real_amout={{item.real_amout}}&logistics_fee={{item.logistics_fee}}&status={{item.status}}">
           <text>查看明细</text>
         </navigator>
       </view>
