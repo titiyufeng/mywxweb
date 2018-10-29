@@ -1,7 +1,37 @@
 <!--miniprogram/pages/ordersmanage/ordersmanage.wxml-->
 <view>
 
-  <view>adasdad
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">订单状态</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input disabled class="weui-input" value='已撤销' />
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input">
+      <!-- <view class="weui-cell__hd">
+        <view class="weui-label">出生日期</view>
+      </view> -->
+      <view class="weui-cell__bd">
+        <picker mode="date" value="1962-01-01" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
+          <input id='name' name='birthday' class="weui-input" placeholder="开始日期" disabled value='1962-01-01'></input>
+        </picker>
+      </view>
+      <view style='float:right'>----</view>
+      <view class="weui-cell__bd">
+        <picker mode="date" value="1961-01-01" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
+          <input id='name' name='birthday' class="weui-input" placeholder="结束日期" disabled value='1961-01-01'></input>
+        </picker>
+      </view>
+      <!-- <view class="weui-cell__bd">
+        <picker mode="date" value="{{birthday}}" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
+          <input id='name' name='birthday' class="weui-input" placeholder="请选择出生日期" disabled value='{{birthday}}'></input>
+        </picker>
+      </view> -->
+    </view>
   </view>
 
 
