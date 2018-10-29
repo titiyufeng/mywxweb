@@ -124,7 +124,7 @@
             <view class="weui-label" style='color:blue'>收货地址</view>
           </view>
           <view class="weui-cell__bd">
-            <input id='user_city' name='user_city' class="weui-input" disabled placeholder="" value='{{ order.province }}-{{order.city}}' />
+            <input id='user_city' name='user_city' class="weui-input" disabled placeholder="" value='{{ province }}-{{city}}' />
           </view>
           <view class="">
             <button class="btn" bindtap="handleClick">选省市</button>
