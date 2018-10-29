@@ -1,6 +1,11 @@
 <!--miniprogram/pages/ordersmanage/ordersmanage.wxml-->
-<view >
-  <view class="orders-box">
+<view>
+
+  <view>adasdad
+  </view>
+
+
+  <view class="orders-box" style='margin-top:100px;'>
     <view wx:for="{{listData}}" wx:key="index" class="orders-list">
       <!-- <image class="orders-thumb" src="{{item.detail_images_head[0]}}"></image> -->
       <view class="orders-pro-name">订单时间：{{item.create_time}}</view>
@@ -16,11 +21,11 @@
       <view class="orders-pro-name">运单号：{{item.logistics_id}}</view>
       <view class="orders-pro-name">收货地址：{{item.province}}-{{item.city}}-{{item.detail_address}}</view>
 
-      <view  class="button-sp-area" style="width:50%;padding:0;margin:0;float:left;box-sizing:border-box; ">
+      <view class="button-sp-area" style="width:50%;padding:0;margin:0;float:left;box-sizing:border-box; ">
         <button id="{{item._id}}" class="weui-btn mini-btn" type="warn" size="mini" bindtap='update_order'>修改订单</button>
       </view>
       <view class="button-sp-area" style="width:50%;padding:0;margin:0;float:left;box-sizing:border-box;">
-        <button id="{{item.order_id}}" class="weui-btn mini-btn" type="warn"  size="mini" bindtap='update_orderdetail'>修改订单明细</button>
+        <button id="{{item.order_id}}" class="weui-btn mini-btn" type="warn" size="mini" bindtap='update_orderdetail'>修改订单明细</button>
       </view>
     </view>
   </view>

@@ -58,17 +58,6 @@ Page({
     var city = this.data.city
     var detail_address = e.detail.value.detail_address
 
-
-    // console.log("_id:" + _id)
-    // console.log("status:" + status)
-    // console.log("username:" + username)
-    // console.log("mobile:" + mobile)
-    // console.log("logistics_fee:" + logistics_fee)
-    // console.log("logistics_id:" + logistics_id)
-    // console.log("province:" + province)
-    // console.log("city:" + city)
-    // console.log("detail_address:" + detail_address)
-
     app.dbconn.collection('order').doc(_id).update({
       data: {
         status: status,

@@ -6,7 +6,8 @@ var app = getApp()
 Page({
   data: {
     listData: [],
-    pagenum: 1
+    pagenum: 1,
+    show: true
   },
   onShow: function() {
     var status = {
@@ -104,19 +105,42 @@ Page({
   /***
    *跳转修改订单 
    */
-  update_order:function(e){
+  update_order: function(e) {
     var url = '/pages/ordersmanage/order_manage_update/order_manage_update?_id=' + e.target.id
     wx.navigateTo({
       url: url
     })
   },
   /***
- *跳转修改订单详情
- */
-  update_orderdetail: function (e) {
+   *跳转修改订单详情
+   */
+  update_orderdetail: function(e) {
     var url = '/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update?_id=' + e.target.id
     wx.navigateTo({
       url: url
+    })
+  },
+
+  filter: function(e) { //点击筛选事件
+    var animation = wx.createAnimation({ //创建动画
+      duration: 1000,
+      timingFunction: 'ease',
+      width: 300,
+      height: 800,
+      top: 0,
+      bottom: 0,
+      right: 0,
+      backgroundColor: '#fff',
+      opcity: 0.5
+    })
+
+    this.animation = animation
+
+    animation.translateX(-100 + 'vh').step() //动画效果向右滑动100vh
+
+    this.setData({
+      animationData: animation.export(),
+      show: true
     })
   }
 })
