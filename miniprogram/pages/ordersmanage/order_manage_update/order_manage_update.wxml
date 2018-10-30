@@ -31,8 +31,8 @@
               <view class="weui-label" style='color:red'>修改状态</view>
             </view>
             <view class="weui-cell__bd">
-              <picker bindchange="satutsChange" value="{{satutsIndex}}" range="{{satuts}}">
-                <view class="weui-select weui-select_in-select-after">{{satuts[satutsIndex]}}</view>
+              <picker bindchange="statusChange" value="{{statusIndex}}" range="{{status_list}}">
+                <view class="weui-select weui-select_in-select-after">{{status_list[statusIndex]}}</view>
               </picker>
             </view>
           </view>

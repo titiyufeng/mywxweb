@@ -67,7 +67,7 @@ Page({
     console.log("birthday:" + birthday)
 
     // //将生日转成时间戳
-    var birthday = Date.parse(new Date(birthday)) / 1000;;
+    var birthday = Date.parse(new Date(birthday)) / 1000;
 
     if (username.length == 0 || mobile.length == 0 || user_city.length == 0 || detail_address.length == 0 || birthday.length == 0) {
       this.showTopTips('信息提交错误，所有信息不能为空')

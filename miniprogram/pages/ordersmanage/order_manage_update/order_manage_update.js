@@ -3,8 +3,8 @@ var util = require("../../../utils/util.js");
 var app = getApp()
 Page({
   data: {
-    satuts: ["已提交", "已确认", "已发货", "已结款", "已撤销"],
-    satutsIndex: 0,
+    status_list: ["已提交", "已确认", "已发货", "已结款", "已撤销"],
+    statusIndex: 0,
     order: {},
     province: '', //省
     city: '' //市
@@ -24,13 +24,13 @@ Page({
         var order
         order = res.data
         order.create_time = util.formatTime(order.create_time, 'Y-M-D h:m:s')
-        var satutsIndex = parseInt(order.status)
+        var statusIndex = parseInt(order.status)
         order.status = status[order.status]
         that.setData({
           order: order,
           province: order.province, //省
           city: order.city,//市
-          satutsIndex:satutsIndex
+          statusIndex:statusIndex
         })
       },
       fail: console.error
@@ -40,9 +40,9 @@ Page({
   /**
    *切换订单状态 
    */
-  satutsChange: function(e) {
+  statusChange: function(e) {
     this.setData({
-      satutsIndex: e.detail.value
+      statusIndex: e.detail.value
     })
   },
 
@@ -51,7 +51,7 @@ Page({
    */
   formSubmit: function(e) {
     var _id = e.detail.value._id
-    var status = String(this.data.satutsIndex)
+    var status = String(this.data.statusIndex)
     var username = e.detail.value.username
     var mobile = e.detail.value.mobile
     var logistics_fee = parseFloat(e.detail.value.logistics_fee)

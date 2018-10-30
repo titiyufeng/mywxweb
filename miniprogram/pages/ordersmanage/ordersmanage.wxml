@@ -1,41 +1,54 @@
 <!--miniprogram/pages/ordersmanage/ordersmanage.wxml-->
 <view>
 
-  <view class="weui-cells weui-cells_after-title">
+  <view class="weui-cells weui-cells_after-title" style='background-color:#F8F8FF;'>
+
+          <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">订单状态</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="statusChange" value="{{statusIndex}}" range="{{status_list}}">
+                <view class="weui-select weui-select_in-select-after">{{status_list[statusIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+
+
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
-        <view class="weui-label">订单状态</view>
+        <view class="weui-label">选择日期</view>
       </view>
       <view class="weui-cell__bd">
-        <input disabled class="weui-input" value='已撤销' />
+        <picker mode="date" value="{{startdate}}" start="2018-01-01" end="2037-09-01" bindchange="bindStartDateChange">
+          <input id='startdate' name='startdate' class="weui-input" placeholder="开始日期" disabled value='{{startdate}}'></input>
+        </picker>
+      </view>
+      <view style='float:right'>--至--</view>
+      <view class="weui-cell__bd">
+        <picker mode="date" value="{{enddate}}" start="2018-01-01" end="2037-09-01" bindchange="bindEndDateChange">
+          <input id='enddate' name='enddate' class="weui-input" placeholder="结束日期" disabled value='{{enddate}}'></input>
+        </picker>
       </view>
     </view>
 
     <view class="weui-cell weui-cell_input">
-      <!-- <view class="weui-cell__hd">
-        <view class="weui-label">出生日期</view>
-      </view> -->
-      <view class="weui-cell__bd">
-        <picker mode="date" value="1962-01-01" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
-          <input id='name' name='birthday' class="weui-input" placeholder="开始日期" disabled value='1962-01-01'></input>
-        </picker>
+      <view class="weui-cell__hd">
+        <view class="weui-label">手机号码</view>
       </view>
-      <view style='float:right'>----</view>
       <view class="weui-cell__bd">
-        <picker mode="date" value="1961-01-01" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
-          <input id='name' name='birthday' class="weui-input" placeholder="结束日期" disabled value='1961-01-01'></input>
-        </picker>
+        <input class="weui-input" placeholder="请输入手机号码" value='{{mobile}}' />
       </view>
-      <!-- <view class="weui-cell__bd">
-        <picker mode="date" value="{{birthday}}" start="1965-01-01" end="2037-09-01" bindchange="bindDateChange">
-          <input id='name' name='birthday' class="weui-input" placeholder="请选择出生日期" disabled value='{{birthday}}'></input>
-        </picker>
-      </view> -->
     </view>
+
+    <view class="weui-btn-area" style='text-align: center;'>
+      <button class="weui-btn mini-btn" type="primary" size="mini" style='margin-right:50px;'>搜索订单</button>
+    </view>
+
   </view>
 
 
-  <view class="orders-box" style='margin-top:100px;'>
+  <view class="orders-box">
     <view wx:for="{{listData}}" wx:key="index" class="orders-list">
       <!-- <image class="orders-thumb" src="{{item.detail_images_head[0]}}"></image> -->
       <view class="orders-pro-name">订单时间：{{item.create_time}}</view>

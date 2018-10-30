@@ -5,9 +5,27 @@ var app = getApp()
 
 Page({
   data: {
+    status_list: ["已提交", "已确认", "已发货", "已结款", "已撤销"],
+    statusIndex: 0,
     listData: [],
     pagenum: 1,
-    show: true
+    show: true,
+    startdate: '2018-05-12',
+    enddate: '2037-09-01',
+    startTimestamp:0,
+    endTimestamp: 0,
+    mobile: ''
+  },
+  onLoad: function() {
+    var curent_date = Date.parse(new Date()) / 1000
+    var startdate = util.formatTime(curent_date, 'Y-M-D')
+    var enddate = util.formatTime(curent_date, 'Y-M-D')
+    this.setData({
+      startdate: startdate,
+      enddate: enddate,
+      startTimestamp: Date.parse(new Date(startdate + ' 00:00:00')) / 1000,
+      endTimestamp: Date.parse(new Date(enddate + ' 23:59:59')) / 1000,
+    })
   },
   onShow: function() {
     var status = {
@@ -21,6 +39,7 @@ Page({
     var manager_openid = wx.getStorageSync('manager_openid')
     var listData = []
     var that = this
+    var curent_status = String(that.data.statusIndex)
 
     for (var i = 0; i < manager_openid.length; i++) {
       if (openid == manager_openid[i]) {
@@ -141,6 +160,37 @@ Page({
     this.setData({
       animationData: animation.export(),
       show: true
+    })
+  },
+
+  /**
+   *切换订单状态 
+   */
+  statusChange: function(e) {
+    this.setData({
+      statusIndex: e.detail.value
+    })
+  },
+
+  /**
+   * 选择开始日期
+   */
+  bindStartDateChange: function(e) {
+    console.log(Date.parse(new Date(e.detail.value + ' 00:00:00')) / 1000)
+    this.setData({
+      startdate: e.detail.value,
+      startTimestamp: Date.parse(new Date(e.detail.value + ' 00:00:00')) / 1000,
+    })
+  },
+
+  /**
+   * 选择结束日期
+   */
+  bindEndDateChange: function(e) {
+    console.log(Date.parse(new Date(e.detail.value + ' 23:59:59')) / 1000)
+    this.setData({
+      enddate: e.detail.value,
+      endTimestamp: Date.parse(new Date(e.detail.value + ' 23:59:59')) / 1000,
     })
   }
 })
