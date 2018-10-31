@@ -22,7 +22,7 @@ Page({
     app.dbconn.collection('order').where({
       openid: openid,
       delete_time:0
-    }).get({
+    }).orderBy('create_time', 'desc').get({
       success: function(res) {
         if (res.data.length > 0) {
           var listData = res.data
@@ -110,7 +110,7 @@ Page({
     app.dbconn.collection('order').where({
       openid: openid,
       delete_time: 0
-    }).skip(pagenum * 20).limit(20).get({
+    }).orderBy('create_time', 'desc').skip(pagenum * 20).limit(20).get({
       success: function(res) {
         if (res.data.length > 0) {
           var tmp_listData = res.data

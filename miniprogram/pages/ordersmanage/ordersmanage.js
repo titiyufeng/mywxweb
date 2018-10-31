@@ -12,7 +12,7 @@ Page({
     show: true,
     startdate: '2018-05-12',
     enddate: '2037-09-01',
-    startTimestamp:0,
+    startTimestamp: 0,
     endTimestamp: 0,
     mobile: ''
   },
@@ -27,7 +27,7 @@ Page({
       endTimestamp: Date.parse(new Date(enddate + ' 23:59:59')) / 1000,
     })
   },
-  onShow: function () {
+  onShow: function() {
     var status = {
       "0": "已提交",
       "1": "已确认",
@@ -40,26 +40,64 @@ Page({
     var listData = []
     var that = this
     var curent_status = String(that.data.statusIndex)
+    var mobile = that.data.mobile
 
+    const _ = app.dbconn.command
     for (var i = 0; i < manager_openid.length; i++) {
       if (openid == manager_openid[i]) {
-        app.dbconn.collection('order').where({
-          delete_time: 0
-        }).get({
-          success: function(res) {
-            if (res.data.length > 0) {
-              var listData = res.data
-              for (var i = 0; i < listData.length; i++) {
-                listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
-                listData[i].status = status[listData[i].status]
+        if (mobile) {       //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
+          app.dbconn.collection('order').where({
+            delete_time: 0,
+            create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
+            status: curent_status,
+            mobile: _.eq(mobile)
+          }).orderBy('create_time', 'desc').get({
+            success: function(res) {
+              if (res.data.length > 0) {
+                var listData = res.data
+                for (var i = 0; i < listData.length; i++) {
+                  listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
+                  listData[i].status = status[listData[i].status]
+                }
+                that.setData({
+                  listData: listData
+                })
+              } else {
+                var listData = []
+                that.setData({
+                  listData: listData
+                })
               }
-            }
-            that.setData({
-              listData: listData
-            })
-          },
-          fail: console.error
-        })
+            },
+            fail: console.error
+          })
+        } else {
+          app.dbconn.collection('order').where({
+            delete_time: 0,
+            create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
+            status: curent_status
+          }).orderBy('create_time', 'desc').get({
+            success: function(res) {
+              if (res.data.length > 0) {
+                var listData = res.data
+                for (var i = 0; i < listData.length; i++) {
+                  listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
+                  listData[i].status = status[listData[i].status]
+                }
+                that.setData({
+                  listData: listData
+                })
+              } else {
+                var listData = []
+                that.setData({
+                  listData: listData
+                })
+              }
+            },
+            fail: console.error
+          })
+        }
+
         break
       }
     }
@@ -81,40 +119,80 @@ Page({
     var that = this
     var openid = app.globalData.openid
     var manager_openid = wx.getStorageSync('manager_openid')
+    var curent_status = String(that.data.statusIndex)
     var tmp_listData
     var pagenum = that.data.pagenum
+    var mobile = that.data.mobile
 
+    const _ = app.dbconn.command
     for (var i = 0; i < manager_openid.length; i++) {
       if (openid == manager_openid[i]) {
-        app.dbconn.collection('order').where({
-          delete_time: 0
-        }).skip(pagenum * 20).limit(20).get({
-          success: function(res) {
-            if (res.data.length > 0) {
-              var tmp_listData = res.data
-              for (var i = 0; i < tmp_listData.length; i++) {
-                tmp_listData[i].create_time = util.formatTime(tmp_listData[i].create_time, 'Y-M-D h:m:s')
-                tmp_listData[i].status = status[tmp_listData[i].status]
+        if (mobile) {         //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
+          app.dbconn.collection('order').where({
+            delete_time: 0,
+            create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
+            status: curent_status,
+            mobile: _.eq(mobile)
+          }).orderBy('create_time', 'desc').skip(pagenum * 20).limit(20).get({
+            success: function(res) {
+              if (res.data.length > 0) {
+                var tmp_listData = res.data
+                for (var i = 0; i < tmp_listData.length; i++) {
+                  tmp_listData[i].create_time = util.formatTime(tmp_listData[i].create_time, 'Y-M-D h:m:s')
+                  tmp_listData[i].status = status[tmp_listData[i].status]
+                }
+                var listData = that.data.listData
+                var total_listData = []
+                for (var i in listData) {
+                  total_listData.push(listData[i])
+                }
+                var total_listData = total_listData.concat(tmp_listData)
+                that.setData({
+                  listData: total_listData,
+                  pagenum: pagenum + 1
+                })
+              } else {
+                wx.showToast({
+                  icon: 'none',
+                  title: '没有更多数据啦！'
+                })
               }
-              var listData = that.data.listData
-              var total_listData = []
-              for (var i in listData) {
-                total_listData.push(listData[i])
+            },
+            fail: console.error
+          })
+        } else {
+          app.dbconn.collection('order').where({
+            delete_time: 0,
+            create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
+            status: curent_status
+          }).orderBy('create_time', 'desc').skip(pagenum * 20).limit(20).get({
+            success: function(res) {
+              if (res.data.length > 0) {
+                var tmp_listData = res.data
+                for (var i = 0; i < tmp_listData.length; i++) {
+                  tmp_listData[i].create_time = util.formatTime(tmp_listData[i].create_time, 'Y-M-D h:m:s')
+                  tmp_listData[i].status = status[tmp_listData[i].status]
+                }
+                var listData = that.data.listData
+                var total_listData = []
+                for (var i in listData) {
+                  total_listData.push(listData[i])
+                }
+                var total_listData = total_listData.concat(tmp_listData)
+                that.setData({
+                  listData: total_listData,
+                  pagenum: pagenum + 1
+                })
+              } else {
+                wx.showToast({
+                  icon: 'none',
+                  title: '没有更多数据啦！'
+                })
               }
-              var total_listData = total_listData.concat(tmp_listData)
-              that.setData({
-                listData: total_listData,
-                pagenum: pagenum + 1
-              })
-            } else {
-              wx.showToast({
-                icon: 'none',
-                title: '没有更多数据啦！'
-              })
-            }
-          },
-          fail: console.error
-        })
+            },
+            fail: console.error
+          })
+        }
         break
       }
     }
@@ -196,8 +274,7 @@ Page({
   /**
    * 搜索订单
    */
-  formSubmit:function(e){
-    // console.log(e.detail.value.mobile)
+  formSubmit: function(e) {
     this.data.mobile = e.detail.value.mobile
     // var mobile = e.detail.value.mobile
     var that = this
