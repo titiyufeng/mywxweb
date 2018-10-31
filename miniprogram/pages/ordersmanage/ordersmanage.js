@@ -27,7 +27,7 @@ Page({
       endTimestamp: Date.parse(new Date(enddate + ' 23:59:59')) / 1000,
     })
   },
-  onShow: function() {
+  onShow: function () {
     var status = {
       "0": "已提交",
       "1": "已确认",
@@ -192,5 +192,15 @@ Page({
       enddate: e.detail.value,
       endTimestamp: Date.parse(new Date(e.detail.value + ' 23:59:59')) / 1000,
     })
+  },
+  /**
+   * 搜索订单
+   */
+  formSubmit:function(e){
+    // console.log(e.detail.value.mobile)
+    this.data.mobile = e.detail.value.mobile
+    // var mobile = e.detail.value.mobile
+    var that = this
+    that.onShow()
   }
 })
