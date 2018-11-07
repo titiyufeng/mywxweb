@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 9,
 			"list": [
 				{
 					"id": -1,
@@ -81,7 +81,14 @@
 				{
 					"id": -1,
 					"name": "orderdetail_manage_update",
-					"pathName": "pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update"
+					"pathName": "pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "ordersmanage",
+					"pathName": "pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update",
+					"query": ""
 				}
 			]
 		}

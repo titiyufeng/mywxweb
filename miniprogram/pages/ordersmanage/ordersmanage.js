@@ -212,35 +212,11 @@ Page({
    *跳转修改订单详情
    */
   update_orderdetail: function(e) {
-    var url = '/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update?_id=' + e.target.id
+    var url = '/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update?order_id=' + e.target.id
     wx.navigateTo({
       url: url
     })
   },
-
-  filter: function(e) { //点击筛选事件
-    var animation = wx.createAnimation({ //创建动画
-      duration: 1000,
-      timingFunction: 'ease',
-      width: 300,
-      height: 800,
-      top: 0,
-      bottom: 0,
-      right: 0,
-      backgroundColor: '#fff',
-      opcity: 0.5
-    })
-
-    this.animation = animation
-
-    animation.translateX(-100 + 'vh').step() //动画效果向右滑动100vh
-
-    this.setData({
-      animationData: animation.export(),
-      show: true
-    })
-  },
-
   /**
    *切换订单状态 
    */
@@ -254,7 +230,6 @@ Page({
    * 选择开始日期
    */
   bindStartDateChange: function(e) {
-    console.log(Date.parse(new Date(e.detail.value + ' 00:00:00')) / 1000)
     this.setData({
       startdate: e.detail.value,
       startTimestamp: Date.parse(new Date(e.detail.value + ' 00:00:00')) / 1000,
@@ -265,7 +240,6 @@ Page({
    * 选择结束日期
    */
   bindEndDateChange: function(e) {
-    console.log(Date.parse(new Date(e.detail.value + ' 23:59:59')) / 1000)
     this.setData({
       enddate: e.detail.value,
       endTimestamp: Date.parse(new Date(e.detail.value + ' 23:59:59')) / 1000,

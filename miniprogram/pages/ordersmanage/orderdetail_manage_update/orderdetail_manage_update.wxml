@@ -1,2 +1,39 @@
 <!--miniprogram/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update.wxml-->
-<text>miniprogram/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update.wxml</text>
+<view class="main">
+  <view wx:if="{{hasList}}">
+    <view class="cart-box">
+      <view class="cart-list" wx:for="{{orderdetail}}" wx:key="{{index}}">
+        <icon wx:if="{{item.selected}}" type="success" color="red" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />
+        <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" />
+        <navigator url="../detail/detail?goods_no={{item.goods_no}}">
+          <image class="cart-thumb" src="{{item.detail_images_head[0]}}"></image>
+        </navigator>
+        <text class="cart-pro-name">{{item.totalNum}}-{{item.goods_name}}</text>
+        <text class="cart-pro-price">￥{{item.real_goods_price}}</text>
+
+        <view class="cart-count-box">
+          <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">-</text>
+          <text class="cart-count-num">{{item.totalNum}}</text>
+          <text class="cart-count-add" bindtap="addCount" data-index="{{index}}" data-goods_limit_num="{{item.goods_limit_num}}">+</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="cart-footer">
+      <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="selectAll" />
+      <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" />
+
+      <navigator url="../orders/orders">
+        <view class="order-icon" hidden='{{is_display_order}}'>
+          <image src="../../../resouce/icon3.png"></image>
+        </view>
+      </navigator>
+
+      <text bindtap="selectAll">全选</text>
+      <text class="cart-toatl-price">￥{{totalPrice}}</text>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="cart-no-data">购物车是空的哦~</view>
+  </view>
+</view>

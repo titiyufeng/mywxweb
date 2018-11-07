@@ -110,7 +110,7 @@ Page({
     var cart
     var that = this
     //从缓存中获取购物车信息
-    var cart = wx.getStorageSync("cart")
+    cart = wx.getStorageSync("cart")
     console.log("show缓存中的购物车数据如下：")
     console.log(cart)
 
