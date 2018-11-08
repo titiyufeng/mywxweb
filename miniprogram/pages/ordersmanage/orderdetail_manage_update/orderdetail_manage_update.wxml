@@ -13,7 +13,7 @@
 
         <view class="cart-count-box">
           <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">-</text>
-          <text class="cart-count-num">{{item.totalNum}}</text>
+          <text class="cart-count-num">{{item.real_totalNum}}</text>
           <text class="cart-count-add" bindtap="addCount" data-index="{{index}}" data-goods_limit_num="{{item.goods_limit_num}}">+</text>
         </view>
       </view>
@@ -34,6 +34,6 @@
     </view>
   </view>
   <view wx:else>
-    <view class="cart-no-data">购物车是空的哦~</view>
+    <view class="cart-no-data">没有订单</view>
   </view>
 </view>

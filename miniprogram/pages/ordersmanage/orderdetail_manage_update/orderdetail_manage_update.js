@@ -12,15 +12,12 @@ Page({
     totalPrice: 0.00, // 总价，初始为0
     selectAllStatus: false, // 全选状态，默认全选
     is_display_order: true, //是否显示订单跳转链接图标
-    obj: {
-      name: "hello"
-    }
   },
 
-  onShow(options) {
+  onLoad(options) {
     var openid = app.globalData.openid
-    // var order_id = options.order_id
-    var order_id = 1540428004
+    var order_id = parseInt(options.order_id)
+    // var order_id = 1540428004
     var that = this
     var orderdetail
     app.dbconn.collection('orderdetail').where({
@@ -59,7 +56,7 @@ Page({
     this.getTotalPrice();
   },
   /**
-   * 购物车全选事件
+   * 全选事件
    */
   selectAll(e) {
     let selectAllStatus = this.data.selectAllStatus;
@@ -82,9 +79,9 @@ Page({
   addCount(e) {
     const index = e.currentTarget.dataset.index;
     let orderdetail = this.data.orderdetail;
-    let totalNum = orderdetail[index].totalNum;
-    totalNum = totalNum + 1;
-    orderdetail[index].totalNum = totalNum;
+    let real_totalNum = orderdetail[index].real_totalNum;
+    real_totalNum = real_totalNum + 1;
+    orderdetail[index].real_totalNum = real_totalNum;
     this.setData({
       orderdetail: orderdetail
     });
@@ -98,12 +95,12 @@ Page({
     const index = e.currentTarget.dataset.index;
     const obj = e.currentTarget.dataset.obj;
     let orderdetail = this.data.orderdetail;
-    let totalNum = orderdetail[index].totalNum;
-    if (totalNum <= 0) {
+    let real_totalNum = orderdetail[index].real_totalNum;
+    if (real_totalNum <= 0) {
       return false;
     }
-    totalNum = totalNum - 1;
-    orderdetail[index].totalNum = totalNum;
+    real_totalNum = real_totalNum - 1;
+    orderdetail[index].real_totalNum = real_totalNum;
     this.setData({
       orderdetail: orderdetail
     });
@@ -111,25 +108,26 @@ Page({
   },
 
   /**
-   * 计算总价、并将最新的cart数据写入缓存
+   * 计算总价
    */
   getTotalPrice() {
-    let orderdetail = this.data.orderdetail; // 获取购物车列表
+    let orderdetail = this.data.orderdetail; // 获取订单列表
     let total = 0;
     let is_display_order = this.data.is_display_order
     for (let i = 0; i < orderdetail.length; i++) { // 循环列表得到每个数据
       if (orderdetail[i].selected) { // 判断选中才会计算价格
-        total += orderdetail[i].totalNum * orderdetail[i].real_goods_price; // 所有价格加起来
+        total += orderdetail[i].real_totalNum * orderdetail[i].real_goods_price; // 所有价格加起来
       }
     }
 
+    //根据订单合计金额判断是否展示订单链接图标
     if (total > 0) {
       is_display_order = false
     } else {
       is_display_order = true
     }
 
-    //根据购物车合计金额判断是否展示订单链接图标
+
     this.setData({ // 最后赋值到data中渲染到页面
       orderdetail: orderdetail,
       totalPrice: total.toFixed(2),

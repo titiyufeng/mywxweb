@@ -45,7 +45,7 @@ Page({
     const _ = app.dbconn.command
     for (var i = 0; i < manager_openid.length; i++) {
       if (openid == manager_openid[i]) {
-        if (mobile) {       //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
+        if (mobile) { //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
           app.dbconn.collection('order').where({
             delete_time: 0,
             create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
@@ -127,7 +127,7 @@ Page({
     const _ = app.dbconn.command
     for (var i = 0; i < manager_openid.length; i++) {
       if (openid == manager_openid[i]) {
-        if (mobile) {         //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
+        if (mobile) { //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
           app.dbconn.collection('order').where({
             delete_time: 0,
             create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
@@ -212,7 +212,7 @@ Page({
    *跳转修改订单详情
    */
   update_orderdetail: function(e) {
-    var url = '/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update?order_id=' + e.target.id
+    var url = '/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update?order_id=' + e.currentTarget.dataset.order_id + '&_id=' + e.currentTarget.dataset._id
     wx.navigateTo({
       url: url
     })
