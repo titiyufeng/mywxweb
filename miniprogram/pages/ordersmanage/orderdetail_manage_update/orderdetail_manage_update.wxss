@@ -1,5 +1,5 @@
 /* miniprogram/pages/ordersmanage/orderdetail_manage_update/orderdetail_manage_update.wxss */
-
+@import '../../../style/weui.wxss';
 page {
   background-color: #fff;
   font-family: "Helvetica Neue",

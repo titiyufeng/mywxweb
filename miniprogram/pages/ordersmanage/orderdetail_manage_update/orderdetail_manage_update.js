@@ -20,6 +20,7 @@ Page({
     // var order_id = 1540428004
     var that = this
     var orderdetail
+    var totalPrice = 0
     app.dbconn.collection('orderdetail').where({
       order_id: order_id,
       _openid: openid,
@@ -28,18 +29,22 @@ Page({
       success: function(res) {
         if (res.data.length > 0) {
           var orderdetail = res.data
+
+          for (let i = 0; i < orderdetail.length; i++) { // 循环列表得到每个数据
+            totalPrice += orderdetail[i].real_totalNum * orderdetail[i].real_goods_price; // 所有价格加起来
+          }
+          
           that.setData({
             orderdetail: orderdetail,
             hasList: true,
             selectAllStatus: false,
-            totalPrice: 0.00,
+            totalPrice: totalPrice.toFixed(2),
             is_display_order: true
           })
         } else {}
       },
       fail: console.error
     })
-
     this.getTotalPrice();
   },
   /**
@@ -115,9 +120,10 @@ Page({
     let total = 0;
     let is_display_order = this.data.is_display_order
     for (let i = 0; i < orderdetail.length; i++) { // 循环列表得到每个数据
-      if (orderdetail[i].selected) { // 判断选中才会计算价格
-        total += orderdetail[i].real_totalNum * orderdetail[i].real_goods_price; // 所有价格加起来
-      }
+      // if (orderdetail[i].selected) { // 判断选中才会计算价格
+      //   total += orderdetail[i].real_totalNum * orderdetail[i].real_goods_price; // 所有价格加起来
+      // }
+      total += orderdetail[i].real_totalNum * orderdetail[i].real_goods_price; // 所有价格加起来
     }
 
     //根据订单合计金额判断是否展示订单链接图标

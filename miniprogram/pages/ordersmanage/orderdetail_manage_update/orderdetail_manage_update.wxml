@@ -3,9 +3,14 @@
   <view wx:if="{{hasList}}">
     <view class="cart-box">
       <view class="cart-list" wx:for="{{orderdetail}}" wx:key="{{index}}">
-        <icon wx:if="{{item.selected}}" type="success" color="red" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />
-        <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" />
-        <navigator url="../detail/detail?goods_no={{item.goods_no}}">
+        <!-- <icon wx:if="{{item.selected}}" type="success" color="red" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />
+        <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" /> -->
+        
+        <view class="button-sp-area" >
+            <button class="weui-btn mini-btn" type="warn" size="mini" style='position: absolute;left:0rpx;top:35rpx;width:10px;background-color:#ab956d;'>修改</button>
+        </view>
+
+        <navigator url="../../detail/detail?goods_no={{item.goods_no}}">
           <image class="cart-thumb" src="{{item.detail_images_head[0]}}"></image>
         </navigator>
         <text class="cart-pro-name">{{item.totalNum}}-{{item.goods_name}}</text>
@@ -20,16 +25,16 @@
     </view>
 
     <view class="cart-footer">
-      <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="selectAll" />
-      <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" />
+      <!-- <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="selectAll" />
+      <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" /> -->
 
       <navigator url="../orders/orders">
-        <view class="order-icon" hidden='{{is_display_order}}'>
+        <view class="order-icon">
           <image src="../../../resouce/icon3.png"></image>
         </view>
       </navigator>
 
-      <text bindtap="selectAll">全选</text>
+      <!-- <text bindtap="selectAll">全选</text> -->
       <text class="cart-toatl-price">￥{{totalPrice}}</text>
     </view>
   </view>
