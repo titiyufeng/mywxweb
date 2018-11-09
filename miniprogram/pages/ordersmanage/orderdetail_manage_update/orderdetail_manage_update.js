@@ -12,6 +12,7 @@ Page({
     totalPrice: 0.00, // 总价，初始为0
     selectAllStatus: false, // 全选状态，默认全选
     is_display_order: true, //是否显示订单跳转链接图标
+    order_id:''
   },
 
   onLoad(options) {
@@ -39,7 +40,8 @@ Page({
             hasList: true,
             selectAllStatus: false,
             totalPrice: totalPrice.toFixed(2),
-            is_display_order: true
+            is_display_order: true,
+            order_id: order_id
           })
         } else {}
       },
@@ -139,5 +141,18 @@ Page({
       totalPrice: total.toFixed(2),
       is_display_order: is_display_order
     });
+  },
+  /**
+   * 更新订单表
+   */
+  order_updata:function(e){
+    console.log(this.data.order_id)
+  },
+  /**
+ * 更新订单明细表
+ */
+  orderdetail_updata: function (e) {
+    console.log(e.currentTarget.dataset._id)
+    console.log(e.currentTarget.dataset.real_totalnum)
   }
 })
