@@ -280,7 +280,7 @@ Page({
 
     this.setData({ // 最后赋值到data中渲染到页面
       cart: cart,
-      totalPrice: total.toFixed(2),
+      totalPrice: total,
       is_display_order: is_display_order
     });
   }

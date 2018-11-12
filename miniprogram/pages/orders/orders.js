@@ -22,7 +22,7 @@ Page({
     app.dbconn.collection('user').where({
       openid: app.globalData.openid
     }).get({
-      success: function (res) {
+      success: function(res) {
         if (res.data.length == 1) {
           if (res.data[0].mobile) {
             that.setData({
@@ -32,14 +32,14 @@ Page({
               city: res.data[0].city,
               detail_address: res.data[0].detail_address,
             })
-          }else{
+          } else {
             wx.showModal({
               title: '',
               content: '您尚未设置收货地址，请前往“我的-个人信息”页面进行设置！',
-              confirmText:'去设置',
+              confirmText: '去设置',
               text: 'center',
               showCancel: false,
-              success: function (res) {
+              success: function(res) {
                 if (res.confirm) {
                   console.log('用户点击确定')
                   wx.reLaunch({
@@ -58,7 +58,7 @@ Page({
       },
       fail: console.error
     })
-  
+
     this.setData({
       orders: orders
     })
@@ -82,7 +82,7 @@ Page({
     //将订单写入订单表及订单明细表
     var order_id = Date.parse(new Date()) / 1000
     var order = wx.getStorageSync('cart')
-    wx.removeStorageSync('cart')//提交后将购物车清空
+    wx.removeStorageSync('cart') //提交后将购物车清空
     //开始插入订单表
     app.dbconn.collection('order').add({
       data: {
@@ -93,10 +93,10 @@ Page({
         city: this.data.city,
         detail_address: this.data.detail_address,
         order_id: order_id,
-        logistics_id: '',//运单号
+        logistics_id: '', //运单号
         amout: this.data.total,
         real_amout: this.data.total,
-        logistics_fee: 0,//运费
+        logistics_fee: 0, //运费
         status: '0',
         create_time: Date.parse(new Date()) / 1000,
         delete_time: 0,
@@ -139,9 +139,9 @@ Page({
           content: '提交成功，等待卖家确认，卖家确认后将不能撤销！',
           text: 'center',
           showCancel: false,
-          success: function (res) {
+          success: function(res) {
             if (res.confirm) {
-              console.log('用户点击确定')              
+              console.log('用户点击确定')
               wx.reLaunch({
                 url: '../index/index'
               })

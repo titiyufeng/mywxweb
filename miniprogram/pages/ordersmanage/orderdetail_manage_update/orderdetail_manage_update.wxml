@@ -29,9 +29,9 @@
       <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" /> -->
 
 
-        <view class="order-icon">
-          <image src="../../../resouce/icon3.png" bindtap='order_updata'></image>
-        </view>
+      <view class="order-icon">
+        <image src="../../../resouce/icon3.png" bindtap='order_updata'></image>
+      </view>
 
 
       <!-- <text bindtap="selectAll">全选</text> -->

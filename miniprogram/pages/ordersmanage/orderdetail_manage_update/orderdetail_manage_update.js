@@ -12,13 +12,14 @@ Page({
     totalPrice: 0.00, // 总价，初始为0
     selectAllStatus: false, // 全选状态，默认全选
     is_display_order: true, //是否显示订单跳转链接图标
-    order_id:''
+    order_id: '',
+    order_id_id: ''
   },
 
   onLoad(options) {
     var openid = app.globalData.openid
     var order_id = parseInt(options.order_id)
-    // var order_id = 1540428004
+    var order_id_id = options._id
     var that = this
     var orderdetail
     var totalPrice = 0
@@ -34,14 +35,15 @@ Page({
           for (let i = 0; i < orderdetail.length; i++) { // 循环列表得到每个数据
             totalPrice += orderdetail[i].real_totalNum * orderdetail[i].real_goods_price; // 所有价格加起来
           }
-          
+
           that.setData({
             orderdetail: orderdetail,
             hasList: true,
             selectAllStatus: false,
-            totalPrice: totalPrice.toFixed(2),
+            totalPrice: totalPrice,
             is_display_order: true,
-            order_id: order_id
+            order_id: order_id,
+            order_id_id: order_id_id
           })
         } else {}
       },
@@ -138,21 +140,50 @@ Page({
 
     this.setData({ // 最后赋值到data中渲染到页面
       orderdetail: orderdetail,
-      totalPrice: total.toFixed(2),
+      totalPrice: total,
       is_display_order: is_display_order
     });
   },
   /**
    * 更新订单表
    */
-  order_updata:function(e){
-    console.log(this.data.order_id)
+  order_updata: function(e) {
+    var openid = app.globalData.openid
+    var order_id_id = this.data.order_id_id
+    var real_amout = this.data.totalPrice
+    console.log(this.data.order_id_id)
+    console.log(this.data.totalPrice)
+
+    app.dbconn.collection('order').doc(order_id_id).update({
+      data: {
+        real_amout: real_amout
+      },
+      success: function(res) {
+        wx.showModal({
+          content: '修改成功，确认订单明细表更新成功！',
+          showCancel: false,
+        })
+      },
+      fail: console.error
+    })
   },
   /**
- * 更新订单明细表
- */
-  orderdetail_updata: function (e) {
-    console.log(e.currentTarget.dataset._id)
-    console.log(e.currentTarget.dataset.real_totalnum)
+   * 更新订单明细表
+   */
+  orderdetail_updata: function(e) {
+    var _id = e.currentTarget.dataset._id
+    var real_totalnum = e.currentTarget.dataset.real_totalnum
+    app.dbconn.collection('orderdetail').doc(_id).update({
+      data: {
+        real_totalNum: real_totalnum
+      },
+      success: function(res) {
+        wx.showModal({
+          content: '修改成功，确认订单表更新成功！',
+          showCancel: false,
+        })
+      },
+      fail: console.error
+    })
   }
 })
