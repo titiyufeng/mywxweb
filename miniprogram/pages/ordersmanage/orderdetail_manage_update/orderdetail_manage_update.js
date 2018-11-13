@@ -185,5 +185,24 @@ Page({
       },
       fail: console.error
     })
-  }
+  },
+  /**
+ * 确认订单明细表
+ */
+  orderdetail_confirm: function (e) {
+    var _id = e.currentTarget.dataset._id
+    var real_totalnum = e.currentTarget.dataset.real_totalnum
+    app.dbconn.collection('orderdetail').doc(_id).update({
+      data: {
+        status: '1'
+      },
+      success: function (res) {
+        wx.showModal({
+          content: '订单明细确认成功！',
+          showCancel: false,
+        })
+      },
+      fail: console.error
+    })
+  },
 })

@@ -23,7 +23,7 @@ page {
 .cart-list {
   position: relative;
   padding: 20rpx 20rpx 20rpx 285rpx;
-  height: 185rpx;
+  height: 200rpx;
   border-bottom: 1rpx solid #e9e9e9;
 }
 

@@ -119,6 +119,7 @@ Page({
               goods_price: order[i].price,
               real_totalNum: order[i].totalNum,
               real_goods_price: order[i].price,
+              status: '0',
               create_time: Date.parse(new Date()) / 1000,
               delete_time: 0,
               udpate_time: Date.parse(new Date()) / 1000

@@ -7,7 +7,8 @@
         <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" /> -->
 
         <view class="button-sp-area">
-          <button data-_id="{{item._id}}" data-real_totalNum="{{item.real_totalNum}}" class="weui-btn mini-btn" type="warn" size="mini" style='position: absolute;left:0rpx;top:35rpx;width:10px;background-color:#ab956d;' bindtap='orderdetail_updata'>修改</button>
+          <button data-_id="{{item._id}}" data-real_totalNum="{{item.real_totalNum}}" class="weui-btn mini-btn" type="warn" size="mini" style='font-size:12px;position: absolute;left:0rpx;top:2px;width:0px;background-color:#ab956d;' bindtap='orderdetail_updata'>修改</button>
+          <button data-_id="{{item._id}}" data-real_totalNum="{{item.real_totalNum}}" class="weui-btn mini-btn" type="warn" size="mini" style='font-size:12px;position: absolute;left:0rpx;top:50px;width:0px;' bindtap='orderdetail_confirm'>确认</button>
         </view>
 
         <navigator url="../../detail/detail?goods_no={{item.goods_no}}">
