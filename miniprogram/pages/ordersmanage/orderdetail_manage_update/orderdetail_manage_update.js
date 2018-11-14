@@ -148,24 +148,38 @@ Page({
    * 更新订单表
    */
   order_updata: function(e) {
+    var that = this
     var openid = app.globalData.openid
-    var order_id_id = this.data.order_id_id
-    var real_amout = this.data.totalPrice
+    var order_id_id = that.data.order_id_id
+    var real_amout = that.data.totalPrice
+    var orderdetail = that.data.orderdetail
     console.log(this.data.order_id_id)
     console.log(this.data.totalPrice)
 
-    app.dbconn.collection('order').doc(order_id_id).update({
-      data: {
-        real_amout: real_amout
-      },
-      success: function(res) {
+    for (let i = 0; i < orderdetail.length; i++) {
+      console.log(orderdetail[i].status)
+      if (orderdetail[i].status == '0') {
         wx.showModal({
-          content: '修改成功，确认订单明细表更新成功！',
+          content: '第' + (i+1) + '条订单明细未确认！',
           showCancel: false,
         })
-      },
-      fail: console.error
-    })
+        break
+      } else {
+        app.dbconn.collection('order').doc(order_id_id).update({
+          data: {
+            real_amout: real_amout
+          },
+          success: function(res) {
+            wx.showModal({
+              content: '修改成功，确认订单明细表更新成功！',
+              showCancel: false,
+            })
+          },
+          fail: console.error
+        })
+      }
+    }
+
   },
   /**
    * 更新订单明细表
@@ -187,16 +201,16 @@ Page({
     })
   },
   /**
- * 确认订单明细表
- */
-  orderdetail_confirm: function (e) {
+   * 确认订单明细表
+   */
+  orderdetail_confirm: function(e) {
     var _id = e.currentTarget.dataset._id
     var real_totalnum = e.currentTarget.dataset.real_totalnum
     app.dbconn.collection('orderdetail').doc(_id).update({
       data: {
         status: '1'
       },
-      success: function (res) {
+      success: function(res) {
         wx.showModal({
           content: '订单明细确认成功！',
           showCancel: false,
@@ -204,5 +218,5 @@ Page({
       },
       fail: console.error
     })
-  },
+  }
 })
