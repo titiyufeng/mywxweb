@@ -13,7 +13,10 @@ Page({
       // { text: '待归还', url: '../borrowbook/borrowbook?status=Y', icon: '../../images/usermenu/huan.png', tips: '' },
       // { text: '个人喜好', url: '../favorcate/favorcate', icon: '../../images/usermenu/favor.png', tips: '' },
     ],
-    menuitems_manager: { text: '订单管理', url: '../ordersmanage/ordersmanage', icon: '../../resouce/my/oder.png', tips: '' },
+    menuitems_manager: [
+      { text: '订单管理', url: '../ordersmanage/ordersmanage', icon: '../../resouce/my/oder.png', tips: '' },
+      { text: '采购清单', url: '../ordersmanage/purchaselist/purchaselist', icon: '../../resouce/my/oder.png', tips: '' }
+      ],
     userinfo: wx.getStorageSync("userinfo"),
     is_manager:false
   },
@@ -27,7 +30,7 @@ Page({
       success: function (res) {
         var manager_openid = res.data[0].manager_openid
         wx.setStorageSync('manager_openid', manager_openid)
-        //判断是否是管理员，如果是则展示“订单管理”菜单，如果不是则不展示
+        //判断是否是管理员，如果是则展示管理员相关菜单，如果不是则不展示
         for(var i = 0;i<manager_openid.length;i++){
           if (openid == manager_openid[i]) {
             that.setData({
