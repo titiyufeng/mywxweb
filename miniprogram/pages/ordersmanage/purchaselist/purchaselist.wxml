@@ -1,2 +1,35 @@
 <!--miniprogram/pages/ordersmanage/purchaselist/purchaselist.wxml-->
-<text>miniprogram/pages/ordersmanage/purchaselist/purchaselist.wxml</text>
+<!--主盒子-->
+<view class="container">
+  <scroll-view scroll-y scroll-with-animation class="nav_right" scroll-top="{{topNum}}">
+    <!--如果有数据，才遍历项-->
+    <view wx:if="{{cateItems[curIndex].is_have_child}}">
+      <block wx:for="{{right_goodslist}}" wx:key="id">
+        <view class="nav_right_items">
+          <!--界面跳转 -->
+          <navigator url="/pages/detail/detail?cate_id={{item.cate_id}}&goods_no={{item.goods_no}}&goods_name={{item.goods_name}}&goods_detail={{item.goods_detail}}">
+            <image src="cloud://mywxweb-e946c5.6d79-mywxweb-e946c5/goods_images/{{item.cate_id}}/{{item.goods_no}}/{{item.goods_no}}.jpg" />
+          </navigator>
+          <text>
+        编号：{{item.goods_no}} 
+      </text>
+          <text>
+        名称：{{item.goods_name}} 
+      </text>
+          <text>
+        数量：{{item.goods_price}} 
+      </text>
+          <!-- <view class="button-sp-area" style="width:50%;padding:0;margin:0;float:left;box-sizing:border-box;"> -->
+          <view class="button-sp-area" >
+            <button data-order_id="{{item.order_id}}" data-_id="{{item._id}}" class="weui-btn mini-btn" type="warn" size="mini" bindtap='update_orderdetail'>购买数量</button>
+          </view>
+
+        </view>
+      </block>
+    </view>
+    <!--如果无数据，则显示数据-->
+    <view class="nodata_text" wx:else="">
+      该分类暂无商品
+    </view>
+  </scroll-view>
+</view>

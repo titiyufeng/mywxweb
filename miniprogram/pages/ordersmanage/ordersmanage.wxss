@@ -22,7 +22,7 @@ page {
 }
 
 .orders-box {
-  /* padding-bottom: 105rpx; */
+  padding-bottom: 105rpx;
 }
 
 .orders-list {
