@@ -11,8 +11,6 @@ exports.main = async(event, context) => {
     env: env
   })
 
-  return await db.collection('goods_datas').where({
-    goods_no: goods_no
+  return await db.collection('order').where({
   }).get()
-
 }
