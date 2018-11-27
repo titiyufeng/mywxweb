@@ -10,7 +10,7 @@ Page({
     orders: []
   },
 
-  onReady() {
+  onReady: function() {
     this.getTotalPrice();
   },
 
@@ -67,7 +67,7 @@ Page({
   /**
    * 计算总价
    */
-  getTotalPrice() {
+  getTotalPrice: function() {
     let orders = this.data.orders;
     let total = 0;
     for (let i = 0; i < orders.length; i++) {
@@ -78,7 +78,7 @@ Page({
     })
   },
 
-  confirm() {
+  confirm: function() {
     //将订单写入订单表及订单明细表
     var order_id = Date.parse(new Date()) / 1000
     var order = wx.getStorageSync('cart')
@@ -112,6 +112,7 @@ Page({
             data: {
               order_detail_id: order_id + '--' + i,
               order_id: order_id,
+              openid: app.globalData.openid,
               detail_images_head: order[i].detail_images_head,
               goods_name: order[i].goods_name,
               goods_no: order[i].goods_no,
@@ -158,4 +159,22 @@ Page({
       }
     })
   }
+
+  /**
+   * 测试
+   */
+  // confirm_1:function(){
+  //   wx.cloud.callFunction({
+  //     name: 'u_insert_orders',
+  //     data: {
+  //       $url: 'u_insert_orders',
+  //       name: 'tcb',
+  //       password: '09876'
+  //     }
+  //   }).then((res) => {
+  //     console.log(res);
+  //   }).catch((e) => {
+  //     console.log(e);
+  //   });
+  // }
 })

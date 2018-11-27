@@ -1,3 +1,5 @@
+<!--miniprogram/pages/orders/orders.wxml-->
+<!--订单确认及提交页面-->
 <view class="main">
   <view class='user_addinfo'>
     <text>收货人：{{username}}
