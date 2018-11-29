@@ -8,7 +8,7 @@
     </text>
   </view>
   <view class="orders-box">
-    <view wx:for="{{orders}}" wx:key="index" class="orders-list">
+    <view wx:for="{{order_detail}}" wx:key="index" class="orders-list">
       <image class="orders-thumb" src="{{item.detail_images_head[0]}}"></image>
       <view class="orders-pro-name">{{item.goods_name}}</view>
       <view class="orders-pro-name ">￥{{item.price}}</view>
@@ -18,6 +18,6 @@
 
   <view class="orders-footer">
     <view class="orders-footer-total">货款合计(不含运费)：￥{{total}}</view>
-    <view class="orders-footer-btn" bindtap="confirm">确认订单</view>
+    <view class="orders-footer-btn" bindtap="confirm_1">确认订单</view>
   </view>
 </view>

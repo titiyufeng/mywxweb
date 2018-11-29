@@ -11,6 +11,7 @@
 	"appid": "wxe199def353aa45e5",
 	"projectname": "mywxweb",
 	"libVersion": "2.2.5",
+	"compileType": "miniprogram",
 	"condition": {
 		"search": {
 			"current": -1,

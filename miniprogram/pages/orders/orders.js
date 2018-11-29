@@ -4,10 +4,9 @@ var app = getApp()
 
 Page({
   data: {
-    address: {},
     hasAddress: false,
     total: 0,
-    orders: []
+    order_detail: []
   },
 
   onReady: function() {
@@ -16,7 +15,7 @@ Page({
 
   onShow: function() {
     var cart = wx.getStorageSync('cart')
-    var orders = cart
+    var order_detail = cart
     var that = this
 
     app.dbconn.collection('user').where({
@@ -60,7 +59,7 @@ Page({
     })
 
     this.setData({
-      orders: orders
+      order_detail: order_detail
     })
   },
 
@@ -68,10 +67,10 @@ Page({
    * 计算总价
    */
   getTotalPrice: function() {
-    let orders = this.data.orders;
+    let order_detail = this.data.order_detail;
     let total = 0;
-    for (let i = 0; i < orders.length; i++) {
-      total += orders[i].totalNum * orders[i].price;
+    for (let i = 0; i < order_detail.length; i++) {
+      total += order_detail[i].totalNum * order_detail[i].price;
     }
     this.setData({
       total: total
@@ -105,7 +104,6 @@ Page({
       success: function(res) {
         console.log("订单添加成功!")
         //开始插入订单详情表
-        // var order = wx.getStorageSync('cart')
         console.log(order)
         for (var i = 0; i < order.length; i++) {
           app.dbconn.collection('orderdetail').add({
@@ -158,23 +156,33 @@ Page({
         console.error
       }
     })
-  }
+  },
 
   /**
    * 测试
    */
-  // confirm_1:function(){
-  //   wx.cloud.callFunction({
-  //     name: 'u_insert_orders',
-  //     data: {
-  //       $url: 'u_insert_orders',
-  //       name: 'tcb',
-  //       password: '09876'
-  //     }
-  //   }).then((res) => {
-  //     console.log(res);
-  //   }).catch((e) => {
-  //     console.log(e);
-  //   });
-  // }
+  confirm_1: function() {
+    var order_id = Date.parse(new Date()) / 1000
+    var data = this.data
+    var openid = app.globalData.openid
+
+    wx.cloud.callFunction({
+      name: 'myfunc',
+      data: {
+        $url: 'u_insert_orders',
+        order_id: order_id,
+        openid: openid,
+        logistics_id: '',
+        logistics_fee:0,
+        status: '0',
+        data: data,
+      }
+    }).then((res) => {
+      console.log(res);
+    }).catch((e) => {
+      console.log(e);
+    });
+
+    wx.removeStorageSync('cart') //提交后将购物车清空
+  }
 })
