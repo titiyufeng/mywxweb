@@ -25,6 +25,7 @@ Page({
         if (res.data.length == 1) {
           if (res.data[0].mobile) {
             that.setData({
+              openid: app.globalData.openid,
               username: res.data[0].username,
               mobile: res.data[0].mobile,
               province: res.data[0].province,
@@ -163,26 +164,19 @@ Page({
    */
   confirm_1: function() {
     var order_id = Date.parse(new Date()) / 1000
-    var data = this.data
-    var openid = app.globalData.openid
-
+    var req_data = this.data
     wx.cloud.callFunction({
       name: 'myfunc',
       data: {
         $url: 'u_insert_orders',
         order_id: order_id,
-        openid: openid,
-        logistics_id: '',
-        logistics_fee:0,
-        status: '0',
-        data: data,
+        req_data : req_data
       }
     }).then((res) => {
       console.log(res);
+      wx.removeStorageSync('cart') //提交后将购物车清空
     }).catch((e) => {
       console.log(e);
-    });
-
-    wx.removeStorageSync('cart') //提交后将购物车清空
+    });    
   }
 })

@@ -11,11 +11,11 @@ exports.main = async(event, context) => {
   // app.router('u_insert_orders', async(ctx, next) => {
   //   console.log(2222222222222);
   //   await next();
-    
+
   // }, async(ctx, next) => {
   //   console.log(3333333333333);
   //   await next();
-    
+
   // }, async(ctx) => {
   //   ctx.body = {
   //     code: 0,
@@ -43,37 +43,32 @@ exports.main = async(event, context) => {
   // });
 
 
-  app.router('u_insert_orders', async (ctx) => {
+  app.router('u_insert_orders', async(ctx) => {
     const cloud = require('wx-server-sdk')
     cloud.init()
     const db = cloud.database()
-      try {
-        return await db.collection('order').add({
-          // data 字段表示需新增的 JSON 数据
-          data: {
-            description: "learn cloud database",
-            due: new Date("2018-09-01"),
-            tags: [
-              "cloud",
-              "database"
-            ],
-            // 位置（113°E，23°N）
-            location: new db.Geo.Point(113, 23),
-            done: false
-          }
-        })
-      } catch (e) {
-        console.error(e)
+    await db.collection('order').add({
+      data: {
+        openid:event.req_data.openid,
+        order_id: event.order_id,
+        logistics_id: '', //运单号
+        logistics_fee: 0, //运费
+        status: '0',
+        create_time: Date.parse(new Date()) / 1000,
+        delete_time: 0,
+        udpate_time: Date.parse(new Date()) / 1000,
+        username: event.req_data.username,
+        mobile: event.req_data.mobile,
+        province: event.req_data.province,
+        city: event.req_data.city,
+        detail_address: event.req_data.detail_address,
+        amout: event.req_data.total,
+        real_amout: event.req_data.total,
       }
-
+    })
     ctx.body = {
       code: 0,
-      data: {
-        book: 1,
-        isBorrowed: 22,
-        re_data: event.data,
-        message: 'u_insert_orders'
-      }
+      req_data: event.req_data
     }
   });
 
