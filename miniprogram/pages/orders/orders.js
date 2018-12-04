@@ -81,7 +81,7 @@ Page({
   confirm: function() {
     //将订单写入订单表及订单明细表
     var order_id = Date.parse(new Date()) / 1000
-    var order = wx.getStorageSync('cart')
+    var order_detail = wx.getStorageSync('cart')
     wx.removeStorageSync('cart') //提交后将购物车清空
     //开始插入订单表
     app.dbconn.collection('order').add({
@@ -105,20 +105,20 @@ Page({
       success: function(res) {
         console.log("订单添加成功!")
         //开始插入订单详情表
-        console.log(order)
-        for (var i = 0; i < order.length; i++) {
+        console.log(order_detail)
+        for (var i = 0; i < order_detail.length; i++) {
           app.dbconn.collection('orderdetail').add({
             data: {
               order_detail_id: order_id + '--' + i,
               order_id: order_id,
               openid: app.globalData.openid,
-              detail_images_head: order[i].detail_images_head,
-              goods_name: order[i].goods_name,
-              goods_no: order[i].goods_no,
-              totalNum: order[i].totalNum,
-              goods_price: order[i].price,
-              real_totalNum: order[i].totalNum,
-              real_goods_price: order[i].price,
+              detail_images_head: order_detail[i].detail_images_head,
+              goods_name: order_detail[i].goods_name,
+              goods_no: order_detail[i].goods_no,
+              totalNum: order_detail[i].totalNum,
+              goods_price: order_detail[i].price,
+              real_totalNum: order_detail[i].totalNum,
+              real_goods_price: order_detail[i].price,
               status: '0',
               create_time: Date.parse(new Date()) / 1000,
               delete_time: 0,

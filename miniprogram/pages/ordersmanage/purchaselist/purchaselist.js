@@ -1,4 +1,5 @@
 // miniprogram/pages/ordersmanage/purchaselist/purchaselist.js
+//采购清单页面
 
 var util = require("../../../utils/util.js");
 var app = getApp()
