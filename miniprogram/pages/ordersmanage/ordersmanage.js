@@ -8,7 +8,7 @@ Page({
     status_list: ["已提交", "已确认", "已发货", "已结款", "已撤销"],
     statusIndex: 0,
     listData: [],
-    pagenum: 1,
+    pagenum: 0,
     show: true,
     startdate: '2018-05-12',
     enddate: '2037-09-01',
@@ -252,6 +252,9 @@ Page({
     this.data.mobile = e.detail.value.mobile
     // var mobile = e.detail.value.mobile
     var that = this
+    that.setData({
+      pagenum:0
+    })
     that.onShow()
   }
 })
