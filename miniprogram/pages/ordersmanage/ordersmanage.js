@@ -27,7 +27,71 @@ Page({
       endTimestamp: Date.parse(new Date(enddate + ' 23:59:59')) / 1000,
     })
   },
-  // onShow: function() {
+  onShow: function() {
+    var listData = []
+    var pagenum = 1
+    this.get_orders(listData, pagenum)
+    this.setData({
+      pagenum: 2
+    })
+  },
+  /**
+   *获取订单数据
+   */
+  get_orders: function(listData, pagenum) {
+    var status = {
+      "0": "已提交",
+      "1": "已确认",
+      "2": "已发货",
+      "3": "已结款",
+      "4": "已撤销"
+    }
+    wx.cloud.callFunction({
+        // 云函数名称
+        name: 'myfunc',
+        // 传给云函数的参数
+        data: {
+          $url: 'm_get_orders',
+          startTimestamp: this.data.startTimestamp,
+          pagenum: pagenum,
+          mobile: this.data.mobile,
+          endTimestamp: this.data.endTimestamp,
+          curent_status: String(this.data.statusIndex)
+        },
+      })
+      .then(res => {
+        var tmplistData = []
+        tmplistData = res.result.result.data
+        if (tmplistData.length > 0) {
+          for (var i = 0; i < tmplistData.length; i++) {
+            tmplistData[i].create_time = util.formatTime(tmplistData[i].create_time, 'Y-M-D h:m:s')
+            tmplistData[i].status = status[tmplistData[i].status]
+          }
+        }
+        listData = listData.concat(tmplistData)
+        this.setData({
+          listData: listData,
+        })
+      })
+  },
+
+  onReachBottom: function() {
+    var listData = this.data.listData
+    var pagenum = this.data.pagenum
+
+    this.get_orders(listData, pagenum)
+    this.setData({
+      pagenum: pagenum + 1
+    })
+  },
+
+  /**
+   *上拉触底事件：加载第二页 
+   */
+  // onReachBottom() {
+  //   wx.showLoading({
+  //     title: '加载中',
+  //   })
   //   var status = {
   //     "0": "已提交",
   //     "1": "已确认",
@@ -35,11 +99,12 @@ Page({
   //     "3": "已结款",
   //     "4": "已撤销"
   //   }
+  //   var that = this
   //   var openid = app.globalData.openid
   //   var manager_openid = wx.getStorageSync('manager_openid')
-  //   var listData = []
-  //   var that = this
   //   var curent_status = String(that.data.statusIndex)
+  //   var tmp_listData
+  //   var pagenum = that.data.pagenum
   //   var mobile = that.data.mobile
 
   //   const _ = app.dbconn.command
@@ -51,21 +116,28 @@ Page({
   //           create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
   //           status: curent_status,
   //           mobile: _.eq(mobile)
-  //         }).orderBy('create_time', 'desc').get({
+  //         }).orderBy('create_time', 'desc').skip(pagenum * 20).limit(20).get({
   //           success: function(res) {
   //             if (res.data.length > 0) {
-  //               var listData = res.data
-  //               for (var i = 0; i < listData.length; i++) {
-  //                 listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
-  //                 listData[i].status = status[listData[i].status]
+  //               var tmp_listData = res.data
+  //               for (var i = 0; i < tmp_listData.length; i++) {
+  //                 tmp_listData[i].create_time = util.formatTime(tmp_listData[i].create_time, 'Y-M-D h:m:s')
+  //                 tmp_listData[i].status = status[tmp_listData[i].status]
   //               }
+  //               var listData = that.data.listData
+  //               var total_listData = []
+  //               for (var i in listData) {
+  //                 total_listData.push(listData[i])
+  //               }
+  //               var total_listData = total_listData.concat(tmp_listData)
   //               that.setData({
-  //                 listData: listData
+  //                 listData: total_listData,
+  //                 pagenum: pagenum + 1
   //               })
   //             } else {
-  //               var listData = []
-  //               that.setData({
-  //                 listData: listData
+  //               wx.showToast({
+  //                 icon: 'none',
+  //                 title: '没有更多数据啦！'
   //               })
   //             }
   //           },
@@ -76,146 +148,39 @@ Page({
   //           delete_time: 0,
   //           create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
   //           status: curent_status
-  //         }).orderBy('create_time', 'desc').get({
+  //         }).orderBy('create_time', 'desc').skip(pagenum * 20).limit(20).get({
   //           success: function(res) {
   //             if (res.data.length > 0) {
-  //               var listData = res.data
-  //               console.log(listData)
-  //               for (var i = 0; i < listData.length; i++) {
-  //                 listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
-  //                 listData[i].status = status[listData[i].status]
+  //               var tmp_listData = res.data
+  //               for (var i = 0; i < tmp_listData.length; i++) {
+  //                 tmp_listData[i].create_time = util.formatTime(tmp_listData[i].create_time, 'Y-M-D h:m:s')
+  //                 tmp_listData[i].status = status[tmp_listData[i].status]
   //               }
+  //               var listData = that.data.listData
+  //               var total_listData = []
+  //               for (var i in listData) {
+  //                 total_listData.push(listData[i])
+  //               }
+  //               var total_listData = total_listData.concat(tmp_listData)
   //               that.setData({
-  //                 listData: listData
+  //                 listData: total_listData,
+  //                 pagenum: pagenum + 1
   //               })
   //             } else {
-  //               var listData = []
-  //               that.setData({
-  //                 listData: listData
+  //               wx.showToast({
+  //                 icon: 'none',
+  //                 title: '没有更多数据啦！'
   //               })
   //             }
   //           },
   //           fail: console.error
   //         })
   //       }
-
   //       break
   //     }
   //   }
+  //   wx.hideLoading()
   // },
-  onShow:function(){
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'myfunc',
-      // 传给云函数的参数
-      data: {
-        $url: 'm_get_orders',
-        startTimestamp: this.data.startTimestamp,
-        endTimestamp: this.data.endTimestamp,
-        curent_status: String(this.data.statusIndex)
-      },
-    })
-      .then(res => {
-        console.log(res.result) // 3
-      })
-      .catch(console.error)
-  },
-  /**
-   *上拉触底事件：加载第二页 
-   */
-  onReachBottom() {
-    wx.showLoading({
-      title: '加载中',
-    })
-    var status = {
-      "0": "已提交",
-      "1": "已确认",
-      "2": "已发货",
-      "3": "已结款",
-      "4": "已撤销"
-    }
-    var that = this
-    var openid = app.globalData.openid
-    var manager_openid = wx.getStorageSync('manager_openid')
-    var curent_status = String(that.data.statusIndex)
-    var tmp_listData
-    var pagenum = that.data.pagenum
-    var mobile = that.data.mobile
-
-    const _ = app.dbconn.command
-    for (var i = 0; i < manager_openid.length; i++) {
-      if (openid == manager_openid[i]) {
-        if (mobile) { //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
-          app.dbconn.collection('order').where({
-            delete_time: 0,
-            create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
-            status: curent_status,
-            mobile: _.eq(mobile)
-          }).orderBy('create_time', 'desc').skip(pagenum * 20).limit(20).get({
-            success: function(res) {
-              if (res.data.length > 0) {
-                var tmp_listData = res.data
-                for (var i = 0; i < tmp_listData.length; i++) {
-                  tmp_listData[i].create_time = util.formatTime(tmp_listData[i].create_time, 'Y-M-D h:m:s')
-                  tmp_listData[i].status = status[tmp_listData[i].status]
-                }
-                var listData = that.data.listData
-                var total_listData = []
-                for (var i in listData) {
-                  total_listData.push(listData[i])
-                }
-                var total_listData = total_listData.concat(tmp_listData)
-                that.setData({
-                  listData: total_listData,
-                  pagenum: pagenum + 1
-                })
-              } else {
-                wx.showToast({
-                  icon: 'none',
-                  title: '没有更多数据啦！'
-                })
-              }
-            },
-            fail: console.error
-          })
-        } else {
-          app.dbconn.collection('order').where({
-            delete_time: 0,
-            create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
-            status: curent_status
-          }).orderBy('create_time', 'desc').skip(pagenum * 20).limit(20).get({
-            success: function(res) {
-              if (res.data.length > 0) {
-                var tmp_listData = res.data
-                for (var i = 0; i < tmp_listData.length; i++) {
-                  tmp_listData[i].create_time = util.formatTime(tmp_listData[i].create_time, 'Y-M-D h:m:s')
-                  tmp_listData[i].status = status[tmp_listData[i].status]
-                }
-                var listData = that.data.listData
-                var total_listData = []
-                for (var i in listData) {
-                  total_listData.push(listData[i])
-                }
-                var total_listData = total_listData.concat(tmp_listData)
-                that.setData({
-                  listData: total_listData,
-                  pagenum: pagenum + 1
-                })
-              } else {
-                wx.showToast({
-                  icon: 'none',
-                  title: '没有更多数据啦！'
-                })
-              }
-            },
-            fail: console.error
-          })
-        }
-        break
-      }
-    }
-    wx.hideLoading()
-  },
 
   /***
    *跳转修改订单 
