@@ -8,7 +8,7 @@ Page({
     status_list: ["已提交", "已确认", "已发货", "已结款", "已撤销"],
     statusIndex: 0,
     listData: [],
-    pagenum: 0,
+    pagenum: 1,
     show: true,
     startdate: '2018-05-12',
     enddate: '2037-09-01',
@@ -27,80 +27,98 @@ Page({
       endTimestamp: Date.parse(new Date(enddate + ' 23:59:59')) / 1000,
     })
   },
-  onShow: function() {
-    var status = {
-      "0": "已提交",
-      "1": "已确认",
-      "2": "已发货",
-      "3": "已结款",
-      "4": "已撤销"
-    }
-    var openid = app.globalData.openid
-    var manager_openid = wx.getStorageSync('manager_openid')
-    var listData = []
-    var that = this
-    var curent_status = String(that.data.statusIndex)
-    var mobile = that.data.mobile
+  // onShow: function() {
+  //   var status = {
+  //     "0": "已提交",
+  //     "1": "已确认",
+  //     "2": "已发货",
+  //     "3": "已结款",
+  //     "4": "已撤销"
+  //   }
+  //   var openid = app.globalData.openid
+  //   var manager_openid = wx.getStorageSync('manager_openid')
+  //   var listData = []
+  //   var that = this
+  //   var curent_status = String(that.data.statusIndex)
+  //   var mobile = that.data.mobile
 
-    const _ = app.dbconn.command
-    for (var i = 0; i < manager_openid.length; i++) {
-      if (openid == manager_openid[i]) {
-        if (mobile) { //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
-          app.dbconn.collection('order').where({
-            delete_time: 0,
-            create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
-            status: curent_status,
-            mobile: _.eq(mobile)
-          }).orderBy('create_time', 'desc').get({
-            success: function(res) {
-              if (res.data.length > 0) {
-                var listData = res.data
-                for (var i = 0; i < listData.length; i++) {
-                  listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
-                  listData[i].status = status[listData[i].status]
-                }
-                that.setData({
-                  listData: listData
-                })
-              } else {
-                var listData = []
-                that.setData({
-                  listData: listData
-                })
-              }
-            },
-            fail: console.error
-          })
-        } else {
-          app.dbconn.collection('order').where({
-            delete_time: 0,
-            create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
-            status: curent_status
-          }).orderBy('create_time', 'desc').get({
-            success: function(res) {
-              if (res.data.length > 0) {
-                var listData = res.data
-                for (var i = 0; i < listData.length; i++) {
-                  listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
-                  listData[i].status = status[listData[i].status]
-                }
-                that.setData({
-                  listData: listData
-                })
-              } else {
-                var listData = []
-                that.setData({
-                  listData: listData
-                })
-              }
-            },
-            fail: console.error
-          })
-        }
+  //   const _ = app.dbconn.command
+  //   for (var i = 0; i < manager_openid.length; i++) {
+  //     if (openid == manager_openid[i]) {
+  //       if (mobile) { //判断是否有手机号码，如果有则指定手机号码查询，如果没有则查询全部
+  //         app.dbconn.collection('order').where({
+  //           delete_time: 0,
+  //           create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
+  //           status: curent_status,
+  //           mobile: _.eq(mobile)
+  //         }).orderBy('create_time', 'desc').get({
+  //           success: function(res) {
+  //             if (res.data.length > 0) {
+  //               var listData = res.data
+  //               for (var i = 0; i < listData.length; i++) {
+  //                 listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
+  //                 listData[i].status = status[listData[i].status]
+  //               }
+  //               that.setData({
+  //                 listData: listData
+  //               })
+  //             } else {
+  //               var listData = []
+  //               that.setData({
+  //                 listData: listData
+  //               })
+  //             }
+  //           },
+  //           fail: console.error
+  //         })
+  //       } else {
+  //         app.dbconn.collection('order').where({
+  //           delete_time: 0,
+  //           create_time: _.and(_.gte(that.data.startTimestamp), _.lte(that.data.endTimestamp)),
+  //           status: curent_status
+  //         }).orderBy('create_time', 'desc').get({
+  //           success: function(res) {
+  //             if (res.data.length > 0) {
+  //               var listData = res.data
+  //               console.log(listData)
+  //               for (var i = 0; i < listData.length; i++) {
+  //                 listData[i].create_time = util.formatTime(listData[i].create_time, 'Y-M-D h:m:s')
+  //                 listData[i].status = status[listData[i].status]
+  //               }
+  //               that.setData({
+  //                 listData: listData
+  //               })
+  //             } else {
+  //               var listData = []
+  //               that.setData({
+  //                 listData: listData
+  //               })
+  //             }
+  //           },
+  //           fail: console.error
+  //         })
+  //       }
 
-        break
-      }
-    }
+  //       break
+  //     }
+  //   }
+  // },
+  onShow:function(){
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'myfunc',
+      // 传给云函数的参数
+      data: {
+        $url: 'm_get_orders',
+        startTimestamp: this.data.startTimestamp,
+        endTimestamp: this.data.endTimestamp,
+        curent_status: String(this.data.statusIndex)
+      },
+    })
+      .then(res => {
+        console.log(res.result) // 3
+      })
+      .catch(console.error)
   },
   /**
    *上拉触底事件：加载第二页 
@@ -253,7 +271,7 @@ Page({
     // var mobile = e.detail.value.mobile
     var that = this
     that.setData({
-      pagenum:0
+      // pagenum:0
     })
     that.onShow()
   }
